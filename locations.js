@@ -17,6 +17,7 @@ let viewMode = 'grid'; // 'grid' or 'list'
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async () => {
     await loadLocationData();
+    loadDiscoveredLocations();
     initializeFilters();
     setupEventListeners();
     renderGallery();
