@@ -191,7 +191,6 @@ function setupEventListeners() {
     // Filter toggle buttons
     document.querySelectorAll('.filter-toggle').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const filterType = e.target.dataset.filter;
             const filterOptions = e.target.closest('.filter-section').querySelector('.filter-options');
 
             if (filterOptions) {
