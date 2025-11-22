@@ -1,0 +1,62 @@
+{
+  "name": "Skyrim Bestiary 3D",
+  "short_name": "Skyrim 3D",
+  "description": "Interactive 3D Bestiary and Photogrammetry Studio for The Elder Scrolls V: Skyrim",
+  "start_url": "/landing.html",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#4a148c",
+  "orientation": "any",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect fill='%234a148c' width='192' height='192'/%3E%3Ctext x='50%25' y='50%25' font-size='100' text-anchor='middle' dominant-baseline='middle' fill='white'%3E🐉%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Crect fill='%234a148c' width='512' height='512'/%3E%3Ctext x='50%25' y='50%25' font-size='300' text-anchor='middle' dominant-baseline='middle' fill='white'%3E🐉%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games", "education", "3d"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Crect fill='%231a1a2e' width='1280' height='720'/%3E%3Ctext x='50%25' y='50%25' font-size='60' text-anchor='middle' dominant-baseline='middle' fill='white'%3ESkyrim Bestiary Screenshot%3C/text%3E%3C/svg%3E",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "label": "Bestiary View"
+    }
+  ],
+  "features": [
+    "3D Character Viewer",
+    "Photogrammetry Studio",
+    "Offline Support",
+    "Interactive 3D Models"
+  ],
+  "shortcuts": [
+    {
+      "name": "Bestiary",
+      "short_name": "Bestiary",
+      "description": "View all creatures",
+      "url": "/bestiary.html",
+      "icons": [{
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ctext x='50%25' y='50%25' font-size='50' text-anchor='middle' dominant-baseline='middle'%3E📖%3C/text%3E%3C/svg%3E",
+        "sizes": "96x96"
+      }]
+    },
+    {
+      "name": "3D Studio",
+      "short_name": "Studio",
+      "description": "3D Reconstruction",
+      "url": "/index.html",
+      "icons": [{
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ctext x='50%25' y='50%25' font-size='50' text-anchor='middle' dominant-baseline='middle'%3E🎨%3C/text%3E%3C/svg%3E",
+        "sizes": "96x96"
+      }]
+    }
+  ]
+}

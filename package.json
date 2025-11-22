@@ -1,0 +1,57 @@
+{
+  "name": "skyrim-bestiary-3d",
+  "version": "1.0.0",
+  "description": "3D Maker - Skyrim Bestiary: A dual-purpose web application combining photogrammetry tools with an interactive 3D creature viewer for The Elder Scrolls V: Skyrim",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js,.ts",
+    "format": "prettier --write \"**/*.{js,ts,html,css,json}\"",
+    "type-check": "tsc --noEmit",
+    "validate": "node scripts/validate-characters.js",
+    "stats": "node scripts/stats.js",
+    "add-character": "node scripts/add-character.js",
+    "export:md": "node scripts/export-markdown.js > CREATURES.md",
+    "prepare": "npm run validate"
+  },
+  "keywords": [
+    "skyrim",
+    "bestiary",
+    "3d",
+    "three.js",
+    "photogrammetry",
+    "webgl",
+    "3d-reconstruction",
+    "game-database"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.6",
+    "@types/three": "^0.160.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-static-copy": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
