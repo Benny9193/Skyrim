@@ -1,5 +1,6 @@
 // Bestiary Gallery JavaScript - API Integrated
 import api, { characterAPI, favoritesAPI, statsAPI, healthCheck } from '../api/client.js';
+import { debounce } from '../utils/performance.js';
 
 // State management
 let allCharacters = [];
@@ -62,6 +63,7 @@ async function initializeApp() {
         initializeFilters();
         renderCollectionsList();
         setupEventListeners();
+        setupGalleryEventDelegation(); // Setup event delegation once
         renderGallery();
         hideLoadingState();
 
@@ -286,9 +288,14 @@ function setupEventListeners() {
     // Search input
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            activeFilters.search = e.target.value.toLowerCase();
+        // Debounce search to improve performance with large datasets
+        const debouncedSearch = debounce((value) => {
+            activeFilters.search = value.toLowerCase();
             applyFilters();
+        }, 300);
+        
+        searchInput.addEventListener('input', (e) => {
+            debouncedSearch(e.target.value);
         });
     }
 
@@ -759,6 +766,7 @@ function sortCharacters() {
 }
 
 // Render gallery
+// Render gallery with event delegation to prevent memory leaks
 function renderGallery() {
     const grid = document.getElementById('creaturesGrid');
     const noResults = document.getElementById('noResults');
@@ -786,49 +794,66 @@ function renderGallery() {
     }
 
     if (noResults) noResults.classList.add('hidden');
-    grid.innerHTML = filteredCharacters.map(character => createCreatureCard(character)).join('');
+    grid.innerHTML = filteredCharacters.map((character, index) => 
+        createCreatureCard(character, index)
+    ).join('');
+}
 
-    // Add click handlers to cards
-    document.querySelectorAll('.creature-card').forEach((card, index) => {
-        const addBtn = card.querySelector('.creature-card-add-btn');
-        if (addBtn) {
-            addBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                showAddToCollectionModal(filteredCharacters[index]);
-            });
+// Setup event delegation for gallery (call once on initialization)
+function setupGalleryEventDelegation() {
+    const grid = document.getElementById('creaturesGrid');
+    if (!grid) return;
+    
+    // Use event delegation instead of adding listeners to each card
+    grid.addEventListener('click', async (e) => {
+        const card = e.target.closest('.creature-card');
+        if (!card) return;
+        
+        const index = parseInt(card.dataset.index);
+        const character = filteredCharacters[index];
+        if (!character) return;
+        
+        // Handle add to collection button
+        if (e.target.closest('.creature-card-add-btn')) {
+            e.stopPropagation();
+            showAddToCollectionModal(character);
+            return;
         }
-
-        const favoriteBtn = card.querySelector('.creature-card-favorite-btn');
-        if (favoriteBtn) {
-            favoriteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleFavorite(filteredCharacters[index].id);
-            });
+        
+        // Handle favorite button
+        if (e.target.closest('.creature-card-favorite-btn')) {
+            e.stopPropagation();
+            await toggleFavorite(character.id);
+            // Update just this button instead of re-rendering
+            const btn = e.target.closest('.creature-card-favorite-btn');
+            const favorited = isFavorited(character.id);
+            btn.textContent = favorited ? '❤️' : '🤍';
+            return;
         }
-
+        
+        // Handle comparison checkbox
         if (comparisonMode) {
-            const checkbox = card.querySelector('.creature-card-checkbox');
+            const checkbox = e.target.closest('.creature-card-checkbox');
             if (checkbox) {
-                checkbox.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    toggleComparisonSelection(filteredCharacters[index], card);
-                });
+                e.stopPropagation();
+                toggleComparisonSelection(character, card);
+                return;
             }
-            card.addEventListener('click', (e) => {
-                const checkbox = card.querySelector('.creature-card-checkbox');
-                if (checkbox) checkbox.click();
-            });
+            // Click anywhere on card in comparison mode toggles checkbox
+            const cardCheckbox = card.querySelector('.creature-card-checkbox');
+            if (cardCheckbox) {
+                cardCheckbox.checked = !cardCheckbox.checked;
+                toggleComparisonSelection(character, card);
+            }
         } else {
-            card.addEventListener('click', () => {
-                const characterId = filteredCharacters[index].id;
-                window.location.href = `character.html?character=${characterId - 1}`;
-            });
+            // Navigate to character detail page
+            window.location.href = `character.html?character=${character.id - 1}`;
         }
     });
 }
 
-// Create creature card HTML
-function createCreatureCard(character) {
+// Create creature card HTML with data-index for event delegation
+function createCreatureCard(character, index) {
     const difficultyClass = character.difficulty.toLowerCase();
     const imagePath = character.imagePath || character.image_path || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E';
     const isSelected = selectedForComparison.some(c => c.id === character.id);
@@ -845,7 +870,7 @@ function createCreatureCard(character) {
     const level = character.level || 0;
 
     return `
-        <div class="creature-card ${comparisonClass} ${selectedClass}">
+        <div class="creature-card ${comparisonClass} ${selectedClass}" data-index="${index}">
             ${checkbox}
             ${addBtn}
             ${favoriteBtn}
