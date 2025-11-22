@@ -178,6 +178,94 @@ function setupEventListeners() {
     document.getElementById('addToCollectionModal').querySelector('.modal-overlay').addEventListener('click', () => {
         document.getElementById('addToCollectionModal').classList.add('hidden');
     });
+
+    // Keyboard navigation
+    setupKeyboardNavigation();
+}
+
+// Keyboard navigation for gallery
+function setupKeyboardNavigation() {
+    document.addEventListener('keydown', (e) => {
+        // Ignore if typing in input field
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        switch(e.key) {
+            case 'c':
+            case 'C':
+                e.preventDefault();
+                toggleComparisonMode();
+                break;
+            case 'Escape':
+                if (comparisonMode) {
+                    toggleComparisonMode();
+                }
+                break;
+            case 'h':
+            case 'H':
+            case '?':
+                e.preventDefault();
+                showKeyboardShortcuts();
+                break;
+        }
+    });
+}
+
+// Show keyboard shortcuts help for gallery
+function showKeyboardShortcuts() {
+    const shortcuts = `
+        <div style="padding: 20px; max-width: 500px;">
+            <h3 style="margin-top: 0; color: var(--color-primary);">⌨️ Keyboard Shortcuts</h3>
+            <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 20px; margin-top: 20px;">
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">C</kbd>
+                <span>Toggle comparison mode</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">Esc</kbd>
+                <span>Exit comparison mode</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">H or ?</kbd>
+                <span>Show this help</span>
+            </div>
+            <button onclick="this.closest('.modal-overlay').parentElement.classList.add('hidden')"
+                    style="margin-top: 20px; padding: 10px 20px; background: var(--color-primary); color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%;">
+                Got it!
+            </button>
+        </div>
+    `;
+    showModal('Keyboard Shortcuts', shortcuts);
+}
+
+// Show modal helper for gallery
+function showModal(title, content) {
+    let modal = document.getElementById('helpModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'helpModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;"></div>
+        `;
+        document.body.appendChild(modal);
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = 'position: relative; background: white; border-radius: 8px; max-width: 600px; z-index: 10000;';
+        modalContent.innerHTML = `
+            <div style="padding: 20px; border-bottom: 1px solid #eee;">
+                <h3 id="helpModalTitle" style="margin: 0;">${title}</h3>
+            </div>
+            <div id="helpModalBody" style="padding: 20px;"></div>
+        `;
+        modal.querySelector('.modal-overlay').appendChild(modalContent);
+
+        modal.querySelector('.modal-overlay').addEventListener('click', (e) => {
+            if (e.target === modal.querySelector('.modal-overlay')) {
+                modal.classList.add('hidden');
+            }
+        });
+    }
+
+    modal.querySelector('#helpModalTitle').textContent = title;
+    modal.querySelector('#helpModalBody').innerHTML = content;
+    modal.classList.remove('hidden');
 }
 
 // Collection management functions
