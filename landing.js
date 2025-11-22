@@ -126,9 +126,16 @@ window.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Landing page loaded');
 
+    // Hide loader when page is ready
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.querySelector('.page-loader')?.classList.add('hidden');
+        }, 500);
+    });
+
     // Add entrance animation to elements
     setTimeout(() => {
         document.querySelector('.hero-content')?.classList.add('animate-in');
         document.querySelector('.hero-visual')?.classList.add('animate-in');
-    }, 100);
+    }, 600);
 });
