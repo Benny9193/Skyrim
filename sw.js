@@ -1,8 +1,9 @@
 // Service Worker for Skyrim Bestiary 3D
 // Enables offline functionality and caching
 
-const CACHE_NAME = 'skyrim-bestiary-v1';
-const RUNTIME_CACHE = 'skyrim-runtime-v1';
+const CACHE_NAME = 'skyrim-bestiary-v2';
+const RUNTIME_CACHE = 'skyrim-runtime-v2';
+const API_CACHE = 'skyrim-api-v1';
 
 // Files to cache immediately on install
 const STATIC_CACHE_URLS = [
@@ -10,18 +11,20 @@ const STATIC_CACHE_URLS = [
   '/index.html',
   '/bestiary.html',
   '/character.html',
+  '/stats.html',
+  '/location.html',
   '/style.css',
   '/landing.css',
   '/bestiary.css',
   '/character.css',
-  '/app.js',
-  '/character.js',
-  '/bestiary.js',
-  '/landing.js',
-  '/characters.json',
+  '/src/js/bestiary.js',
+  '/src/js/character.js',
+  '/src/api/client.js',
+  '/data/characters.json',
   '/reconstruction_data.json',
   '/enhanced_mesh.obj',
-  '/enhanced_point_cloud.ply'
+  '/enhanced_point_cloud.ply',
+  '/public/manifest.json'
 ];
 
 // Install event - cache static assets
@@ -52,8 +55,10 @@ self.addEventListener('activate', (event) => {
         return Promise.all(
           cacheNames
             .filter((cacheName) => {
-              // Delete old caches
-              return cacheName !== CACHE_NAME && cacheName !== RUNTIME_CACHE;
+              // Delete old caches (keep current ones)
+              return cacheName !== CACHE_NAME &&
+                     cacheName !== RUNTIME_CACHE &&
+                     cacheName !== API_CACHE;
             })
             .map((cacheName) => {
               console.log('[Service Worker] Deleting old cache:', cacheName);
@@ -73,13 +78,45 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip cross-origin requests
-  if (url.origin !== location.origin) {
+  // Skip cross-origin requests (except API calls)
+  if (url.origin !== location.origin && !url.pathname.startsWith('/api')) {
+    return;
+  }
+
+  // Network-first strategy for API calls
+  if (url.pathname.startsWith('/api')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // Cache successful API responses
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(API_CACHE).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          // Fallback to cached API response if offline
+          return caches.match(request).then((cachedResponse) => {
+            if (cachedResponse) {
+              console.log('[Service Worker] Serving API from cache (offline):', request.url);
+              return cachedResponse;
+            }
+            // Return error response if no cache available
+            return new Response(
+              JSON.stringify({ success: false, error: 'Offline and no cached data' }),
+              { headers: { 'Content-Type': 'application/json' } }
+            );
+          });
+        })
+    );
     return;
   }
 
   // Network-first strategy for HTML files (always get latest)
-  if (request.headers.get('accept').includes('text/html')) {
+  if (request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
       fetch(request)
         .then((response) => {

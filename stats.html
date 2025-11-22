@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestiary Statistics - Skyrim Bestiary</title>
+    <link rel="stylesheet" href="../src/css/style.css">
+    <style>
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .stats-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--color-primary), #4a90e2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-header p {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        .stat-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .stat-card-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-card-label {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .chart-header {
+            margin-bottom: 28px;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .chart-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .bar-label {
+            min-width: 120px;
+            font-weight: 500;
+        }
+
+        .bar-container {
+            flex: 1;
+            height: 32px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), #4a90e2);
+            transition: width 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .bar-value {
+            min-width: 60px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .difficulty-easy { background: linear-gradient(90deg, #28a745, #34d058); }
+        .difficulty-normal { background: linear-gradient(90deg, #ffc107, #ffdb4d); }
+        .difficulty-hard { background: linear-gradient(90deg, #fd7e14, #ff922b); }
+        .difficulty-deadly { background: linear-gradient(90deg, #dc3545, #ff4458); }
+
+        .loading-state, .error-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .loading-state-icon, .error-state-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 48px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4a90e2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .top-creatures {
+            display: grid;
+            gap: 16px;
+        }
+
+        .creature-rank-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .creature-rank-item:hover {
+            background: #e9ecef;
+        }
+
+        .rank-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .rank-gold { background: linear-gradient(135deg, #ffd700, #ffed4e); color: #333; }
+        .rank-silver { background: linear-gradient(135deg, #c0c0c0, #e8e8e8); color: #333; }
+        .rank-bronze { background: linear-gradient(135deg, #cd7f32, #e89651); color: white; }
+
+        .creature-info-rank {
+            flex: 1;
+        }
+
+        .creature-name-rank {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .creature-meta-rank {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="container">
+                <div class="header-content">
+                    <a href="landing.html" class="header-link">← Back to Home</a>
+                    <h1 class="app-title">Bestiary Statistics</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="stats-container">
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state">
+                <div class="loading-state-icon">⏳</div>
+                <h2>Loading Statistics...</h2>
+                <p>Fetching data from backend API</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-state" style="display: none;">
+                <div class="error-state-icon">⚠️</div>
+                <h2>Failed to Load Statistics</h2>
+                <p id="errorMessage">An error occurred while fetching data.</p>
+                <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 20px;">
+                    Retry
+                </button>
+            </div>
+
+            <!-- Stats Content -->
+            <div id="statsContent" style="display: none;">
+                <!-- Header -->
+                <div class="stats-header">
+                    <h1>📊 Database Analytics</h1>
+                    <p>Complete overview of creatures in the Skyrim Bestiary</p>
+                </div>
+
+                <!-- Overview Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-icon">🐉</div>
+                        <div class="stat-card-value" id="totalCreatures">0</div>
+                        <div class="stat-card-label">Total Creatures</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon">📈</div>
+                        <div class="stat-card-value" id="avgLevel">0</div>
+                        <div class="stat-card-label">Average Level</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon">⚔️</div>
+                        <div class="stat-card-value" id="maxLevel">0</div>
+                        <div class="stat-card-label">Highest Level</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon">🛡️</div>
+                        <div class="stat-card-value" id="minLevel">0</div>
+                        <div class="stat-card-label">Lowest Level</div>
+                    </div>
+                </div>
+
+                <!-- Difficulty Distribution -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2 class="chart-title">Difficulty Distribution</h2>
+                        <p class="chart-subtitle">Breakdown of creatures by difficulty level</p>
+                    </div>
+                    <div class="bar-chart" id="difficultyChart">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Race Distribution -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2 class="chart-title">Race Distribution</h2>
+                        <p class="chart-subtitle">Distribution of creatures by race/species</p>
+                    </div>
+                    <div class="bar-chart" id="raceChart">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Faction Distribution -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2 class="chart-title">Faction Distribution</h2>
+                        <p class="chart-subtitle">Creatures grouped by faction affiliation</p>
+                    </div>
+                    <div class="bar-chart" id="factionChart">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Top 5 Most Powerful -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h2 class="chart-title">🏆 Most Powerful Creatures</h2>
+                        <p class="chart-subtitle">Top 5 creatures by level</p>
+                    </div>
+                    <div class="top-creatures" id="topCreatures">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="nav-buttons">
+                    <a href="bestiary.html" class="btn btn-primary">View Bestiary</a>
+                    <a href="landing.html" class="btn btn-outline">Back to Home</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { statsAPI, characterAPI } from '../src/api/client.js';
+
+        async function loadStatistics() {
+            try {
+                // Fetch statistics from backend
+                const statsResponse = await statsAPI.get();
+                const charactersResponse = await characterAPI.getAll();
+
+                if (!statsResponse.success || !charactersResponse.success) {
+                    throw new Error('Failed to fetch statistics');
+                }
+
+                const stats = statsResponse.data;
+                const characters = charactersResponse.data;
+
+                // Update overview cards
+                document.getElementById('totalCreatures').textContent = stats.total || 0;
+                document.getElementById('avgLevel').textContent = Math.round(stats.avgLevel || 0);
+                document.getElementById('maxLevel').textContent = stats.maxLevel || 0;
+                document.getElementById('minLevel').textContent = stats.minLevel || 0;
+
+                // Render difficulty chart
+                renderBarChart('difficultyChart', stats.byDifficulty, stats.total, true);
+
+                // Render race chart
+                renderBarChart('raceChart', stats.byRace, stats.total);
+
+                // Render faction chart
+                renderBarChart('factionChart', stats.byFaction, stats.total);
+
+                // Render top creatures
+                renderTopCreatures(characters);
+
+                // Show content, hide loading
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('statsContent').style.display = 'block';
+
+            } catch (error) {
+                console.error('Failed to load statistics:', error);
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('errorState').style.display = 'block';
+                document.getElementById('errorMessage').textContent = error.message || 'Failed to fetch data from backend API.';
+            }
+        }
+
+        function renderBarChart(containerId, data, total, useDifficultyColors = false) {
+            const container = document.getElementById(containerId);
+            if (!container || !data) return;
+
+            // Sort by count descending
+            const sorted = Object.entries(data).sort((a, b) => b[1] - a[1]);
+
+            const maxValue = Math.max(...sorted.map(([_, count]) => count));
+
+            container.innerHTML = sorted.map(([label, count]) => {
+                const percentage = ((count / total) * 100).toFixed(1);
+                const width = (count / maxValue) * 100;
+
+                let colorClass = '';
+                if (useDifficultyColors) {
+                    colorClass = `difficulty-${label.toLowerCase()}`;
+                }
+
+                return `
+                    <div class="bar-item">
+                        <div class="bar-label">${label}</div>
+                        <div class="bar-container">
+                            <div class="bar-fill ${colorClass}" style="width: ${width}%;">
+                                ${count}
+                            </div>
+                        </div>
+                        <div class="bar-value">${percentage}%</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderTopCreatures(characters) {
+            const container = document.getElementById('topCreatures');
+            if (!container || !characters) return;
+
+            // Sort by level descending and take top 5
+            const topFive = [...characters]
+                .sort((a, b) => b.level - a.level)
+                .slice(0, 5);
+
+            const medals = ['rank-gold', 'rank-silver', 'rank-bronze', '', ''];
+
+            container.innerHTML = topFive.map((creature, index) => {
+                const rank = index + 1;
+                const medalClass = medals[index];
+
+                return `
+                    <div class="creature-rank-item">
+                        <div class="rank-badge ${medalClass}">${rank}</div>
+                        <div class="creature-info-rank">
+                            <div class="creature-name-rank">${creature.name}</div>
+                            <div class="creature-meta-rank">${creature.race} • Level ${creature.level} • ${creature.difficulty}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Load statistics on page load
+        document.addEventListener('DOMContentLoaded', loadStatistics);
+    </script>
+</body>
+</html>

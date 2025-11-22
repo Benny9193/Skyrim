@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Maker - Home</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4a148c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Skyrim 3D">
+    <link rel="manifest" href="../public/manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect fill='%234a148c' width='192' height='192'/%3E%3Ctext x='50%25' y='50%25' font-size='100' text-anchor='middle' dominant-baseline='middle' fill='white'%3E🐉%3C/text%3E%3C/svg%3E">
+
     <link rel="stylesheet" href="../src/css/style.css">
     <link rel="stylesheet" href="../src/css/landing.css">
 </head>
@@ -76,6 +85,12 @@
                         <h3>Location Guide</h3>
                         <p>Explore Skyrim locations</p>
                         <span class="quick-badge">New: Interactive maps</span>
+                    </a>
+                    <a href="stats.html" class="quick-card">
+                        <div class="quick-icon">📊</div>
+                        <h3>Statistics</h3>
+                        <p>Database analytics</p>
+                        <span class="quick-badge">New: Live data from API</span>
                     </a>
                 </div>
             </div>
@@ -320,5 +335,6 @@
     </div>
 
     <script src="../src/js/landing.js"></script>
+    <script type="module" src="../src/js/pwa-install.js"></script>
 </body>
 </html>

@@ -57,6 +57,37 @@
         "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ctext x='50%25' y='50%25' font-size='50' text-anchor='middle' dominant-baseline='middle'%3E🎨%3C/text%3E%3C/svg%3E",
         "sizes": "96x96"
       }]
+    },
+    {
+      "name": "Statistics",
+      "short_name": "Stats",
+      "description": "View database analytics",
+      "url": "/stats.html",
+      "icons": [{
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ctext x='50%25' y='50%25' font-size='50' text-anchor='middle' dominant-baseline='middle'%3E📊%3C/text%3E%3C/svg%3E",
+        "sizes": "96x96"
+      }]
+    },
+    {
+      "name": "Character Viewer",
+      "short_name": "Viewer",
+      "description": "View 3D character models",
+      "url": "/character.html",
+      "icons": [{
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Ctext x='50%25' y='50%25' font-size='50' text-anchor='middle' dominant-baseline='middle'%3E🐲%3C/text%3E%3C/svg%3E",
+        "sizes": "96x96"
+      }]
     }
-  ]
+  ],
+  "share_target": {
+    "action": "/bestiary.html",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "display_override": ["window-controls-overlay", "standalone"],
+  "prefer_related_applications": false
 }
