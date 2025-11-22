@@ -1,0 +1,264 @@
+[
+  {
+    "id": 1,
+    "name": "Dragon Rising",
+    "type": "Main Quest",
+    "questline": "Main Questline",
+    "location": "Whiterun",
+    "level": 1,
+    "difficulty": "Normal",
+    "giver": "Jarl Balgruuf the Greater",
+    "status": "available",
+    "description": "Kill the dragon that is attacking the Western Watchtower. This is your first encounter with a dragon and marks the beginning of your journey as the Dragonborn.",
+    "objectives": [
+      "Talk to Jarl Balgruuf",
+      "Talk to Irileth",
+      "Kill the dragon",
+      "Investigate the dragon",
+      "Report back to Jarl Balgruuf"
+    ],
+    "rewards": {
+      "gold": 0,
+      "items": ["Axe of Whiterun"],
+      "skills": ["Unrelenting Force - First Word"]
+    },
+    "prerequisites": ["Bleak Falls Barrow"],
+    "nextQuest": "The Way of the Voice",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23660000%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐉%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 2,
+    "name": "Bleak Falls Barrow",
+    "type": "Main Quest",
+    "questline": "Main Questline",
+    "location": "Bleak Falls Barrow",
+    "level": 1,
+    "difficulty": "Easy",
+    "giver": "Farengar Secret-Fire",
+    "status": "available",
+    "description": "Retrieve the Dragonstone from Bleak Falls Barrow. This ancient Nordic ruin holds the key to understanding dragon burial sites across Skyrim.",
+    "objectives": [
+      "Talk to Farengar",
+      "Retrieve the Dragonstone",
+      "Deliver the Dragonstone to Farengar"
+    ],
+    "rewards": {
+      "gold": 400,
+      "items": ["Dragonstone"],
+      "skills": []
+    },
+    "prerequisites": [],
+    "nextQuest": "Dragon Rising",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23555555%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚰️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 3,
+    "name": "The Way of the Voice",
+    "type": "Main Quest",
+    "questline": "Main Questline",
+    "location": "High Hrothgar",
+    "level": 1,
+    "difficulty": "Normal",
+    "giver": "Jarl Balgruuf",
+    "status": "locked",
+    "description": "Learn the secrets of the Thu'um from the Greybeards at High Hrothgar. Climb the 7,000 steps to reach the monastery and begin your training in the Way of the Voice.",
+    "objectives": [
+      "Climb the 7,000 steps to High Hrothgar",
+      "Speak to Arngeir",
+      "Learn the word of power",
+      "Demonstrate your Thu'um",
+      "Learn the Word of Power from Einarth"
+    ],
+    "rewards": {
+      "gold": 0,
+      "items": [],
+      "skills": ["Unrelenting Force - Complete", "Whirlwind Sprint - First Word"]
+    },
+    "prerequisites": ["Dragon Rising"],
+    "nextQuest": "The Horn of Jurgen Windcaller",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cccccc%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23333333%22%3E⛰️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 4,
+    "name": "A Chance Arrangement",
+    "type": "Thieves Guild",
+    "questline": "Thieves Guild",
+    "location": "Riften",
+    "level": 1,
+    "difficulty": "Easy",
+    "giver": "Brynjolf",
+    "status": "available",
+    "description": "Help Brynjolf in Riften's marketplace. Frame Brand-Shei and prove your worth to join the Thieves Guild.",
+    "objectives": [
+      "Meet Brynjolf during daytime",
+      "Steal Madesi's Ring",
+      "Plant the ring on Brand-Shei",
+      "Speak to Brynjolf"
+    ],
+    "rewards": {
+      "gold": 100,
+      "items": [],
+      "skills": []
+    },
+    "prerequisites": [],
+    "nextQuest": "Taking Care of Business",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23333333%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗝️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 5,
+    "name": "Take Up Arms",
+    "type": "Companions",
+    "questline": "The Companions",
+    "location": "Whiterun",
+    "level": 1,
+    "difficulty": "Easy",
+    "giver": "Kodlak Whitemane",
+    "status": "available",
+    "description": "Join the Companions, Skyrim's most renowned group of warriors. Prove your worth in combat and become one of the Circle.",
+    "objectives": [
+      "Speak to Kodlak Whitemane",
+      "Train with Vilkas",
+      "Command followers to do tasks",
+      "Spar with Vilkas"
+    ],
+    "rewards": {
+      "gold": 0,
+      "items": ["Companions Armor"],
+      "skills": []
+    },
+    "prerequisites": [],
+    "nextQuest": "Proving Honor",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cc6600%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚔️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 6,
+    "name": "First Lessons",
+    "type": "College of Winterhold",
+    "questline": "College of Winterhold",
+    "location": "Winterhold",
+    "level": 1,
+    "difficulty": "Easy",
+    "giver": "Faralda",
+    "status": "available",
+    "description": "Join the College of Winterhold and begin your magical education. Demonstrate your magical aptitude to gain entry.",
+    "objectives": [
+      "Cast a spell for Faralda",
+      "Reach the Hall of the Elements",
+      "Listen to Tolfdir's lecture",
+      "Cast flames on the wards",
+      "Follow Tolfdir"
+    ],
+    "rewards": {
+      "gold": 0,
+      "items": ["Novice Robes", "Novice Hood"],
+      "skills": []
+    },
+    "prerequisites": [],
+    "nextQuest": "Under Saarthal",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%2399ccff%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23003366%22%3E🔮%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 7,
+    "name": "Diplomatic Immunity",
+    "type": "Main Quest",
+    "questline": "Main Questline",
+    "location": "Thalmor Embassy",
+    "level": 10,
+    "difficulty": "Hard",
+    "giver": "Delphine",
+    "status": "locked",
+    "description": "Infiltrate the Thalmor Embassy to discover what they know about the dragons. Sneak through their headquarters and find evidence of their involvement.",
+    "objectives": [
+      "Meet Malborn in Solitude",
+      "Give Malborn the equipment",
+      "Meet Delphine at the stables",
+      "Infiltrate the Thalmor Embassy",
+      "Search for information about the dragons"
+    ],
+    "rewards": {
+      "gold": 0,
+      "items": ["Thalmor Dossier: Esbern"],
+      "skills": []
+    },
+    "prerequisites": ["A Blade in the Dark"],
+    "nextQuest": "A Cornered Rat",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23996633%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🕵️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 8,
+    "name": "Alduin's Wall",
+    "type": "Main Quest",
+    "questline": "Main Questline",
+    "location": "Sky Haven Temple",
+    "level": 15,
+    "difficulty": "Hard",
+    "giver": "Esbern",
+    "status": "locked",
+    "description": "Discover the ancient secrets of Alduin's Wall with Esbern and Delphine. Learn how the ancient Nords defeated Alduin in ages past.",
+    "objectives": [
+      "Escort Esbern to Riverwood",
+      "Talk to Esbern",
+      "Gain entrance to Sky Haven Temple",
+      "Learn the secret of Alduin's Wall"
+    ],
+    "rewards": {
+      "gold": 0,
+      "items": ["Dragonbane"],
+      "skills": []
+    },
+    "prerequisites": ["The Throat of the World"],
+    "nextQuest": "The Throat of the World",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cc9966%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗡️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 9,
+    "name": "The Wolf Queen Awakened",
+    "type": "Side Quest",
+    "questline": "Miscellaneous",
+    "location": "Solitude",
+    "level": 10,
+    "difficulty": "Hard",
+    "giver": "Falk Firebeard",
+    "status": "available",
+    "description": "The spirit of Potema, the Wolf Queen, is stirring in the catacombs beneath Solitude. Put her restless spirit to rest once and for all.",
+    "objectives": [
+      "Speak to Falk Firebeard",
+      "Defeat Potema",
+      "Retrieve Potema's remains",
+      "Return to Falk Firebeard"
+    ],
+    "rewards": {
+      "gold": 1000,
+      "items": ["Shield of Solitude"],
+      "skills": []
+    },
+    "prerequisites": ["The Man Who Cried Wolf"],
+    "nextQuest": null,
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%233366aa%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👑%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 10,
+    "name": "Dragonslayer",
+    "type": "Main Quest",
+    "questline": "Main Questline",
+    "location": "Sovngarde",
+    "level": 20,
+    "difficulty": "Deadly",
+    "giver": "Paarthurnax",
+    "status": "locked",
+    "description": "Enter Sovngarde and defeat Alduin once and for all. Join forces with the ancient heroes of Nordic legend to save the world from the World-Eater.",
+    "objectives": [
+      "Enter Sovngarde",
+      "Defeat Alduin",
+      "Return to Skyrim"
+    ],
+    "rewards": {
+      "gold": 0,
+      "items": [],
+      "skills": []
+    },
+    "prerequisites": ["Alduin's Bane", "The Fallen"],
+    "nextQuest": null,
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23ffd700%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚔️%3C/text%3E%3C/svg%3E"
+  }
+]
