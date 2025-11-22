@@ -1,0 +1,409 @@
+[
+  {
+    "id": 1,
+    "name": "Whiterun",
+    "type": "City",
+    "hold": "Whiterun Hold",
+    "region": "Central Skyrim",
+    "difficulty": "Safe",
+    "description": "Whiterun is one of the nine major cities in Skyrim and the capital of Whiterun Hold. The city is located in the central tundra of Skyrim, along the White River that flows from Riverwood. It is the most centrally located of all the cities in Skyrim and serves as a major trading hub.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%238B7355%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🏰%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Dragonsreach Palace",
+      "The Companions Jorrvaskr",
+      "Cloud District",
+      "Market Square",
+      "City Walls"
+    ],
+    "npcs": [
+      "Jarl Balgruuf the Greater",
+      "Farengar Secret-Fire",
+      "Kodlak Whitemane",
+      "Belethor"
+    ],
+    "quests": [
+      "Dragon Rising",
+      "Bleak Falls Barrow",
+      "The Companions Questline",
+      "Battle for Whiterun"
+    ],
+    "shops": [
+      { "name": "Belethor's General Goods", "type": "General Merchant" },
+      { "name": "The Drunken Huntsman", "type": "Weapons & Archery" },
+      { "name": "Warmaiden's", "type": "Blacksmith" },
+      { "name": "Arcadia's Cauldron", "type": "Alchemy" }
+    ],
+    "climate": "Temperate Plains",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 2,
+    "name": "Blackreach",
+    "type": "Dwemer Ruins",
+    "hold": "Multiple Holds",
+    "region": "Underground",
+    "difficulty": "Deadly",
+    "description": "Blackreach is a massive underground cavern found beneath the ruins of several Dwemer cities. This vast, bioluminescent cave system is home to Falmer, Chaurus, and other dangerous creatures. The ancient Dwemer architecture stands as a testament to their advanced civilization.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23001a33%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%2300ffff%22%3E🌌%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Giant Glowing Mushrooms",
+      "Crimson Nirnroot",
+      "Dwemer Centurions",
+      "Silent City",
+      "Tower of Mzark"
+    ],
+    "npcs": [],
+    "quests": [
+      "Discerning the Transmundane",
+      "Elder Knowledge",
+      "A Return To Your Roots"
+    ],
+    "shops": [],
+    "climate": "Underground Cavern",
+    "fastTravel": false,
+    "discovered": false
+  },
+  {
+    "id": 3,
+    "name": "Solitude",
+    "type": "City",
+    "hold": "Haafingar",
+    "region": "Northwestern Skyrim",
+    "difficulty": "Safe",
+    "description": "Solitude is the capital city of both Haafingar Hold and the province of Skyrim. Located on a natural arch over the Sea of Ghosts, it is the most prosperous city in Skyrim and the seat of the Imperial Legion's power in the province. The imposing Blue Palace overlooks the city.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%233366aa%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👑%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Blue Palace",
+      "Bards College",
+      "Castle Dour",
+      "East Empire Company",
+      "Solitude Lighthouse"
+    ],
+    "npcs": [
+      "Jarl Elisif the Fair",
+      "General Tullius",
+      "Viarmo",
+      "Falk Firebeard"
+    ],
+    "quests": [
+      "The Wolf Queen Awakened",
+      "The Man Who Cried Wolf",
+      "Tending the Flames",
+      "Diplomatic Immunity"
+    ],
+    "shops": [
+      { "name": "Radiant Raiment", "type": "Clothing" },
+      { "name": "Bits and Pieces", "type": "General Goods" },
+      { "name": "The Winking Skeever", "type": "Inn" }
+    ],
+    "climate": "Coastal Cold",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 4,
+    "name": "High Hrothgar",
+    "type": "Temple",
+    "hold": "Whiterun Hold",
+    "region": "Throat of the World",
+    "difficulty": "Normal",
+    "description": "High Hrothgar is a monastery situated at the top of the Seven Thousand Steps, a treacherous mountain path leading to the peak of the Throat of the World. It is home to the Greybeards, masters of the Way of the Voice who live in absolute silence and contemplation.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cccccc%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23333333%22%3E⛰️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Courtyard",
+      "Main Hall",
+      "Seven Thousand Steps",
+      "Word Walls",
+      "Meditation Chambers"
+    ],
+    "npcs": [
+      "Paarthurnax",
+      "Master Arngeir",
+      "Master Borri",
+      "Master Einarth",
+      "Master Wulfgar"
+    ],
+    "quests": [
+      "The Way of the Voice",
+      "The Throat of the World",
+      "Paarthurnax",
+      "Season Unending"
+    ],
+    "shops": [],
+    "climate": "Extreme Cold Mountain",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 5,
+    "name": "Riften",
+    "type": "City",
+    "hold": "The Rift",
+    "region": "Southeastern Skyrim",
+    "difficulty": "Normal",
+    "description": "Riften is a major city in southeastern Skyrim near the borders of Morrowind and Cyrodiil. The city is built on the shores of Lake Honrich and is known for its fishing industry and criminal underworld. The Thieves Guild operates from the Ratway beneath the city.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23663300%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🌊%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Mistveil Keep",
+      "The Ratway",
+      "Thieves Guild",
+      "Market Square",
+      "Temple of Mara"
+    ],
+    "npcs": [
+      "Jarl Laila Law-Giver",
+      "Brynjolf",
+      "Maven Black-Briar",
+      "Maramal"
+    ],
+    "quests": [
+      "Thieves Guild Questline",
+      "The Pursuit",
+      "Scoundrel's Folly",
+      "The Book of Love"
+    ],
+    "shops": [
+      { "name": "The Pawned Prawn", "type": "Pawnshop" },
+      { "name": "The Scorched Hammer", "type": "Blacksmith" },
+      { "name": "The Bee and Barb", "type": "Inn" }
+    ],
+    "climate": "Temperate Forest",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 6,
+    "name": "Winterhold",
+    "type": "City",
+    "hold": "Winterhold Hold",
+    "region": "Northern Skyrim",
+    "difficulty": "Normal",
+    "description": "Once a great city rivaling Solitude in power and influence, Winterhold was largely destroyed during the Great Collapse. Now only a small village remains, overshadowed by the College of Winterhold, the premier institution for magical studies in Skyrim.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%2399ccff%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23003366%22%3E🔮%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "College of Winterhold",
+      "The Frozen Hearth",
+      "Jarl's Longhouse",
+      "Bridge to College",
+      "Ruins of Old City"
+    ],
+    "npcs": [
+      "Jarl Korir",
+      "Arch-Mage Savos Aren",
+      "Faralda",
+      "Tolfdir"
+    ],
+    "quests": [
+      "College of Winterhold Questline",
+      "First Lessons",
+      "Good Intentions",
+      "The Eye of Magnus"
+    ],
+    "shops": [
+      { "name": "The Frozen Hearth", "type": "Inn" }
+    ],
+    "climate": "Frozen Tundra",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 7,
+    "name": "Sovngarde",
+    "type": "Realm",
+    "hold": "None",
+    "region": "Aetherius",
+    "difficulty": "Deadly",
+    "description": "Sovngarde is the Nordic afterlife, a realm in Aetherius reserved for Nord warriors who die valiantly in battle. The Hall of Valor stands at its center, where ancient heroes feast and sing for eternity. The realm is shrouded in mist conjured by Alduin to trap souls.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23ffd700%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚔️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Hall of Valor",
+      "Whalebone Bridge",
+      "Alduin's Mist",
+      "Shor's Throne",
+      "The Heroes"
+    ],
+    "npcs": [
+      "Tsun",
+      "Ysgramor",
+      "Gormlaith Golden-Hilt",
+      "Felldir the Old",
+      "Hakon One-Eye"
+    ],
+    "quests": [
+      "Sovngarde (quest)",
+      "Dragonslayer"
+    ],
+    "shops": [],
+    "climate": "Ethereal",
+    "fastTravel": false,
+    "discovered": false
+  },
+  {
+    "id": 8,
+    "name": "Markarth",
+    "type": "City",
+    "hold": "The Reach",
+    "region": "Western Skyrim",
+    "difficulty": "Normal",
+    "description": "Markarth is a city carved into the living rock of a mountain in the Reach. The city is known for its rich silver mines and ancient Dwemer architecture. It is also the site of significant political intrigue involving the Forsworn rebellion and the Silver-Blood family.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23996633%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚒️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Understone Keep",
+      "Cidhna Mine",
+      "Dwemer Museum",
+      "Temple of Dibella",
+      "Smelter"
+    ],
+    "npcs": [
+      "Jarl Igmund",
+      "Calcelmo",
+      "Nepos the Nose",
+      "Thonar Silver-Blood"
+    ],
+    "quests": [
+      "The Forsworn Conspiracy",
+      "No One Escapes Cidhna Mine",
+      "The Heart of Dibella",
+      "Nimhe, the Poisoned One"
+    ],
+    "shops": [
+      { "name": "Arnleif and Sons Trading Company", "type": "General Goods" },
+      { "name": "The Hag's Cure", "type": "Alchemy" },
+      { "name": "Silver-Blood Inn", "type": "Inn" }
+    ],
+    "climate": "Mountain Valley",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 9,
+    "name": "Bleak Falls Barrow",
+    "type": "Nordic Ruin",
+    "hold": "Whiterun Hold",
+    "region": "Southern Mountains",
+    "difficulty": "Hard",
+    "description": "Bleak Falls Barrow is an ancient Nordic tomb located in the mountains south of Riverwood. The ruin contains the first Word Wall the Dragonborn encounters and is home to dangerous Draugr, including a powerful Overlord. The Golden Claw puzzle guards its inner sanctum.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23555555%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚰️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Word Wall (Fus)",
+      "Golden Claw Puzzle",
+      "Draugr Crypts",
+      "Spider Lair",
+      "Main Chamber"
+    ],
+    "npcs": [
+      "Arvel the Swift",
+      "Draugr Overlord"
+    ],
+    "quests": [
+      "Bleak Falls Barrow",
+      "The Golden Claw"
+    ],
+    "shops": [],
+    "climate": "Cold Mountains",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 10,
+    "name": "Sky Haven Temple",
+    "type": "Temple",
+    "hold": "The Reach",
+    "region": "Karth River Valley",
+    "difficulty": "Normal",
+    "description": "Sky Haven Temple is an ancient Blades sanctuary built into the Karth River canyon. Hidden behind a secret entrance activated by Dragonbane, this fortress served as a base for the Blades during the Akaviri invasions. The temple houses a massive relief depicting Alduin's Wall.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cc9966%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗡️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Alduin's Wall",
+      "Blood Seal",
+      "Dragonbane",
+      "Blades Armory",
+      "Secret Entrance"
+    ],
+    "npcs": [
+      "Esbern",
+      "Delphine"
+    ],
+    "quests": [
+      "Alduin's Wall",
+      "Rebuilding the Blades",
+      "Dragon Hunting"
+    ],
+    "shops": [],
+    "climate": "Canyon",
+    "fastTravel": true,
+    "discovered": false
+  },
+  {
+    "id": 11,
+    "name": "Dwemer Museum",
+    "type": "Museum",
+    "hold": "The Reach",
+    "region": "Markarth",
+    "difficulty": "Safe",
+    "description": "Located in Understone Keep in Markarth, the Dwemer Museum houses the most extensive collection of Dwemer artifacts in Skyrim. Curated by Court Wizard Calcelmo, the museum contains relics from the lost Dwemer civilization, including automatons, armor, and mysterious devices.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23bb8844%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🏛️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Dwemer Artifacts Collection",
+      "Stone of Barenziah",
+      "Calcelmo's Laboratory",
+      "Research Notes",
+      "Ancient Mechanisms"
+    ],
+    "npcs": [
+      "Calcelmo",
+      "Aicantar"
+    ],
+    "quests": [
+      "Hard Answers",
+      "Nimhe, the Poisoned One"
+    ],
+    "shops": [],
+    "climate": "Indoor",
+    "fastTravel": false,
+    "discovered": false
+  },
+  {
+    "id": 12,
+    "name": "Throat of the World",
+    "type": "Mountain",
+    "hold": "Whiterun Hold",
+    "region": "Central Skyrim",
+    "difficulty": "Hard",
+    "description": "The Throat of the World is the highest peak in Skyrim and all of Tamriel. This sacred mountain is home to Paarthurnax, the leader of the Greybeards. At its summit stands a Word Wall and the Time-Wound where the ancient Nords banished Alduin through time.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23e6f2ff%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23003d7a%22%3E🏔️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "features": [
+      "Word Wall (Lok)",
+      "Time-Wound",
+      "Summit Camp",
+      "Notched Pickaxe",
+      "Dragon Perch"
+    ],
+    "npcs": [
+      "Paarthurnax"
+    ],
+    "quests": [
+      "The Throat of the World",
+      "Elder Knowledge",
+      "Alduin's Bane",
+      "Paarthurnax"
+    ],
+    "shops": [],
+    "climate": "Extreme Cold Peak",
+    "fastTravel": false,
+    "discovered": false
+  }
+]

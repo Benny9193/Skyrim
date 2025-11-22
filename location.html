@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Viewer - Skyrim</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="location.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header location-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="locations.html" class="header-link">← All Locations</a>
+                        <span class="separator">|</span>
+                        <a href="landing.html" class="header-link">Home</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content location-main">
+            <div class="container">
+                <div class="location-layout">
+                    <!-- Left Panel: Location Information -->
+                    <div class="location-info-panel">
+                        <!-- Location Header -->
+                        <div class="card location-header-card">
+                            <div class="card__body">
+                                <div class="location-title-section">
+                                    <h2 class="location-name" id="locationName">Loading...</h2>
+                                    <p class="location-type" id="locationType">Type</p>
+                                    <div class="location-meta">
+                                        <span class="meta-item" id="locationHold">Hold</span>
+                                        <span class="separator">•</span>
+                                        <span class="meta-item" id="locationRegion">Region</span>
+                                    </div>
+                                </div>
+                                <div class="location-image-container">
+                                    <img id="locationImage" src="" alt="Location" class="location-image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Info -->
+                        <div class="card location-quick-info-card">
+                            <div class="card__body">
+                                <h3>Quick Information</h3>
+                                <div class="quick-info-grid">
+                                    <div class="info-item">
+                                        <span class="info-label">Difficulty</span>
+                                        <span class="info-value" id="infoDifficulty">
+                                            <span class="difficulty-badge">Normal</span>
+                                        </span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Climate</span>
+                                        <span class="info-value" id="infoClimate">Temperate</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Fast Travel</span>
+                                        <span class="info-value" id="infoFastTravel">No</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Discovered</span>
+                                        <span class="info-value">
+                                            <button class="btn btn--sm" id="toggleDiscoveredBtn">Mark as Discovered</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="card location-description-card">
+                            <div class="card__body">
+                                <h3>About</h3>
+                                <p class="location-description" id="locationDescription">No description available.</p>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="card location-features-card">
+                            <div class="card__body">
+                                <h3>Notable Features</h3>
+                                <ul class="features-list" id="featuresList">
+                                    <!-- Features populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- NPCs -->
+                        <div class="card location-npcs-card">
+                            <div class="card__body">
+                                <h3>Notable NPCs</h3>
+                                <div class="npcs-list" id="npcsList">
+                                    <!-- NPCs populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quests -->
+                        <div class="card location-quests-card">
+                            <div class="card__body">
+                                <h3>Related Quests</h3>
+                                <ul class="quests-list" id="questsList">
+                                    <!-- Quests populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Shops -->
+                        <div class="card location-shops-card">
+                            <div class="card__body">
+                                <h3>Shops & Services</h3>
+                                <div class="shops-list" id="shopsList">
+                                    <!-- Shops populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="card notes-section">
+                            <div class="card__body">
+                                <h3>Personal Notes</h3>
+                                <textarea id="locationNotes" placeholder="Add your notes about this location..."></textarea>
+                                <button class="btn btn--sm" id="saveNotesBtn" style="margin-top: 10px;">
+                                    Save Notes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: 3D Viewer -->
+                    <div class="location-viewer-panel">
+                        <div class="card viewer-container">
+                            <div class="viewer-header">
+                                <h3>3D Model Viewer</h3>
+                                <div class="viewer-controls">
+                                    <button class="btn btn--sm" id="resetViewBtn" title="Reset View">
+                                        🔄
+                                    </button>
+                                    <button class="btn btn--sm" id="lightModeBtn" title="Toggle Lighting">
+                                        💡
+                                    </button>
+                                    <button class="btn btn--sm" id="wireframeBtn" title="Wireframe Mode">
+                                        📐
+                                    </button>
+                                    <button class="btn btn--sm" id="gridBtn" title="Toggle Grid">
+                                        ⊞
+                                    </button>
+                                    <button class="btn btn--sm" id="fullscreenBtn" title="Fullscreen">
+                                        ⛶
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="viewer-content">
+                                <canvas id="locationCanvas"></canvas>
+                                <div class="viewer-overlay" id="viewerOverlay">
+                                    <div class="overlay-content">
+                                        <div class="loader-spinner"></div>
+                                        <p>Loading 3D model...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="viewer-footer">
+                                <div class="viewer-info">
+                                    <span>Left-click: Rotate • Scroll: Zoom • Right-click: Pan</span>
+                                </div>
+                                <div class="viewer-settings">
+                                    <label>Rotation Speed:</label>
+                                    <input type="range" id="rotationSpeedSlider" min="0" max="2.0" step="0.1" value="1.0" class="slider">
+                                    <span id="rotationSpeedValue">1.0x</span>
+                                </div>
+                                <div class="viewer-settings">
+                                    <label>Ambient Light:</label>
+                                    <input type="range" id="ambientLightSlider" min="0" max="1" step="0.1" value="0.5" class="slider">
+                                    <span id="ambientLightValue">0.5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Between Locations -->
+                <div class="location-navigation">
+                    <button class="btn btn--outline" id="prevLocationBtn">
+                        ← Previous
+                    </button>
+                    <span class="location-counter" id="locationCounter">1 / 1</span>
+                    <button class="btn btn--outline" id="nextLocationBtn">
+                        Next →
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="location.js"></script>
+</body>
+</html>

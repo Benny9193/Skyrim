@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyrim Locations - Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="locations.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header locations-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Skyrim Locations</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content locations-main">
+            <div class="container">
+                <div class="locations-layout">
+                    <!-- Sidebar - Filters -->
+                    <aside class="locations-sidebar">
+                        <!-- Search -->
+                        <div class="filter-section">
+                            <h3 class="filter-title">Search</h3>
+                            <div class="search-box">
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    class="search-input"
+                                    placeholder="Search by name..."
+                                    autocomplete="off"
+                                >
+                                <span class="search-icon">🔍</span>
+                            </div>
+                        </div>
+
+                        <!-- Type Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Location Type</h3>
+                                <button class="filter-toggle" data-filter="type">−</button>
+                            </div>
+                            <div class="filter-options" id="typeFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Difficulty Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Difficulty</h3>
+                                <button class="filter-toggle" data-filter="difficulty">−</button>
+                            </div>
+                            <div class="filter-options" id="difficultyFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Hold Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Hold</h3>
+                                <button class="filter-toggle" data-filter="hold">−</button>
+                            </div>
+                            <div class="filter-options" id="holdFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Region Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Region</h3>
+                                <button class="filter-toggle" data-filter="region">−</button>
+                            </div>
+                            <div class="filter-options" id="regionFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Sort Options -->
+                        <div class="filter-section">
+                            <h3 class="filter-title">Sort By</h3>
+                            <div class="sort-options">
+                                <button class="sort-btn active" data-sort="name">Name (A-Z)</button>
+                                <button class="sort-btn" data-sort="type">Type</button>
+                                <button class="sort-btn" data-sort="difficulty">Difficulty</button>
+                            </div>
+                        </div>
+
+                        <!-- Fast Travel Filter -->
+                        <div class="filter-section">
+                            <h3 class="filter-title">Travel Options</h3>
+                            <label class="filter-option">
+                                <input
+                                    type="checkbox"
+                                    id="fastTravelCheckbox"
+                                    class="filter-checkbox"
+                                    data-filter="fastTravel"
+                                >
+                                <span class="filter-label">🗺️ Fast Travel Available</span>
+                            </label>
+                            <label class="filter-option">
+                                <input
+                                    type="checkbox"
+                                    id="discoveredCheckbox"
+                                    class="filter-checkbox"
+                                    data-filter="discovered"
+                                >
+                                <span class="filter-label">✓ Discovered Only</span>
+                                <span class="filter-count" id="discoveredCount">(0)</span>
+                            </label>
+                        </div>
+
+                        <!-- Clear Filters -->
+                        <button class="btn btn--outline btn--full-width" id="clearFiltersBtn">
+                            Clear All Filters
+                        </button>
+
+                        <!-- Map View Toggle -->
+                        <button class="btn btn--primary btn--full-width" id="mapViewBtn" style="margin-top: 12px;">
+                            🗺️ Map View
+                        </button>
+                    </aside>
+
+                    <!-- Main Content - Grid -->
+                    <section class="locations-content">
+                        <!-- Results Info -->
+                        <div class="results-header">
+                            <div class="results-left">
+                                <h2 id="resultsTitle">All Locations</h2>
+                                <p id="resultsCount" class="results-count"></p>
+                            </div>
+                            <div class="results-right">
+                                <button class="btn btn--outline" id="gridToggleBtn">
+                                    ⊞ Grid View
+                                </button>
+                                <button class="btn btn--outline" id="listToggleBtn">
+                                    ☰ List View
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Locations Grid -->
+                        <div class="locations-grid" id="locationsGrid">
+                            <!-- Populated by JavaScript -->
+                        </div>
+
+                        <!-- No Results -->
+                        <div class="no-results hidden" id="noResults">
+                            <div class="no-results-content">
+                                <div class="no-results-icon">🔍</div>
+                                <h3>No locations found</h3>
+                                <p>Try adjusting your search or filter criteria</p>
+                                <button class="btn btn--primary" id="resetSearchBtn">Clear Search</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Map View Modal -->
+        <div class="modal hidden" id="mapModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h3>Skyrim Map</h3>
+                    <button class="modal-close" id="closeMapBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="map-container" id="mapContainer">
+                        <div class="map-placeholder">
+                            <p>Interactive map coming soon...</p>
+                            <p>Locations will be marked based on your current filters</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="locations-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="index.html">3D Studio</a>
+                    <span class="separator">•</span>
+                    <a href="bestiary.html">Bestiary</a>
+                    <span class="separator">•</span>
+                    <a href="character.html">View Character</a>
+                </div>
+                <p>&copy; 2024 Skyrim Explorer. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="locations.js"></script>
+</body>
+</html>
