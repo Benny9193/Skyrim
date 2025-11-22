@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "name": "Blue Mountain Flower",
+    "type": "Plant",
+    "weight": 0.1,
+    "value": 2,
+    "effects": [
+      "Restore Health",
+      "Fortify Conjuration",
+      "Fortify Health",
+      "Damage Magicka Regen"
+    ],
+    "location": "Common, found throughout Skyrim in mountainous regions",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%233366cc%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🌸%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 2,
+    "name": "Wheat",
+    "type": "Plant",
+    "weight": 0.1,
+    "value": 5,
+    "effects": [
+      "Restore Health",
+      "Fortify Health",
+      "Damage Stamina Regen",
+      "Lingering Damage Magicka"
+    ],
+    "location": "Farms throughout Skyrim, especially near Whiterun",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23daa520%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🌾%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 3,
+    "name": "Giant's Toe",
+    "type": "Animal Part",
+    "weight": 1,
+    "value": 20,
+    "effects": [
+      "Damage Stamina",
+      "Fortify Health",
+      "Fortify Carry Weight",
+      "Damage Stamina Regen"
+    ],
+    "location": "Dropped by Giants",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23996633%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🦶%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 4,
+    "name": "Creep Cluster",
+    "type": "Plant",
+    "weight": 0.2,
+    "value": 1,
+    "effects": [
+      "Restore Magicka",
+      "Damage Stamina Regen",
+      "Fortify Carry Weight",
+      "Weakness to Magic"
+    ],
+    "location": "Volcanic tundra near Riften and Eastmarch",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23663399%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🍄%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 5,
+    "name": "Butterfly Wing",
+    "type": "Animal Part",
+    "weight": 0.1,
+    "value": 3,
+    "effects": [
+      "Restore Health",
+      "Fortify Barter",
+      "Lingering Damage Stamina",
+      "Damage Magicka"
+    ],
+    "location": "Caught from flying butterflies throughout Skyrim",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23ff69b4%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🦋%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 6,
+    "name": "Nightshade",
+    "type": "Plant",
+    "weight": 0.1,
+    "value": 8,
+    "effects": [
+      "Damage Health",
+      "Damage Magicka Regen",
+      "Lingering Damage Stamina",
+      "Fortify Destruction"
+    ],
+    "location": "Common plant found throughout Skyrim",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23330033%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%239966ff%22%3E🌿%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 7,
+    "name": "Dragon's Tongue",
+    "type": "Plant",
+    "weight": 0.1,
+    "value": 5,
+    "effects": [
+      "Resist Fire",
+      "Fortify Barter",
+      "Fortify Illusion",
+      "Fortify Two-Handed"
+    ],
+    "location": "Volcanic tundra, especially near Riften",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23cc0000%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🔥%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 8,
+    "name": "Daedra Heart",
+    "type": "Daedric",
+    "weight": 0.5,
+    "value": 250,
+    "effects": [
+      "Restore Health",
+      "Damage Stamina Regen",
+      "Damage Magicka",
+      "Fear"
+    ],
+    "location": "Dropped by Dremora, found in alchemy shops",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23660000%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23ff0000%22%3E❤️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 9,
+    "name": "Glowing Mushroom",
+    "type": "Fungus",
+    "weight": 0.2,
+    "value": 5,
+    "effects": [
+      "Resist Shock",
+      "Fortify Destruction",
+      "Fortify Smithing",
+      "Fortify Health"
+    ],
+    "location": "Caves and Blackreach",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%2300ff99%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🍄%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 10,
+    "name": "Crimson Nirnroot",
+    "type": "Plant",
+    "weight": 0.2,
+    "value": 10,
+    "effects": [
+      "Damage Health",
+      "Damage Stamina",
+      "Invisibility",
+      "Resist Magic"
+    ],
+    "location": "Blackreach only",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23cc0033%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🌿%3C/text%3E%3C/svg%3E"
+  }
+]

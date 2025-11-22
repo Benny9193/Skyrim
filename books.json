@@ -1,0 +1,271 @@
+[
+  {
+    "id": 1,
+    "title": "The Lusty Argonian Maid, Vol. 1",
+    "author": "Crassius Curio",
+    "category": "Fiction",
+    "skillBook": false,
+    "skill": null,
+    "value": 25,
+    "weight": 1,
+    "description": "A scandalous play featuring a maid named Lifts-Her-Tail and her employer.",
+    "locations": [
+      "Vittoria Vici's House, Solitude",
+      "Haelga's Bunkhouse, Riften",
+      "Common book found in many locations"
+    ],
+    "excerpt": "Act IV, Scene III, continued... Lifts-Her-Tail: Certainly not, kind sir! I am here but to clean your chambers.",
+    "rarity": "Common"
+  },
+  {
+    "id": 2,
+    "title": "The Book of the Dragonborn",
+    "author": "Prior Emelene Madrine",
+    "category": "Lore",
+    "skillBook": false,
+    "skill": null,
+    "value": 50,
+    "weight": 1,
+    "description": "A comprehensive guide to the history and powers of the Dragonborn.",
+    "locations": [
+      "High Hrothgar",
+      "Sky Haven Temple",
+      "Farengar's study in Dragonsreach"
+    ],
+    "excerpt": "For those who are blessed and burdened with the gift of the dragon's blood, great power awaits...",
+    "rarity": "Uncommon"
+  },
+  {
+    "id": 3,
+    "title": "2920, Last Year of the First Era",
+    "author": "Carlovac Townway",
+    "category": "Historical",
+    "skillBook": false,
+    "skill": null,
+    "value": 30,
+    "weight": 1,
+    "description": "A 12-volume series chronicling the final year of the First Era.",
+    "locations": [
+      "Various locations throughout Skyrim",
+      "Found in many libraries and bookshelves"
+    ],
+    "excerpt": "Morning Star - Book One of 2920. The Year is told in twelve books, each detailing the events of a single month...",
+    "rarity": "Common"
+  },
+  {
+    "id": 4,
+    "title": "The Wolf Queen, v1",
+    "author": "Waughin Jarth",
+    "category": "Historical",
+    "skillBook": false,
+    "skill": null,
+    "value": 40,
+    "weight": 1,
+    "description": "The tragic tale of Potema, the Wolf Queen of Solitude.",
+    "locations": [
+      "Blue Palace, Solitude",
+      "Various libraries",
+      "Part of a multi-volume series"
+    ],
+    "excerpt": "How Potema, later called the Wolf Queen, came to be is a tale of power, betrayal, and dark magic...",
+    "rarity": "Uncommon"
+  },
+  {
+    "id": 5,
+    "title": "The Arcane Archer",
+    "author": "Summerset Shadows",
+    "category": "Skill Book",
+    "skillBook": true,
+    "skill": "Archery",
+    "value": 50,
+    "weight": 1,
+    "description": "A guide to mastering the art of archery with magical enhancements.",
+    "locations": [
+      "Angi's Camp",
+      "Tower of Mzark",
+      "Various dungeons"
+    ],
+    "excerpt": "The true archer does not simply loose arrows, but imbues each shot with intention and power...",
+    "rarity": "Rare"
+  },
+  {
+    "id": 6,
+    "title": "The Warrior's Charge",
+    "author": "Hjalmar the Skald",
+    "category": "Skill Book",
+    "skillBook": true,
+    "skill": "Two-Handed",
+    "value": 50,
+    "weight": 1,
+    "description": "Techniques for wielding massive weapons with devastating effect.",
+    "locations": [
+      "Driftshade Sanctuary",
+      "Largashbur",
+      "Various Orc strongholds"
+    ],
+    "excerpt": "Let your enemies feel the weight of your steel as you bring down your greatsword with righteous fury...",
+    "rarity": "Rare"
+  },
+  {
+    "id": 7,
+    "title": "A Dance in Fire, v1",
+    "author": "Waughin Jarth",
+    "category": "Fiction",
+    "skillBook": false,
+    "skill": null,
+    "value": 35,
+    "weight": 1,
+    "description": "An adventure story set in Valenwood during a merchant's journey.",
+    "locations": [
+      "Dragonsreach",
+      "Various inns and homes",
+      "Multi-volume series"
+    ],
+    "excerpt": "The streets of Falinesti were alive with commerce and color as our heroes began their fateful journey...",
+    "rarity": "Common"
+  },
+  {
+    "id": 8,
+    "title": "The Black Arts On Trial",
+    "author": "Hannibal Traven",
+    "category": "Skill Book",
+    "skillBook": true,
+    "skill": "Conjuration",
+    "value": 50,
+    "weight": 1,
+    "description": "A treatise on the ethical use of Conjuration magic.",
+    "locations": [
+      "Fellglow Keep",
+      "College of Winterhold",
+      "Sunderstone Gorge"
+    ],
+    "excerpt": "To summon forth the denizens of Oblivion is to walk a dangerous path, yet one that offers great power...",
+    "rarity": "Rare"
+  },
+  {
+    "id": 9,
+    "title": "Reality & Other Falsehoods",
+    "author": "Unknown",
+    "category": "Skill Book",
+    "skillBook": true,
+    "skill": "Illusion",
+    "value": 50,
+    "weight": 1,
+    "description": "A philosophical exploration of illusion magic and the nature of reality.",
+    "locations": [
+      "Broken Oar Grotto",
+      "Redwater Den",
+      "College of Winterhold"
+    ],
+    "excerpt": "What is real? When the mind can be bent to perceive falsehood as truth, reality becomes malleable...",
+    "rarity": "Rare"
+  },
+  {
+    "id": 10,
+    "title": "The Legend of Red Eagle",
+    "author": "Tredayn Dren",
+    "category": "Lore",
+    "skillBook": false,
+    "skill": null,
+    "value": 40,
+    "weight": 1,
+    "description": "The tale of Red Eagle, ancient hero of the Reach.",
+    "locations": [
+      "Rebel's Cairn",
+      "Red Eagle Redoubt",
+      "The Reach locations"
+    ],
+    "excerpt": "In the time before the Nords came to Skyrim, the Reach was home to a great king named Faolan, later known as Red Eagle...",
+    "rarity": "Uncommon"
+  },
+  {
+    "id": 11,
+    "title": "The Doors of Oblivion",
+    "author": "Seif-ij Hidja",
+    "category": "Skill Book",
+    "skillBook": true,
+    "skill": "Conjuration",
+    "value": 50,
+    "weight": 1,
+    "description": "Advanced techniques for opening portals to Oblivion.",
+    "locations": [
+      "Shalidor's Maze",
+      "Labyrinthian",
+      "College of Winterhold"
+    ],
+    "excerpt": "The barriers between Mundus and Oblivion are thinner than most believe, requiring only knowledge and will to breach...",
+    "rarity": "Rare"
+  },
+  {
+    "id": 12,
+    "title": "Killing - Before You're Killed",
+    "author": "Eduardo Corvus",
+    "category": "Skill Book",
+    "skillBook": true,
+    "skill": "One-Handed",
+    "value": 50,
+    "weight": 1,
+    "description": "Practical advice for sword-and-shield combat.",
+    "locations": [
+      "Cronvangr Cave",
+      "Nightgate Inn",
+      "Various bandit camps"
+    ],
+    "excerpt": "In battle, hesitation is death. Strike first, strike fast, and you will live to fight another day...",
+    "rarity": "Rare"
+  },
+  {
+    "id": 13,
+    "title": "Alduin is Real",
+    "author": "Thromgar Iron-Head",
+    "category": "Lore",
+    "skillBook": false,
+    "skill": null,
+    "value": 25,
+    "weight": 1,
+    "description": "A warning about the prophesied return of the World-Eater.",
+    "locations": [
+      "Bleak Falls Barrow",
+      "Various Nordic ruins",
+      "Common in Nord settlements"
+    ],
+    "excerpt": "Let this be a warning to all who would dismiss the old tales as mere mythology...",
+    "rarity": "Common"
+  },
+  {
+    "id": 14,
+    "title": "Catalogue of Armor Enchantments",
+    "author": "Yvonne Bienne",
+    "category": "Skill Book",
+    "skillBook": true,
+    "skill": "Enchanting",
+    "value": 50,
+    "weight": 1,
+    "description": "A comprehensive guide to enchanting armor and clothing.",
+    "locations": [
+      "Shalidor's Maze",
+      "Midden Dark at College of Winterhold",
+      "Hob's Fall Cave"
+    ],
+    "excerpt": "The art of imbuing armor with magical properties requires both understanding of the arcane and patience...",
+    "rarity": "Rare"
+  },
+  {
+    "id": 15,
+    "title": "Songs of Skyrim",
+    "author": "Giraud Gemane",
+    "category": "Poetry",
+    "skillBook": false,
+    "skill": null,
+    "value": 30,
+    "weight": 1,
+    "description": "A collection of traditional Nordic songs and ballads.",
+    "locations": [
+      "Bards College, Solitude",
+      "Various inns",
+      "Common throughout Skyrim"
+    ],
+    "excerpt": "Our hero, our hero, claims a warrior's heart... I tell you, I tell you, the Dragonborn comes...",
+    "rarity": "Common"
+  }
+]

@@ -231,6 +231,23 @@
     gap: 24px;
 }
 
+/* Tools Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.tools-grid .app-card-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+}
+
+.tools-grid .app-icon {
+    font-size: 80px;
+}
+
 .feature-card {
     padding: 28px;
     background: var(--color-surface);
@@ -464,6 +481,10 @@
     }
 
     .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tools-grid {
         grid-template-columns: 1fr;
     }
 
