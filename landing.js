@@ -92,7 +92,43 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Parallax effect for hero section
+let lastScrollTop = 0;
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const hero = document.querySelector('.hero');
+    const heroIcon = document.querySelector('.hero-icon');
+
+    if (hero && scrollTop < window.innerHeight) {
+        // Parallax background
+        hero.style.transform = `translateY(${scrollTop * 0.5}px)`;
+
+        // Parallax icon
+        if (heroIcon) {
+            heroIcon.style.transform = `translateY(${scrollTop * 0.3}px) rotate(${scrollTop * 0.05}deg)`;
+        }
+    }
+
+    // Parallax for section icons
+    const quickIcons = document.querySelectorAll('.quick-icon');
+    quickIcons.forEach((icon, index) => {
+        const rect = icon.getBoundingClientRect();
+        const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+        if (scrollPercent > 0 && scrollPercent < 1) {
+            icon.style.transform = `translateY(${-(scrollPercent * 20 - 10)}px)`;
+        }
+    });
+
+    lastScrollTop = scrollTop;
+}, { passive: true });
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Landing page loaded');
+
+    // Add entrance animation to elements
+    setTimeout(() => {
+        document.querySelector('.hero-content')?.classList.add('animate-in');
+        document.querySelector('.hero-visual')?.classList.add('animate-in');
+    }, 100);
 });
