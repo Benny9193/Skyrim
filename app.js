@@ -91,12 +91,33 @@ function initializeThreeJS() {
     animate();
 }
 
-// Animation loop
+// Animation loop with visibility control to save resources
+let animationFrameId = null;
+let isAnimationPaused = false;
+
 function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
+    if (!isAnimationPaused) {
+        animationFrameId = requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+    }
 }
+
+// Pause animation when page is hidden to save CPU/battery
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        isAnimationPaused = true;
+        if (animationFrameId !== null) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+        }
+    } else {
+        if (isAnimationPaused) {
+            isAnimationPaused = false;
+            animate();
+        }
+    }
+});
 
 // Handle window resize
 function onWindowResize() {
