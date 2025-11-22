@@ -103,6 +103,14 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.hero-content.animate-in {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .hero-title {
@@ -129,6 +137,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
+}
+
+.hero-visual.animate-in {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .hero-icon {
