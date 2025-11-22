@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "Skuldafn Temple",
+    "region": "Eastern Mountains",
+    "type": "Nordic Ruin",
+    "difficulty": "Deadly",
+    "description": "An ancient Nordic temple located high in the mountains, serving as the gateway to Sovngarde. This temple is guarded by powerful Draugr and dragons, making it one of the most dangerous locations in Skyrim.",
+    "lore": "Skuldafn was built in the Merethic Era as a Dragon Priest temple. The word 'Skuldafn' means 'Shield' in the Dragon tongue, representing its role as a guardian of the portal to Sovngarde.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23334455%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🏛️%3C/text%3E%3C/svg%3E",
+    "creatures": ["Alduin"],
+    "pointsOfInterest": [
+      "Portal to Sovngarde",
+      "Dragon Perch",
+      "Ancient Word Wall",
+      "Treasure Chambers"
+    ],
+    "questsAvailable": ["The World-Eater's Eyrie"],
+    "services": [],
+    "coordinates": { "x": 120, "y": 85 }
+  },
+  {
+    "id": 2,
+    "name": "Blackreach",
+    "region": "Underground",
+    "type": "Dwemer City",
+    "difficulty": "Very Hard",
+    "description": "A massive underground Dwemer city with glowing mushrooms and ancient automatons. Blackreach is a sprawling subterranean complex filled with Dwemer ruins, Falmer settlements, and mysterious ancient technology.",
+    "lore": "Built by the Dwemer before their mysterious disappearance, Blackreach served as a massive underground city and research facility. The giant glowing mushrooms were cultivated using advanced Dwemer technology.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23112233%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🍄%3C/text%3E%3C/svg%3E",
+    "creatures": ["Dwemer Centurion", "Falmer Shadowmaster"],
+    "pointsOfInterest": [
+      "Crimson Nirnroot Fields",
+      "The Great Lift at Alftand",
+      "Silent City",
+      "Tower of Mzark"
+    ],
+    "questsAvailable": ["A Return to Your Roots", "Discerning the Transmundane"],
+    "services": [],
+    "coordinates": { "x": 60, "y": 120 }
+  },
+  {
+    "id": 3,
+    "name": "Oblivion Gates",
+    "region": "Various Locations",
+    "type": "Daedric Portal",
+    "difficulty": "Hard",
+    "description": "Dimensional rifts leading to the planes of Oblivion, guarded by Daedric forces. These portals appear across Skyrim, bringing forth dangerous Dremora and other otherworldly creatures.",
+    "lore": "During the Oblivion Crisis, these gates opened throughout Tamriel. Though most were closed, some remain active, serving as pathways between Mundus and the Daedric realms.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23660000%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🌀%3C/text%3E%3C/svg%3E",
+    "creatures": ["Daedric Dremora", "Flame Atronach"],
+    "pointsOfInterest": [
+      "Sigil Stone Tower",
+      "Daedric Architecture",
+      "Lava Rivers",
+      "Portal Chambers"
+    ],
+    "questsAvailable": ["Pieces of the Past"],
+    "services": [],
+    "coordinates": { "x": 75, "y": 95 }
+  },
+  {
+    "id": 4,
+    "name": "Dragon Lairs",
+    "region": "Mountain Peaks",
+    "type": "Dragon Nest",
+    "difficulty": "Very Hard",
+    "description": "High mountain peaks and ancient burial mounds where dragons make their homes. These locations feature dragon word walls and are sites of epic battles.",
+    "lore": "Dragons have nested in these locations since the Merethic Era. Each lair contains a word wall teaching ancient dragon shouts, built by the Dragon Cult to honor their draconic masters.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23445566%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🏔️%3C/text%3E%3C/svg%3E",
+    "creatures": ["Frost Dragon", "Ice Wraith"],
+    "pointsOfInterest": [
+      "Dragon Burial Mounds",
+      "Ancient Word Walls",
+      "Mountain Peaks",
+      "Dragon Bones"
+    ],
+    "questsAvailable": ["Dragon Rising", "The Way of the Voice"],
+    "services": [],
+    "coordinates": { "x": 85, "y": 45 }
+  },
+  {
+    "id": 5,
+    "name": "Nordic Ruins",
+    "region": "Throughout Skyrim",
+    "type": "Ancient Tomb",
+    "difficulty": "Medium",
+    "description": "Ancient Nord burial sites and temples, now inhabited by the undead Draugr. These ruins contain valuable treasures and dangerous traps from the time of the Dragon Cult.",
+    "lore": "Built during the Merethic and First Era, these ruins served as temples to the Dragon Cult and burial places for ancient Nordic warriors. The Draugr guardians were once loyal servants who chose undeath to protect their masters.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23556677%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E⚰️%3C/text%3E%3C/svg%3E",
+    "creatures": ["Draugr Deathlord"],
+    "pointsOfInterest": [
+      "Ancient Burial Chambers",
+      "Puzzle Doors",
+      "Word Walls",
+      "Treasure Rooms"
+    ],
+    "questsAvailable": ["The Golden Claw", "Forbidden Legend"],
+    "services": [],
+    "coordinates": { "x": 95, "y": 70 }
+  },
+  {
+    "id": 6,
+    "name": "Vampire Lairs",
+    "region": "Dark Caves",
+    "type": "Underground Lair",
+    "difficulty": "Hard",
+    "description": "Hidden caves and abandoned ruins that serve as havens for vampire clans. These dark locations are filled with blood-drinking undead and their thralls.",
+    "lore": "Vampire covens have existed in Skyrim for centuries, hiding from the sun in these dark refuges. Many are led by ancient vampires with powerful magical abilities.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23220022%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🦇%3C/text%3E%3C/svg%3E",
+    "creatures": ["Vampire Lord"],
+    "pointsOfInterest": [
+      "Blood Altars",
+      "Coffins",
+      "Alchemy Labs",
+      "Thrall Chambers"
+    ],
+    "questsAvailable": ["Bloodline", "The Bloodstone Chalice"],
+    "services": [],
+    "coordinates": { "x": 50, "y": 110 }
+  },
+  {
+    "id": 7,
+    "name": "Dwemer Ruins",
+    "region": "Mountains and Underground",
+    "type": "Ancient City",
+    "difficulty": "Hard",
+    "description": "Ruins of the lost Dwemer civilization, filled with mechanical guardians and ancient technology. These locations contain valuable Dwemer artifacts and dangerous automatons.",
+    "lore": "The Dwemer, or Deep Elves, were a technologically advanced race that mysteriously vanished in the First Era. Their ruins still operate with automated defenses and contain secrets of their lost civilization.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23775533%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E⚙️%3C/text%3E%3C/svg%3E",
+    "creatures": ["Dwemer Centurion"],
+    "pointsOfInterest": [
+      "Dwemer Mechanisms",
+      "Power Cores",
+      "Ancient Workshops",
+      "Lexicon Receptacles"
+    ],
+    "questsAvailable": ["Arniel's Endeavor", "The Lost Expedition"],
+    "services": [],
+    "coordinates": { "x": 65, "y": 100 }
+  },
+  {
+    "id": 8,
+    "name": "Mountain Passes",
+    "region": "High Hrothgar Region",
+    "type": "Mountain Path",
+    "difficulty": "Medium",
+    "description": "Treacherous mountain paths with harsh weather and dangerous wildlife. These routes connect various regions of Skyrim but are perilous to traverse.",
+    "lore": "These ancient paths have been used by traders and pilgrims for centuries. The unpredictable weather and wildlife make them challenging even for seasoned travelers.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23667788%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🗻%3C/text%3E%3C/svg%3E",
+    "creatures": ["Ice Wraith", "Sabre Cat"],
+    "pointsOfInterest": [
+      "7000 Steps to High Hrothgar",
+      "Frost Troll Bridge",
+      "Mountain Shrines",
+      "Scenic Overlooks"
+    ],
+    "questsAvailable": ["The Way of the Voice", "Climb the Steps"],
+    "services": [],
+    "coordinates": { "x": 100, "y": 60 }
+  },
+  {
+    "id": 9,
+    "name": "Whiterun",
+    "region": "Central Skyrim",
+    "type": "Major City",
+    "difficulty": "Safe",
+    "description": "The central trading hub of Skyrim, built around the great mead hall of Jorrvaskr. Whiterun is a bustling city with merchants, warriors, and a strategic location in the heart of the province.",
+    "lore": "Founded by Ysgramor's companions, Whiterun has been a center of trade and culture for millennia. The Skyforge, an ancient Nord forge, is said to be older than the city itself.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23AA8855%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🏰%3C/text%3E%3C/svg%3E",
+    "creatures": [],
+    "pointsOfInterest": [
+      "Jorrvaskr (Companions Guild Hall)",
+      "Dragonsreach",
+      "The Skyforge",
+      "Cloud District"
+    ],
+    "questsAvailable": ["Dragon Rising", "Proving Honor", "In My Time of Need"],
+    "services": ["Shops", "Blacksmith", "Inn", "Temple"],
+    "coordinates": { "x": 70, "y": 75 }
+  },
+  {
+    "id": 10,
+    "name": "Solitude",
+    "region": "Northwestern Skyrim",
+    "type": "Capital City",
+    "difficulty": "Safe",
+    "description": "The capital of Skyrim and seat of the High King. Solitude is an impressive coastal city with grand architecture, serving as the center of Imperial power in the province.",
+    "lore": "Solitude has been Skyrim's capital since the Third Era. Its strategic harbor makes it vital for trade and military operations. The Blue Palace serves as the residence of the Jarl and High King.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23445588%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2250%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E👑%3C/text%3E%3C/svg%3E",
+    "creatures": [],
+    "pointsOfInterest": [
+      "Blue Palace",
+      "Bards College",
+      "East Empire Company Warehouse",
+      "Solitude Lighthouse"
+    ],
+    "questsAvailable": ["The Wolf Queen Awakened", "The Man Who Cried Wolf"],
+    "services": ["Shops", "Blacksmith", "Inn", "Temple", "Bards College"],
+    "coordinates": { "x": 30, "y": 40 }
+  }
+]
