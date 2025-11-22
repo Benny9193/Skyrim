@@ -155,6 +155,161 @@ function setupEventListeners() {
         loadReconstructionData();
         document.getElementById('generateMapBtn').disabled = false;
     }, 1000);
+
+    // Keyboard navigation
+    setupKeyboardNavigation();
+}
+
+// Keyboard navigation for 3D studio
+function setupKeyboardNavigation() {
+    document.addEventListener('keydown', (e) => {
+        // Ignore if typing in input field
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        switch(e.key) {
+            case '1':
+                e.preventDefault();
+                switchViewMode('pointcloud');
+                break;
+            case '2':
+                e.preventDefault();
+                switchViewMode('mesh');
+                break;
+            case 'w':
+            case 'W':
+                e.preventDefault();
+                toggleWireframe();
+                break;
+            case 'f':
+            case 'F':
+                e.preventDefault();
+                toggleFullscreen();
+                break;
+            case 'r':
+            case 'R':
+                e.preventDefault();
+                resetCamera();
+                break;
+            case 'h':
+            case 'H':
+            case '?':
+                e.preventDefault();
+                showKeyboardShortcuts();
+                break;
+        }
+    });
+}
+
+// Reset camera position
+function resetCamera() {
+    if (camera && controls) {
+        camera.position.set(5, 5, 5);
+        controls.target.set(0, 0, 0);
+        controls.update();
+        showNotification('Camera reset');
+    }
+}
+
+// Show notification helper
+function showNotification(message, duration = 2000) {
+    let notification = document.getElementById('notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+    }
+
+    notification.textContent = message;
+    notification.style.opacity = '1';
+
+    setTimeout(() => {
+        notification.style.opacity = '0';
+    }, duration);
+}
+
+// Show keyboard shortcuts help
+function showKeyboardShortcuts() {
+    const shortcuts = `
+        <div style="padding: 20px; max-width: 500px;">
+            <h3 style="margin-top: 0; color: var(--color-primary);">⌨️ Keyboard Shortcuts</h3>
+            <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 20px; margin-top: 20px;">
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">1</kbd>
+                <span>Point cloud view</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">2</kbd>
+                <span>Mesh view</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">W</kbd>
+                <span>Toggle wireframe</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">R</kbd>
+                <span>Reset camera</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">F</kbd>
+                <span>Toggle fullscreen</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">H or ?</kbd>
+                <span>Show this help</span>
+            </div>
+            <button onclick="closeHelpModal()"
+                    style="margin-top: 20px; padding: 10px 20px; background: var(--color-primary); color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%;">
+                Got it!
+            </button>
+        </div>
+    `;
+    showModal('Keyboard Shortcuts', shortcuts);
+}
+
+// Show modal helper
+function showModal(title, content) {
+    let modal = document.getElementById('helpModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'helpModal';
+        modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;';
+        document.body.appendChild(modal);
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = 'position: relative; background: white; border-radius: 8px; max-width: 600px; z-index: 10000;';
+        modalContent.innerHTML = `
+            <div style="padding: 20px; border-bottom: 1px solid #eee;">
+                <h3 id="helpModalTitle" style="margin: 0;">${title}</h3>
+            </div>
+            <div id="helpModalBody" style="padding: 20px;"></div>
+        `;
+        modal.appendChild(modalContent);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+    modal.querySelector('#helpModalTitle').textContent = title;
+    modal.querySelector('#helpModalBody').innerHTML = content;
+    modal.style.display = 'flex';
+}
+
+// Close help modal
+function closeHelpModal() {
+    const modal = document.getElementById('helpModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 // GPS and mapping utility functions

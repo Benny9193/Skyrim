@@ -10,6 +10,17 @@ let favorites = [];
 let scene, camera, renderer, orbitControls;
 let currentModel = null;
 let rotationSpeed = 1;
+let currentBackgroundIndex = 0;
+const backgroundColors = [
+    { name: 'Light Gray', color: 0xf5f5f5 },
+    { name: 'White', color: 0xffffff },
+    { name: 'Dark Gray', color: 0x2a2a2a },
+    { name: 'Black', color: 0x000000 },
+    { name: 'Blue', color: 0x87ceeb },
+    { name: 'Dark Blue', color: 0x1a1a2e },
+    { name: 'Purple', color: 0x4a148c },
+    { name: 'Green', color: 0x1b5e20 }
+];
 
 // Initialize the application
 async function initApplication() {
@@ -222,11 +233,31 @@ function updateCharacterUI() {
     updateCombatInfo();
 }
 
-// Update stat bar width
+// Update stat bar width with animation
 function updateStatBar(elementId, value) {
     const maxValue = 100;
     const percentage = Math.min((value / maxValue) * 100, 100);
-    document.getElementById(elementId).style.width = percentage + '%';
+    const bar = document.getElementById(elementId);
+
+    if (bar) {
+        // Reset width to 0 first
+        bar.style.width = '0%';
+
+        // Animate to target width
+        setTimeout(() => {
+            bar.style.transition = 'width 1s ease-out';
+            bar.style.width = percentage + '%';
+        }, 100);
+
+        // Add hover effect
+        bar.parentElement.onmouseenter = () => {
+            bar.style.transform = 'scaleY(1.1)';
+            bar.style.transition = 'transform 0.2s ease';
+        };
+        bar.parentElement.onmouseleave = () => {
+            bar.style.transform = 'scaleY(1)';
+        };
+    }
 }
 
 // Update skills list
@@ -273,10 +304,12 @@ function updateCombatInfo() {
 async function loadCharacterModel(modelPath) {
     const overlay = document.getElementById('viewerOverlay');
     overlay.classList.remove('hidden');
+    overlay.style.opacity = '1';
 
     try {
-        // Remove previous model
+        // Fade out and remove previous model
         if (currentModel) {
+            await fadeOutModel(currentModel);
             scene.remove(currentModel);
         }
 
@@ -317,6 +350,22 @@ async function loadCharacterModel(modelPath) {
 // Setup loaded model
 function setupModel(model) {
     currentModel = model;
+
+    // Start with model invisible
+    model.traverse(child => {
+        if (child.material) {
+            if (Array.isArray(child.material)) {
+                child.material.forEach(mat => {
+                    mat.transparent = true;
+                    mat.opacity = 0;
+                });
+            } else {
+                child.material.transparent = true;
+                child.material.opacity = 0;
+            }
+        }
+    });
+
     scene.add(model);
 
     // Center and scale model
@@ -334,6 +383,56 @@ function setupModel(model) {
     camera.position.z = 5;
     orbitControls.target.copy(new THREE.Vector3(0, 0, 0));
     orbitControls.update();
+
+    // Fade in model
+    fadeInModel(model);
+}
+
+// Fade in model animation
+function fadeInModel(model) {
+    let opacity = 0;
+    const fadeInterval = setInterval(() => {
+        opacity += 0.05;
+        if (opacity >= 1) {
+            opacity = 1;
+            clearInterval(fadeInterval);
+        }
+
+        model.traverse(child => {
+            if (child.material) {
+                if (Array.isArray(child.material)) {
+                    child.material.forEach(mat => mat.opacity = opacity);
+                } else {
+                    child.material.opacity = opacity;
+                }
+            }
+        });
+    }, 30);
+}
+
+// Fade out model animation
+function fadeOutModel(model) {
+    return new Promise(resolve => {
+        let opacity = 1;
+        const fadeInterval = setInterval(() => {
+            opacity -= 0.1;
+            if (opacity <= 0) {
+                opacity = 0;
+                clearInterval(fadeInterval);
+                resolve();
+            }
+
+            model.traverse(child => {
+                if (child.material) {
+                    if (Array.isArray(child.material)) {
+                        child.material.forEach(mat => mat.opacity = opacity);
+                    } else {
+                        child.material.opacity = opacity;
+                    }
+                }
+            });
+        }, 30);
+    });
 }
 
 // Setup event listeners
@@ -365,6 +464,15 @@ function setupEventListeners() {
     document.getElementById('wireframeBtn')?.addEventListener('click', toggleWireframe);
     document.getElementById('fullscreenBtn')?.addEventListener('click', toggleFullscreen);
 
+    // Camera preset controls
+    document.getElementById('frontViewBtn')?.addEventListener('click', () => setCameraPreset('front'));
+    document.getElementById('sideViewBtn')?.addEventListener('click', () => setCameraPreset('side'));
+    document.getElementById('topViewBtn')?.addEventListener('click', () => setCameraPreset('top'));
+    document.getElementById('perspViewBtn')?.addEventListener('click', () => setCameraPreset('perspective'));
+
+    // Background control
+    document.getElementById('bgToggleBtn')?.addEventListener('click', cycleBackground);
+
     // Rotation speed slider
     document.getElementById('rotationSpeedSlider')?.addEventListener('input', (e) => {
         rotationSpeed = parseFloat(e.target.value);
@@ -375,6 +483,9 @@ function setupEventListeners() {
 
     // Export button
     document.getElementById('exportModelBtn')?.addEventListener('click', exportModel);
+
+    // Screenshot button
+    document.getElementById('screenshotBtn')?.addEventListener('click', takeScreenshot);
 
     // Share button
     document.getElementById('shareBtn')?.addEventListener('click', shareCharacter);
@@ -394,15 +505,281 @@ function setupEventListeners() {
             e.target.closest('.modal')?.classList.add('hidden');
         });
     });
+
+    // Keyboard navigation
+    setupKeyboardNavigation();
+}
+
+// Keyboard navigation
+function setupKeyboardNavigation() {
+    document.addEventListener('keydown', (e) => {
+        // Ignore if typing in input field
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        switch(e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                if (currentCharacterIndex > 0) {
+                    loadCharacter(currentCharacterIndex - 1);
+                }
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                if (currentCharacterIndex < characterData.length - 1) {
+                    loadCharacter(currentCharacterIndex + 1);
+                }
+                break;
+            case ' ':
+                e.preventDefault();
+                toggleAutoRotation();
+                break;
+            case 'r':
+            case 'R':
+                e.preventDefault();
+                resetView();
+                break;
+            case 'w':
+            case 'W':
+                e.preventDefault();
+                toggleWireframe();
+                break;
+            case 'f':
+            case 'F':
+                e.preventDefault();
+                toggleFullscreen();
+                break;
+            case 'e':
+            case 'E':
+                e.preventDefault();
+                exportModel();
+                break;
+            case 'h':
+            case 'H':
+            case '?':
+                e.preventDefault();
+                showKeyboardShortcuts();
+                break;
+            case 's':
+            case 'S':
+                e.preventDefault();
+                takeScreenshot();
+                break;
+            case '1':
+                e.preventDefault();
+                setCameraPreset('front');
+                break;
+            case '2':
+                e.preventDefault();
+                setCameraPreset('side');
+                break;
+            case '3':
+                e.preventDefault();
+                setCameraPreset('top');
+                break;
+            case '4':
+                e.preventDefault();
+                setCameraPreset('perspective');
+                break;
+            case '+':
+            case '=':
+                e.preventDefault();
+                adjustZoom(0.8);
+                break;
+            case '-':
+            case '_':
+                e.preventDefault();
+                adjustZoom(1.2);
+                break;
+            case 'b':
+            case 'B':
+                e.preventDefault();
+                cycleBackground();
+                break;
+        }
+    });
+}
+
+// Toggle auto-rotation
+function toggleAutoRotation() {
+    if (orbitControls) {
+        orbitControls.autoRotate = !orbitControls.autoRotate;
+        showNotification(orbitControls.autoRotate ? 'Auto-rotation enabled' : 'Auto-rotation disabled');
+    }
+}
+
+// Show keyboard shortcuts help
+function showKeyboardShortcuts() {
+    const shortcuts = `
+        <div style="padding: 20px; max-width: 500px;">
+            <h3 style="margin-top: 0; color: var(--color-primary);">⌨️ Keyboard Shortcuts</h3>
+            <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 20px; margin-top: 20px;">
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">←/→</kbd>
+                <span>Navigate between characters</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">Space</kbd>
+                <span>Toggle auto-rotation</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">R</kbd>
+                <span>Reset camera view</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">W</kbd>
+                <span>Toggle wireframe mode</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">F</kbd>
+                <span>Toggle fullscreen</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">E</kbd>
+                <span>Export model</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">S</kbd>
+                <span>Take screenshot</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">1-4</kbd>
+                <span>Camera presets (Front/Side/Top/Perspective)</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">+/-</kbd>
+                <span>Zoom in/out</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">B</kbd>
+                <span>Change background</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">H or ?</kbd>
+                <span>Show this help</span>
+            </div>
+            <button onclick="this.closest('.modal').classList.add('hidden')"
+                    style="margin-top: 20px; padding: 10px 20px; background: var(--color-primary); color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%;">
+                Got it!
+            </button>
+        </div>
+    `;
+    showModal('Keyboard Shortcuts', shortcuts);
+}
+
+// Show notification
+function showNotification(message, duration = 2000) {
+    let notification = document.getElementById('notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+    }
+
+    notification.textContent = message;
+    notification.style.opacity = '1';
+
+    setTimeout(() => {
+        notification.style.opacity = '0';
+    }, duration);
+}
+
+// Show modal helper
+function showModal(title, content) {
+    let modal = document.getElementById('helpModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'helpModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-overlay"></div>
+            <div class="modal-content" style="max-width: 600px;">
+                <div class="modal-header">
+                    <h3 id="helpModalTitle">${title}</h3>
+                    <button class="modal-close" onclick="this.closest('.modal').classList.add('hidden')">×</button>
+                </div>
+                <div id="helpModalBody" class="modal-body"></div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.querySelector('.modal-overlay').addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    }
+
+    modal.querySelector('#helpModalTitle').textContent = title;
+    modal.querySelector('#helpModalBody').innerHTML = content;
+    modal.classList.remove('hidden');
 }
 
 // Viewer control functions
 function resetView() {
     if (camera && orbitControls) {
-        camera.position.z = 5;
+        camera.position.set(0, 0, 5);
         orbitControls.target.copy(new THREE.Vector3(0, 0, 0));
         orbitControls.update();
+        showNotification('View reset');
     }
+}
+
+// Set camera preset views
+function setCameraPreset(preset) {
+    if (!camera || !orbitControls) return;
+
+    const distance = 5;
+    const target = new THREE.Vector3(0, 0, 0);
+
+    switch(preset) {
+        case 'front':
+            camera.position.set(0, 0, distance);
+            showNotification('Front view');
+            break;
+        case 'side':
+            camera.position.set(distance, 0, 0);
+            showNotification('Side view');
+            break;
+        case 'top':
+            camera.position.set(0, distance, 0);
+            showNotification('Top view');
+            break;
+        case 'perspective':
+            camera.position.set(distance * 0.7, distance * 0.7, distance * 0.7);
+            showNotification('Perspective view');
+            break;
+    }
+
+    orbitControls.target.copy(target);
+    orbitControls.update();
+}
+
+// Adjust zoom level
+function adjustZoom(factor) {
+    if (!camera) return;
+
+    const direction = new THREE.Vector3();
+    camera.getWorldDirection(direction);
+
+    const distance = camera.position.length();
+    const newDistance = distance * factor;
+
+    // Clamp zoom to reasonable limits
+    if (newDistance >= 2 && newDistance <= 20) {
+        camera.position.multiplyScalar(factor);
+        orbitControls?.update();
+        showNotification(factor < 1 ? 'Zoomed in' : 'Zoomed out');
+    }
+}
+
+// Cycle through background colors
+function cycleBackground() {
+    if (!scene) return;
+
+    currentBackgroundIndex = (currentBackgroundIndex + 1) % backgroundColors.length;
+    const bg = backgroundColors[currentBackgroundIndex];
+    scene.background = new THREE.Color(bg.color);
+    showNotification(`Background: ${bg.name}`);
 }
 
 function toggleLighting() {
@@ -480,6 +857,44 @@ async function exportModel() {
     } catch (error) {
         console.error('Export failed:', error);
         statusEl.textContent = 'Export failed: ' + error.message;
+    }
+}
+
+// Take screenshot
+function takeScreenshot() {
+    if (!renderer || !scene || !camera) {
+        showNotification('3D viewer not ready', 2000);
+        return;
+    }
+
+    try {
+        // Render the scene
+        renderer.render(scene, camera);
+
+        // Get canvas data
+        const canvas = renderer.domElement;
+        canvas.toBlob((blob) => {
+            if (!blob) {
+                showNotification('Screenshot failed', 2000);
+                return;
+            }
+
+            // Create download link
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            const characterName = currentCharacter ? currentCharacter.name.replace(/\s+/g, '_') : 'character';
+            link.download = `${characterName}_screenshot_${Date.now()}.png`;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            showNotification('Screenshot saved! 📸', 2000);
+        });
+    } catch (error) {
+        console.error('Screenshot error:', error);
+        showNotification('Screenshot failed', 2000);
     }
 }
 
