@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyrim Bestiary - Gallery</title>
+    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/bestiary.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header bestiary-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Skyrim Bestiary</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content bestiary-main">
+            <div class="container">
+                <div class="bestiary-layout">
+                    <!-- Sidebar - Filters -->
+                    <aside class="bestiary-sidebar">
+                        <!-- Search -->
+                        <div class="filter-section">
+                            <h3 class="filter-title">Search</h3>
+                            <div class="search-box">
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    class="search-input"
+                                    placeholder="Search by name..."
+                                    autocomplete="off"
+                                >
+                                <span class="search-icon">🔍</span>
+                            </div>
+                        </div>
+
+                        <!-- Race Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Race/Species</h3>
+                                <button class="filter-toggle" data-filter="race">−</button>
+                            </div>
+                            <div class="filter-options" id="raceFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Difficulty Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Difficulty</h3>
+                                <button class="filter-toggle" data-filter="difficulty">−</button>
+                            </div>
+                            <div class="filter-options" id="difficultyFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Location Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Location</h3>
+                                <button class="filter-toggle" data-filter="location">−</button>
+                            </div>
+                            <div class="filter-options" id="locationFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Faction Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Faction</h3>
+                                <button class="filter-toggle" data-filter="faction">−</button>
+                            </div>
+                            <div class="filter-options" id="factionFilter">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Sort Options -->
+                        <div class="filter-section">
+                            <h3 class="filter-title">Sort By</h3>
+                            <div class="sort-options">
+                                <button class="sort-btn" data-sort="name">Name (A-Z)</button>
+                                <button class="sort-btn" data-sort="level">Level</button>
+                                <button class="sort-btn" data-sort="difficulty">Difficulty</button>
+                            </div>
+                        </div>
+
+                        <!-- Favorites Filter -->
+                        <div class="filter-section">
+                            <h3 class="filter-title">Favorites</h3>
+                            <label class="filter-option">
+                                <input
+                                    type="checkbox"
+                                    id="favoritesCheckbox"
+                                    class="filter-checkbox"
+                                    data-filter="favorites"
+                                >
+                                <span class="filter-label">❤️ Show Favorites Only</span>
+                                <span class="filter-count" id="favoritesCount">(0)</span>
+                            </label>
+                        </div>
+
+                        <!-- Clear Filters -->
+                        <button class="btn btn--outline btn--full-width" id="clearFiltersBtn">
+                            Clear All Filters
+                        </button>
+
+                        <!-- Collections -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3 class="filter-title">Collections</h3>
+                                <button class="filter-toggle" id="collectionsToggle">−</button>
+                            </div>
+                            <div class="filter-options" id="collectionsList">
+                                <!-- Populated by JavaScript -->
+                            </div>
+                            <button class="btn btn--primary btn--full-width" id="newCollectionBtn" style="margin-top: 12px;">
+                                + New Collection
+                            </button>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content - Grid -->
+                    <section class="bestiary-content">
+                        <!-- Results Info -->
+                        <div class="results-header">
+                            <div class="results-left">
+                                <h2 id="resultsTitle">All Creatures</h2>
+                                <p id="resultsCount" class="results-count"></p>
+                            </div>
+                            <div class="results-right">
+                                <button class="btn btn--outline" id="compareToggleBtn">
+                                    ⚖️ Compare Mode
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Creatures Grid -->
+                        <div class="creatures-grid" id="creaturesGrid">
+                            <!-- Populated by JavaScript -->
+                        </div>
+
+                        <!-- No Results -->
+                        <div class="no-results hidden" id="noResults">
+                            <div class="no-results-content">
+                                <div class="no-results-icon">🔍</div>
+                                <h3>No creatures found</h3>
+                                <p>Try adjusting your search or filter criteria</p>
+                                <button class="btn btn--primary" id="resetSearchBtn">Clear Search</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Comparison Mode Banner -->
+        <div class="comparison-banner hidden" id="comparisonBanner">
+            <div class="container">
+                <div class="comparison-banner-content">
+                    <div class="comparison-info">
+                        <span class="comparison-label">Selected for Comparison:</span>
+                        <span class="comparison-count" id="comparisonCount">0</span>
+                    </div>
+                    <div class="comparison-buttons">
+                        <button class="btn btn--primary" id="viewComparisonBtn" disabled>
+                            ⚖️ View Comparison
+                        </button>
+                        <button class="btn btn--outline" id="clearComparisonBtn">
+                            ✕ Clear Selection
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Modal -->
+        <div class="modal hidden" id="comparisonModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h3>Creature Comparison</h3>
+                    <button class="modal-close" id="closeComparisonBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="comparison-view" id="comparisonView">
+                        <!-- Comparison content populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Collection Modal -->
+        <div class="modal hidden" id="newCollectionModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create New Collection</h3>
+                    <button class="modal-close" id="closeNewCollectionBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Collection Name</label>
+                        <input type="text" id="collectionNameInput" class="form-control" placeholder="e.g., Dragons, Undead, Daedra...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description (optional)</label>
+                        <textarea id="collectionDescInput" class="form-control" placeholder="Describe this collection..." rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Color Tag</label>
+                        <div class="color-picker">
+                            <input type="radio" name="collectionColor" value="#FF6B6B" id="color1">
+                            <label for="color1" style="background-color: #FF6B6B;" title="Red"></label>
+                            <input type="radio" name="collectionColor" value="#4ECDC4" id="color2" checked>
+                            <label for="color2" style="background-color: #4ECDC4;" title="Teal"></label>
+                            <input type="radio" name="collectionColor" value="#FFE66D" id="color3">
+                            <label for="color3" style="background-color: #FFE66D;" title="Yellow"></label>
+                            <input type="radio" name="collectionColor" value="#95E1D3" id="color4">
+                            <label for="color4" style="background-color: #95E1D3;" title="Mint"></label>
+                            <input type="radio" name="collectionColor" value="#C7A8EA" id="color5">
+                            <label for="color5" style="background-color: #C7A8EA;" title="Purple"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn--outline" id="cancelCollectionBtn">Cancel</button>
+                        <button class="btn btn--primary" id="createCollectionBtn">Create Collection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add to Collection Modal -->
+        <div class="modal hidden" id="addToCollectionModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add to Collection</h3>
+                    <button class="modal-close" id="closeAddToCollectionBtn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="collections-checklist" id="collectionsChecklist">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn--outline" id="cancelAddToCollectionBtn">Cancel</button>
+                        <button class="btn btn--primary" id="confirmAddToCollectionBtn">Add to Collections</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bestiary-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="index.html">3D Studio</a>
+                    <span class="separator">•</span>
+                    <a href="character.html">View Character</a>
+                </div>
+                <p>&copy; 2024 Skyrim Bestiary. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../src/js/bestiary.js"></script>
+</body>
+</html>

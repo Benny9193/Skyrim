@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Skyrim Bestiary - Explore characters, creatures, and NPCs from The Elder Scrolls V: Skyrim in stunning 3D">
+    <meta name="keywords" content="Skyrim, Bestiary, 3D, Characters, Elder Scrolls">
+    <title>Skyrim Bestiary - Interactive Character Viewer</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/character.css">
+    
+    <!-- Three.js and Extensions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Quick inline enhancements - move to external CSS in production */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .comparison-mode {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 8px;
+            z-index: 999;
+        }
+        
+        .comparison-mode.active {
+            display: block;
+        }
+        
+        .annotation-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.8);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .annotation-marker:hover {
+            transform: scale(1.2);
+            background: rgba(255, 215, 0, 1);
+        }
+        
+        .search-bar {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .search-bar i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-tag {
+            padding: 8px 16px;
+            background: rgba(100, 100, 100, 0.3);
+            border: 1px solid #555;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-tag:hover,
+        .filter-tag.active {
+            background: rgba(200, 150, 50, 0.5);
+            border-color: #c89632;
+        }
+        
+        .voice-command-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .voice-command-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .voice-command-btn.listening {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(102, 126, 234, 0.8); }
+        }
+        
+        .screenshot-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .stats-comparison {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        
+        .stats-comparison.active {
+            display: block;
+        }
+        
+        .achievement-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 3px;
+        }
+        
+        .timeline-view {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            padding-bottom: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: -20px;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+        
+        .ar-view-btn {
+            display: none; /* Show only on AR-capable devices */
+        }
+        
+        @media (max-width: 768px) {
+            .ar-view-btn {
+                display: inline-block;
+            }
+        }
+        
+        .performance-stats {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .performance-stats.visible {
+            display: block;
+        }
+        
+        .model-variants {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            overflow-x: auto;
+        }
+        
+        .variant-thumb {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #555;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            object-fit: cover;
+        }
+        
+        .variant-thumb:hover,
+        .variant-thumb.active {
+            border-color: #c89632;
+            transform: scale(1.1);
+        }
+        
+        .related-characters {
+            margin-top: 20px;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .related-card {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .related-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .related-card .name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .favorites-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+        
+        .favorites-btn.active {
+            color: #ff6b6b;
+            transform: scale(1.2);
+        }
+        
+        .notes-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        
+        .notes-section textarea {
+            width: 100%;
+            min-height: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #555;
+            border-radius: 5px;
+            color: #fff;
+            padding: 10px;
+            resize: vertical;
+        }
+        
+        .social-share {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .social-btn.twitter { background: #1DA1F2; }
+        .social-btn.facebook { background: #4267B2; }
+        .social-btn.reddit { background: #FF4500; }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle btn btn--sm" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Voice Command Button -->
+    <button class="voice-command-btn" id="voiceCommandBtn" aria-label="Voice commands" title="Click to use voice commands">
+        <i class="fas fa-microphone" style="color: white; font-size: 24px;"></i>
+    </button>
+
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header character-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="index.html" class="header-link" aria-label="Back to 3D Studio">
+                            <i class="fas fa-arrow-left"></i> 3D Studio
+                        </a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">
+                            <i class="fas fa-dragon"></i> Skyrim Bestiary
+                        </h1>
+                        <span class="separator">|</span>
+                        <button class="btn btn--sm" id="quickSearchBtn" aria-label="Quick search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn--sm" id="favoritesBtn" aria-label="View favorites">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="btn btn--sm" id="compareBtn" aria-label="Compare characters">
+                            <i class="fas fa-balance-scale"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quick Search Modal -->
+        <div class="search-modal hidden" id="searchModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="search-bar">
+                    <input type="text" id="quickSearchInput" placeholder="Search characters, creatures, NPCs..." aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-tags" id="filterTags">
+                    <button class="filter-tag" data-filter="all">All</button>
+                    <button class="filter-tag" data-filter="creatures">Creatures</button>
+                    <button class="filter-tag" data-filter="npcs">NPCs</button>
+                    <button class="filter-tag" data-filter="dragons">Dragons</button>
+                    <button class="filter-tag" data-filter="undead">Undead</button>
+                    <button class="filter-tag" data-filter="daedra">Daedra</button>
+                    <button class="filter-tag" data-filter="animals">Animals</button>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content character-main">
+            <div class="container">
+                <div class="character-layout">
+                    <!-- Left Panel: Character Information -->
+                    <div class="character-info-panel">
+                        <!-- Character Header -->
+                        <div class="card character-header-card">
+                            <button class="favorites-btn" id="favoriteCharBtn" aria-label="Add to favorites">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <div class="card__body">
+                                <div class="character-title-section">
+                                    <h2 class="character-name" id="characterName">Loading...</h2>
+                                    <p class="character-type" id="characterType">Species</p>
+                                    <div class="achievement-badges" id="achievementBadges">
+                                        <!-- Badges populated by JavaScript -->
+                                    </div>
+                                </div>
+                                <div class="character-image-container">
+                                    <img id="characterImage" src="" alt="Character" class="character-image">
+                                    <div class="model-variants" id="modelVariants">
+                                        <!-- Variant thumbnails populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Character Stats -->
+                        <div class="card character-stats-card">
+                            <div class="card__body">
+                                <h3>
+                                    <i class="fas fa-chart-bar"></i> Stats & Attributes
+                                    <button class="btn btn--sm" id="toggleStatsCompare" style="float: right;">
+                                        <i class="fas fa-chart-line"></i> Compare
+                                    </button>
+                                </h3>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">
+                                            <i class="fas fa-heart"></i> Health
+                                        </span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill health" id="healthStat"></div>
+                                        </div>
+                                        <span class="stat-value" id="healthValue">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">
+                                            <i class="fas fa-magic"></i> Magicka
+                                        </span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill magicka" id="magickaStat"></div>
+                                        </div>
+                                        <span class="stat-value" id="magickaValue">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">
+                                            <i class="fas fa-running"></i> Stamina
+                                        </span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill stamina" id="staminaStat"></div>
+                                        </div>
+                                        <span class="stat-value" id="staminaValue">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">
+                                            <i class="fas fa-level-up-alt"></i> Level
+                                        </span>
+                                        <span class="stat-value large" id="levelValue">0</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Stats Comparison (Hidden by default) -->
+                                <div class="stats-comparison" id="statsComparison">
+                                    <h4>Compare with average:</h4>
+                                    <div id="comparisonChart"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="card character-skills-card">
+                            <div class="card__body">
+                                <h3>
+                                    <i class="fas fa-fist-raised"></i> Skills & Abilities
+                                </h3>
+                                <div class="skills-list" id="skillsList">
+                                    <!-- Skills populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location & Lore -->
+                        <div class="card character-lore-card">
+                            <div class="card__body">
+                                <h3>
+                                    <i class="fas fa-book"></i> Lore & Information
+                                </h3>
+                                <div class="lore-section">
+                                    <div class="lore-item">
+                                        <span class="lore-label">
+                                            <i class="fas fa-dragon"></i> Race/Species:
+                                        </span>
+                                        <span class="lore-value" id="loreRace">Unknown</span>
+                                    </div>
+                                    <div class="lore-item">
+                                        <span class="lore-label">
+                                            <i class="fas fa-map-marker-alt"></i> Location:
+                                        </span>
+                                        <span class="lore-value" id="loreLocation">Unknown</span>
+                                    </div>
+                                    <div class="lore-item">
+                                        <span class="lore-label">
+                                            <i class="fas fa-flag"></i> Faction:
+                                        </span>
+                                        <span class="lore-value" id="loreFaction">None</span>
+                                    </div>
+                                    <div class="lore-item">
+                                        <span class="lore-label">
+                                            <i class="fas fa-skull"></i> Difficulty:
+                                        </span>
+                                        <span class="lore-value difficulty" id="loreDifficulty">Normal</span>
+                                    </div>
+                                    <div class="lore-item">
+                                        <span class="lore-label">
+                                            <i class="fas fa-coins"></i> Base Gold:
+                                        </span>
+                                        <span class="lore-value" id="loreGold">0</span>
+                                    </div>
+                                    <div class="lore-item">
+                                        <span class="lore-label">
+                                            <i class="fas fa-eye"></i> Soul Size:
+                                        </span>
+                                        <span class="lore-value" id="loreSoul">None</span>
+                                    </div>
+                                </div>
+                                <div class="description-section">
+                                    <p class="description-text" id="characterDescription">No description available.</p>
+                                </div>
+                                
+                                <!-- Quest Timeline -->
+                                <div class="timeline-view" id="questTimeline" style="display: none;">
+                                    <h4><i class="fas fa-scroll"></i> Quest Appearances</h4>
+                                    <div id="timelineItems">
+                                        <!-- Timeline items populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Combat Info -->
+                        <div class="card character-combat-card">
+                            <div class="card__body">
+                                <h3>
+                                    <i class="fas fa-sword"></i> Combat Info
+                                </h3>
+                                <div class="combat-list" id="combatInfo">
+                                    <!-- Combat info populated by JavaScript -->
+                                </div>
+                                <div class="resistance-grid" id="resistanceGrid" style="margin-top: 15px;">
+                                    <!-- Resistance info populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loot Table -->
+                        <div class="card character-loot-card">
+                            <div class="card__body">
+                                <h3>
+                                    <i class="fas fa-treasure-chest"></i> Loot Table
+                                </h3>
+                                <div class="loot-list" id="lootList">
+                                    <!-- Loot items populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Characters -->
+                        <div class="card related-characters">
+                            <div class="card__body">
+                                <h3>
+                                    <i class="fas fa-users"></i> Related Characters
+                                </h3>
+                                <div class="related-grid" id="relatedGrid">
+                                    <!-- Related characters populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Personal Notes -->
+                        <div class="card notes-section">
+                            <div class="card__body">
+                                <h3>
+                                    <i class="fas fa-sticky-note"></i> Personal Notes
+                                </h3>
+                                <textarea id="characterNotes" placeholder="Add your notes about this character..."></textarea>
+                                <button class="btn btn--sm" id="saveNotesBtn" style="margin-top: 10px;">
+                                    <i class="fas fa-save"></i> Save Notes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="card character-actions-card">
+                            <div class="card__body">
+                                <div class="action-buttons">
+                                    <button class="btn btn--primary" id="exportModelBtn">
+                                        <i class="fas fa-download"></i> Export Model
+                                    </button>
+                                    <button class="btn btn--outline" id="printCardBtn">
+                                        <i class="fas fa-print"></i> Print Card
+                                    </button>
+                                    <button class="btn btn--outline ar-view-btn" id="arViewBtn">
+                                        <i class="fas fa-cube"></i> View in AR
+                                    </button>
+                                </div>
+                                <div class="social-share">
+                                    <button class="social-btn twitter" id="shareTwitter">
+                                        <i class="fab fa-twitter"></i> Tweet
+                                    </button>
+                                    <button class="social-btn facebook" id="shareFacebook">
+                                        <i class="fab fa-facebook"></i> Share
+                                    </button>
+                                    <button class="social-btn reddit" id="shareReddit">
+                                        <i class="fab fa-reddit"></i> Reddit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: 3D Viewer -->
+                    <div class="character-viewer-panel">
+                        <div class="card viewer-container">
+                            <div class="viewer-header">
+                                <h3>
+                                    <i class="fas fa-cube"></i> 3D Model Viewer
+                                </h3>
+                                <div class="viewer-controls">
+                                    <button class="btn btn--sm" id="resetViewBtn" title="Reset View" aria-label="Reset camera view">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="lightModeBtn" title="Toggle Lighting" aria-label="Toggle lighting mode">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="wireframeBtn" title="Wireframe Mode" aria-label="Toggle wireframe mode">
+                                        <i class="fas fa-project-diagram"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="gridBtn" title="Toggle Grid" aria-label="Toggle grid">
+                                        <i class="fas fa-border-all"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="annotationBtn" title="Annotations" aria-label="Toggle annotations">
+                                        <i class="fas fa-comment-dots"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="animationBtn" title="Play Animation" aria-label="Play animation">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="recordBtn" title="Record GIF" aria-label="Record animation as GIF">
+                                        <i class="fas fa-video"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="screenshotBtn" title="Screenshot" aria-label="Take screenshot">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="fullscreenBtn" title="Fullscreen" aria-label="Toggle fullscreen">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="perfStatsBtn" title="Performance Stats" aria-label="Show performance statistics">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="viewer-content" style="position: relative;">
+                                <canvas id="characterCanvas"></canvas>
+                                <div class="viewer-overlay" id="viewerOverlay">
+                                    <div class="overlay-content">
+                                        <div class="loader-spinner"></div>
+                                        <p>Loading 3D model...</p>
+                                        <div class="progress-bar" style="margin-top: 20px;">
+                                            <div class="progress-fill" id="loadingProgress" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="performance-stats" id="performanceStats">
+                                    <div>FPS: <span id="fpsCounter">60</span></div>
+                                    <div>Triangles: <span id="triangleCount">0</span></div>
+                                    <div>Draw Calls: <span id="drawCalls">0</span></div>
+                                </div>
+                                <div id="annotationsContainer"></div>
+                            </div>
+                            <div class="viewer-footer">
+                                <div class="viewer-info" id="viewerInfo">
+                                    <span>
+                                        <i class="fas fa-mouse"></i> Left-click: Rotate •
+                                        <i class="fas fa-mouse"></i> Scroll: Zoom •
+                                        <i class="fas fa-mouse"></i> Right-click: Pan
+                                    </span>
+                                </div>
+                                <div class="viewer-settings">
+                                    <label>
+                                        <i class="fas fa-sync"></i> Rotation Speed:
+                                    </label>
+                                    <input type="range" id="rotationSpeedSlider" min="0" max="2.0" step="0.1" value="1.0" class="slider" aria-label="Rotation speed">
+                                    <span id="rotationSpeedValue">1.0x</span>
+                                </div>
+                                <div class="viewer-settings">
+                                    <label>
+                                        <i class="fas fa-sun"></i> Ambient Light:
+                                    </label>
+                                    <input type="range" id="ambientLightSlider" min="0" max="1" step="0.1" value="0.5" class="slider" aria-label="Ambient light intensity">
+                                    <span id="ambientLightValue">0.5</span>
+                                </div>
+                                <div class="screenshot-controls">
+                                    <select id="screenshotFormat" class="btn btn--sm">
+                                        <option value="png">PNG</option>
+                                        <option value="jpg">JPG</option>
+                                        <option value="webp">WebP</option>
+                                    </select>
+                                    <select id="screenshotResolution" class="btn btn--sm">
+                                        <option value="1x">1x (Current)</option>
+                                        <option value="2x">2x (High)</option>
+                                        <option value="4x">4x (Ultra)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Between Characters -->
+                <div class="character-navigation">
+                    <button class="btn btn--outline" id="prevCharBtn" aria-label="Previous character">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <span class="character-counter" id="characterCounter">1 / 1</span>
+                    <button class="btn btn--outline" id="nextCharBtn" aria-label="Next character">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Comparison Mode Banner -->
+    <div class="comparison-mode" id="comparisonMode">
+        <span>Comparison Mode Active - Select another character to compare</span>
+        <button class="btn btn--sm" id="cancelCompareBtn" style="margin-left: 15px;">Cancel</button>
+    </div>
+
+    <!-- Character Selection Modal -->
+    <div class="modal hidden" id="characterSelectModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-th"></i> Select Character</h3>
+                <button class="modal-close" id="closeModalBtn" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar" style="margin-bottom: 20px;">
+                    <input type="text" id="modalSearchInput" placeholder="Search characters..." aria-label="Search characters">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="character-grid" id="characterGrid">
+                    <!-- Characters populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal hidden" id="exportModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-download"></i> Export Model</h3>
+                <button class="modal-close" id="closeExportBtn" aria-label="Close export modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="export-options" style="margin-bottom: 20px;">
+                    <h4>Export Format:</h4>
+                    <select id="exportFormatSelect" class="btn" style="width: 100%; margin-bottom: 15px;">
+                        <option value="obj">OBJ (Wavefront)</option>
+                        <option value="gltf">GLTF (GL Transmission Format)</option>
+                        <option value="fbx">FBX (Autodesk)</option>
+                        <option value="stl">STL (3D Printing)</option>
+                        <option value="ply">PLY (Polygon File Format)</option>
+                    </select>
+                    <label>
+                        <input type="checkbox" id="exportTexturesCheck" checked> Include Textures
+                    </label>
+                    <label style="margin-left: 15px;">
+                        <input type="checkbox" id="exportAnimationsCheck"> Include Animations
+                    </label>
+                </div>
+                <p>Exporting <strong id="exportName"></strong> model...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="exportProgress"></div>
+                </div>
+                <p class="progress-text" id="exportStatus">Preparing file...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div class="modal hidden" id="comparisonModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-balance-scale"></i> Character Comparison</h3>
+                <button class="modal-close" id="closeComparisonBtn" aria-label="Close comparison">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="comparisonContent">
+                    <!-- Comparison content populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Annotation Modal -->
+    <div class="modal hidden" id="annotationModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-comment"></i> Add Annotation</h3>
+                <button class="modal-close" id="closeAnnotationBtn" aria-label="Close annotation">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea id="annotationText" placeholder="Enter annotation text..." style="width: 100%; min-height: 100px;"></textarea>
+                <button class="btn btn--primary" id="saveAnnotationBtn" style="margin-top: 10px;">
+                    <i class="fas fa-save"></i> Save Annotation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../src/js/character.js"></script>
+    <script src="../src/js/character-enhanced.js"></script>
+    
+    <script>
+        // Voice Command Setup (basic implementation)
+        document.getElementById('voiceCommandBtn').addEventListener('click', function() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                
+                this.classList.add('listening');
+                
+                recognition.onresult = function(event) {
+                    const command = event.results[0][0].transcript.toLowerCase();
+                    console.log('Voice command:', command);
+                    
+                    // Process voice commands
+                    if (command.includes('next')) {
+                        document.getElementById('nextCharBtn').click();
+                    } else if (command.includes('previous')) {
+                        document.getElementById('prevCharBtn').click();
+                    } else if (command.includes('reset')) {
+                        document.getElementById('resetViewBtn').click();
+                    } else if (command.includes('screenshot')) {
+                        document.getElementById('screenshotBtn').click();
+                    } else if (command.includes('fullscreen')) {
+                        document.getElementById('fullscreenBtn').click();
+                    }
+                };
+                
+                recognition.onend = () => {
+                    this.classList.remove('listening');
+                };
+                
+                recognition.start();
+            } else {
+                alert('Voice commands not supported in this browser');
+            }
+        });
+        
+        // Performance monitoring
+        let lastTime = performance.now();
+        let frames = 0;
+        
+        function updatePerformanceStats() {
+            frames++;
+            const currentTime = performance.now();
+            
+            if (currentTime >= lastTime + 1000) {
+                document.getElementById('fpsCounter').textContent = frames;
+                frames = 0;
+                lastTime = currentTime;
+            }
+            
+            requestAnimationFrame(updatePerformanceStats);
+        }
+        
+        updatePerformanceStats();
+    </script>
+</body>
+</html>

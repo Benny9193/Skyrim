@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Reconstruction Studio</title>
+    <link rel="stylesheet" href="../src/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav-top">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                    </div>
+                    <h1 class="app-title">3D Reconstruction Studio</h1>
+                    <p class="app-tagline">Transform Photos into 3D Assets</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="app-layout">
+                    <!-- Left Panel -->
+                    <div class="left-panel">
+                        <!-- Upload Section -->
+                        <div class="card upload-section">
+                            <div class="card__body">
+                                <h3>Upload Media</h3>
+                                <div class="upload-area" id="uploadArea">
+                                    <div class="upload-content">
+                                        <div class="upload-icon">📷</div>
+                                        <p class="upload-text">Drag & drop images or videos here</p>
+                                        <p class="upload-subtext">or click to browse files</p>
+                                        <button class="btn btn--primary" id="browseBtn">Browse Files</button>
+                                        <input type="file" id="fileInput" multiple accept="image/*,video/*" style="display: none;">
+                                    </div>
+                                </div>
+                                <div class="file-preview" id="filePreview"></div>
+                            </div>
+                        </div>
+
+                        <!-- Processing Pipeline -->
+                        <div class="card pipeline-section">
+                            <div class="card__body">
+                                <h3>Processing Pipeline</h3>
+                                <div class="pipeline-steps">
+                                    <div class="pipeline-step" id="step1">
+                                        <div class="step-indicator">1</div>
+                                        <div class="step-content">
+                                            <span class="step-title">Image Processing</span>
+                                            <div class="step-progress"></div>
+                                        </div>
+                                    </div>
+                                    <div class="pipeline-step" id="step2">
+                                        <div class="step-indicator">2</div>
+                                        <div class="step-content">
+                                            <span class="step-title">Feature Detection</span>
+                                            <div class="step-progress"></div>
+                                        </div>
+                                    </div>
+                                    <div class="pipeline-step" id="step3">
+                                        <div class="step-indicator">3</div>
+                                        <div class="step-content">
+                                            <span class="step-title">3D Reconstruction</span>
+                                            <div class="step-progress"></div>
+                                        </div>
+                                    </div>
+                                    <div class="pipeline-step" id="step4">
+                                        <div class="step-indicator">4</div>
+                                        <div class="step-content">
+                                            <span class="step-title">Mesh Generation</span>
+                                            <div class="step-progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn--primary btn--full-width" id="startReconstructionBtn" disabled>
+                                    Start Reconstruction
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3D Mapping Panel -->
+                        <div class="card mapping-section">
+                            <div class="card__body">
+                                <h3>3D Mapping</h3>
+                                <div class="form-group">
+                                    <label class="form-label">Map Type</label>
+                                    <select class="form-control" id="mapTypeSelect">
+                                        <option value="terrain">Terrain Map</option>
+                                        <option value="topographic">Topographic</option>
+                                        <option value="satellite">Satellite Overlay</option>
+                                        <option value="mesh">3D Mesh Map</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Map Resolution</label>
+                                    <input type="range" id="mapResolutionSlider" min="0.1" max="5.0" step="0.1" value="1.0" class="slider">
+                                    <span id="mapResolutionValue">1.0m</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">GPS Coordinates</label>
+                                    <div class="coordinate-inputs">
+                                        <input type="number" id="latInput" placeholder="Latitude" step="0.000001" class="form-control coord-input">
+                                        <input type="number" id="lngInput" placeholder="Longitude" step="0.000001" class="form-control coord-input">
+                                        <input type="number" id="altInput" placeholder="Altitude (m)" step="0.1" class="form-control coord-input">
+                                    </div>
+                                </div>
+                                <button class="btn btn--primary btn--full-width" id="generateMapBtn" disabled>
+                                    Generate 3D Map
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Settings Panel -->
+                        <div class="card settings-section">
+                            <div class="card__body">
+                                <h3>Reconstruction Settings</h3>
+                                <div class="form-group">
+                                    <label class="form-label">Quality Level</label>
+                                    <select class="form-control" id="qualitySelect">
+                                        <option value="draft">Draft</option>
+                                        <option value="standard" selected>Standard</option>
+                                        <option value="high">High Quality</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Point Cloud Density</label>
+                                    <input type="range" id="densitySlider" min="0.1" max="2.0" step="0.1" value="1.0" class="slider">
+                                    <span id="densityValue">1.0</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Mesh Generation</label>
+                                    <select class="form-control" id="meshSelect">
+                                        <option value="poisson">Poisson Surface</option>
+                                        <option value="delaunay">Delaunay Triangulation</option>
+                                        <option value="marching">Marching Cubes</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Export Options -->
+                        <div class="card export-section">
+                            <div class="card__body">
+                                <h3>Export Options</h3>
+                                <div class="export-buttons">
+                                    <button class="btn btn--outline" id="exportPLY" disabled>
+                                        <span class="export-icon">📊</span>
+                                        Export PLY (Point Cloud)
+                                    </button>
+                                    <button class="btn btn--outline" id="exportOBJ" disabled>
+                                        <span class="export-icon">🎯</span>
+                                        Export OBJ (Mesh)
+                                    </button>
+                                    <button class="btn btn--outline" id="exportSTL" disabled>
+                                        <span class="export-icon">🖨️</span>
+                                        Export STL (3D Print)
+                                    </button>
+                                    <button class="btn btn--outline" id="exportGeoTIFF" disabled>
+                                        <span class="export-icon">🗺️</span>
+                                        Export GeoTIFF (Map)
+                                    </button>
+                                    <button class="btn btn--outline" id="exportKML" disabled>
+                                        <span class="export-icon">📍</span>
+                                        Export KML (Google Earth)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Viewer -->
+                    <div class="viewer-panel">
+                        <div class="card viewer-container">
+                            <div class="viewer-header">
+                                <h3>3D Viewer</h3>
+                                <div class="viewer-controls">
+                                    <button class="btn btn--sm" id="pointCloudBtn">Point Cloud</button>
+                                    <button class="btn btn--sm" id="meshBtn">Mesh</button>
+                                    <button class="btn btn--sm" id="wireframeBtn">Wireframe</button>
+                                    <button class="btn btn--sm" id="mapViewBtn">Map View</button>
+                                    <button class="btn btn--sm" id="fullscreenBtn">⛶</button>
+                                </div>
+                            </div>
+                            <div class="viewer-content">
+                                <canvas id="threeCanvas"></canvas>
+                                <div class="viewer-overlay" id="viewerOverlay">
+                                    <div class="overlay-content">
+                                        <div class="upload-placeholder">
+                                            <div class="placeholder-icon">🎬</div>
+                                            <h4>Ready for 3D Reconstruction</h4>
+                                            <p>Upload images or videos to begin generating your 3D asset</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="viewer-footer">
+                                <div class="viewer-stats" id="viewerStats">
+                                    <span id="pointCount">Points: 0</span>
+                                    <span id="faceCount">Faces: 0</span>
+                                    <span id="cameraCount">Cameras: 0</span>
+                                </div>
+                                <div class="viewer-settings">
+                                    <label>Lighting:</label>
+                                    <input type="range" id="lightingSlider" min="0.1" max="2.0" step="0.1" value="1.0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Processing Modal -->
+        <div class="modal hidden" id="processingModal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <h3>Processing Reconstruction</h3>
+                <div class="processing-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">Initializing...</p>
+                </div>
+                <div class="processing-details" id="processingDetails">
+                    <p>Analyzing uploaded media files...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/js/app.js"></script>
+</body>
+</html>

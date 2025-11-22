@@ -1,0 +1,264 @@
+[
+  {
+    "id": 1,
+    "name": "Alduin",
+    "race": "Dragon",
+    "level": 50,
+    "location": "Skuldafn Temple",
+    "faction": "Dragons",
+    "difficulty": "Deadly",
+    "description": "The World-Eater, the ancient dragon who destroyed the world in the Dragon War and was later resurrected by Daedric forces. Alduin is the most powerful of all dragons and the main antagonist of the main quest.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23660000%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐉%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 100,
+      "magicka": 75,
+      "stamina": 85
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Legendary" },
+      { "name": "Dragon Breath", "level": "Legendary" },
+      { "name": "Magic Resistance", "level": "Legendary" },
+      { "name": "Evasion", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Claw Damage", "value": "45-65", "type": "Physical" },
+      { "name": "Fire Breath", "value": "80", "type": "Fire" },
+      { "name": "Armor Rating", "value": "120", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Daedric Dremora",
+    "race": "Dremora",
+    "level": 30,
+    "location": "Oblivion Gates",
+    "faction": "Daedric Forces",
+    "difficulty": "Hard",
+    "description": "A fearsome Dremora warrior summoned from the planes of Oblivion. These demonic beings are equipped with daedric weaponry and radiate magical power.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23662200%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👿%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 85,
+      "magicka": 90,
+      "stamina": 75
+    },
+    "skills": [
+      { "name": "Destruction Magic", "level": "Expert" },
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Intimidation", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Daedric Sword", "value": "35-45", "type": "Physical" },
+      { "name": "Fireball", "value": "60", "type": "Magic" },
+      { "name": "Frost Resistance", "value": "50%", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Frostbite Spider",
+    "race": "Arachnid",
+    "level": 12,
+    "location": "Blackreach, Dwemer Ruins",
+    "faction": "Wildlife",
+    "difficulty": "Normal",
+    "description": "A giant ice-infused spider found in the depths of Blackreach. Highly venomous and capable of firing freezing venom projectiles.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2300ccff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🕷️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 45,
+      "magicka": 20,
+      "stamina": 60
+    },
+    "skills": [
+      { "name": "Poison", "level": "Expert" },
+      { "name": "Melee Combat", "level": "Adept" }
+    ],
+    "combat": [
+      { "name": "Bite Damage", "value": "15-20", "type": "Physical" },
+      { "name": "Venom Spray", "value": "25", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Ancient Dragon",
+    "race": "Dragon",
+    "level": 45,
+    "location": "Various Dragon Lairs",
+    "faction": "Dragons",
+    "difficulty": "Deadly",
+    "description": "One of the oldest and most powerful dragons still living in Skyrim. Ancient dragons are significantly more dangerous than their younger kin, with powerful magic and devastating breath attacks.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23333333%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐉%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 95,
+      "magicka": 70,
+      "stamina": 80
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Legendary" },
+      { "name": "Dragon Breath", "level": "Legendary" },
+      { "name": "Restoration Magic", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Claw Damage", "value": "40-60", "type": "Physical" },
+      { "name": "Breath Attack", "value": "75", "type": "Frost" },
+      { "name": "Armor Rating", "value": "110", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Vampire Lord",
+    "race": "Vampire",
+    "level": 35,
+    "location": "Vampire Lairs",
+    "faction": "Vampires",
+    "difficulty": "Hard",
+    "description": "A powerful vampire in their lord form with shapeshifting abilities, increased durability, and devastating melee and magic attacks. Vampire Lords are feared predators of the night.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23330000%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🦇%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 80,
+      "magicka": 85,
+      "stamina": 70
+    },
+    "skills": [
+      { "name": "Mysticism", "level": "Expert" },
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Blood Magic", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Claw Damage", "value": "25-40", "type": "Physical" },
+      { "name": "Life Drain", "value": "50", "type": "Magic" },
+      { "name": "Summon Gargoyle", "value": "35", "type": "Magic" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Frost Atronach",
+    "race": "Atronach",
+    "level": 20,
+    "location": "Nordic Ruins, Frozen Peaks",
+    "faction": "Daedric Constructs",
+    "difficulty": "Normal",
+    "description": "An elemental construct of pure frost magic. These creatures are immune to frost attacks and deal devastating cold damage to their enemies.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2300ffff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E❄️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 70,
+      "magicka": 65,
+      "stamina": 50
+    },
+    "skills": [
+      { "name": "Restoration Magic", "level": "Expert" },
+      { "name": "Frost Magic", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Ice Spike", "value": "45", "type": "Frost" },
+      { "name": "Freeze", "value": "20", "type": "Frost" },
+      { "name": "Frost Resistance", "value": "100%", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Sabre Cat",
+    "race": "Beast",
+    "level": 16,
+    "location": "Wilderness, Mountain Passes",
+    "faction": "Wildlife",
+    "difficulty": "Normal",
+    "description": "A large predatory feline with prominent saber-like teeth. These aggressive hunters are found throughout Skyrim and pose a significant threat to unprepared adventurers.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23cc8822%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐯%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 55,
+      "magicka": 10,
+      "stamina": 70
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Adept" },
+      { "name": "Stealth", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Bite Damage", "value": "20-30", "type": "Physical" },
+      { "name": "Claw Damage", "value": "15-20", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Deathlord",
+    "race": "Draugr",
+    "level": 28,
+    "location": "Nordic Tombs",
+    "faction": "Undead",
+    "difficulty": "Hard",
+    "description": "The most powerful form of draugr, these ancient Nordic warriors have risen from their slumber. They command powerful Thu'um and wield enchanted weapons.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23444444%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E💀%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 75,
+      "magicka": 60,
+      "stamina": 75
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Restoration Magic", "level": "Expert" },
+      { "name": "Thu'um", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Sword Damage", "value": "30-40", "type": "Physical" },
+      { "name": "Unrelenting Force", "value": "25", "type": "Magic" },
+      { "name": "Drain Vitality", "value": "35", "type": "Magic" }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Storm Atronach",
+    "race": "Atronach",
+    "level": 22,
+    "location": "Mountain Peaks, Storms",
+    "faction": "Daedric Constructs",
+    "difficulty": "Normal",
+    "description": "An elemental construct of storm and lightning. These powerful beings are immune to shock attacks and can unleash devastating lightning upon their foes.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ffff00%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚡%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 72,
+      "magicka": 70,
+      "stamina": 48
+    },
+    "skills": [
+      { "name": "Restoration Magic", "level": "Expert" },
+      { "name": "Shock Magic", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Lightning Bolt", "value": "50", "type": "Shock" },
+      { "name": "Stun Strike", "value": "30", "type": "Shock" },
+      { "name": "Shock Resistance", "value": "100%", "type": "Shock" }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Daedric Sphere",
+    "race": "Daedric Construct",
+    "level": 18,
+    "location": "Dwemer Ruins, Oblivion Gates",
+    "faction": "Daedric Forces",
+    "difficulty": "Normal",
+    "description": "A mechanical sphere of pure Daedric design. These constructs fire lethal spikes and are surprisingly mobile despite their heavy armor.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23554433%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚙️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 65,
+      "magicka": 40,
+      "stamina": 60
+    },
+    "skills": [
+      { "name": "Combat", "level": "Adept" }
+    ],
+    "combat": [
+      { "name": "Spike Barrage", "value": "35", "type": "Physical" },
+      { "name": "Impact", "value": "20", "type": "Physical" }
+    ]
+  }
+]
