@@ -230,7 +230,7 @@ function createLocationCard(location) {
                     <div class="location-card-meta">
                         <span class="location-badge">${location.region}</span>
                         <span class="location-badge">${location.type}</span>
-                        <span class="location-badge difficulty ${location.difficulty.replace(' ', '.')}">${location.difficulty}</span>
+                        <span class="location-badge difficulty ${location.difficulty}">${location.difficulty}</span>
                     </div>
                 </div>
                 <p class="location-card-description">${location.description}</p>
@@ -270,7 +270,7 @@ function showLocationDetail(locationId) {
     
     const difficultyBadge = document.getElementById('modalDifficulty');
     difficultyBadge.textContent = location.difficulty;
-    difficultyBadge.className = `location-badge difficulty ${location.difficulty.replace(' ', '.')}`;
+    difficultyBadge.className = `location-badge difficulty ${location.difficulty}`;
     
     document.getElementById('modalDescription').textContent = location.description;
     document.getElementById('modalLore').textContent = location.lore;
