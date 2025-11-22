@@ -328,7 +328,7 @@ function renderGallery() {
         const difficultyClass = location.difficulty.toLowerCase().replace(' ', '-');
 
         return `
-            <div class="location-card" onclick="viewLocation(${location.id})">
+            <div class="location-card" data-location-id="${location.id}">
                 <img src="${location.imagePath}" alt="${location.name}" class="location-image">
                 <div class="location-info">
                     <h3 class="location-name">${location.name}</h3>
