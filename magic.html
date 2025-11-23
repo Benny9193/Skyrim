@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic & Shouts - Skyrim Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="magic.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header magic-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Magic & Shouts</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <nav class="tabs-nav">
+            <div class="container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="spells">✨ Spells</button>
+                    <button class="tab-btn" data-tab="shouts">💨 Shouts</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="magic-main">
+            <div class="container">
+                <!-- Spells Tab -->
+                <div class="tab-content active" id="spells-tab">
+                    <div class="section-header">
+                        <h2>Spells</h2>
+                        <p class="subtitle">Master the arcane arts of Skyrim</p>
+                        <div class="controls">
+                            <input type="text" id="spellSearch" class="search-input" placeholder="Search spells...">
+                            <select id="spellSchoolFilter" class="filter-select">
+                                <option value="">All Schools</option>
+                                <option value="Destruction">Destruction</option>
+                                <option value="Restoration">Restoration</option>
+                                <option value="Illusion">Illusion</option>
+                                <option value="Conjuration">Conjuration</option>
+                                <option value="Alteration">Alteration</option>
+                            </select>
+                            <select id="spellLevelFilter" class="filter-select">
+                                <option value="">All Levels</option>
+                                <option value="Novice">Novice</option>
+                                <option value="Apprentice">Apprentice</option>
+                                <option value="Adept">Adept</option>
+                                <option value="Expert">Expert</option>
+                                <option value="Master">Master</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-container" id="spellsGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Shouts Tab -->
+                <div class="tab-content" id="shouts-tab">
+                    <div class="section-header">
+                        <h2>Dragon Shouts</h2>
+                        <p class="subtitle">Harness the power of the Thu'um</p>
+                        <div class="controls">
+                            <input type="text" id="shoutSearch" class="search-input" placeholder="Search shouts...">
+                        </div>
+                    </div>
+
+                    <div class="shouts-container" id="shoutsContainer">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="magic-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="map.html">Map</a>
+                    <span class="separator">•</span>
+                    <a href="bestiary.html">Bestiary</a>
+                </div>
+                <p>&copy; 2024 Skyrim Reference. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="magic.js"></script>
+</body>
+</html>

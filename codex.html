@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyrim Codex - Complete Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="codex.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header codex-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Skyrim Codex</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tabs-nav">
+            <div class="container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="quests">📜 Quests</button>
+                    <button class="tab-btn" data-tab="skills">⭐ Skills</button>
+                    <button class="tab-btn" data-tab="items">⚔️ Items</button>
+                    <button class="tab-btn" data-tab="factions">🏛️ Factions</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content codex-main">
+            <div class="container">
+
+                <!-- Quests Tab -->
+                <section class="tab-content active" id="quests-tab">
+                    <div class="section-header">
+                        <h2>Quests</h2>
+                        <div class="controls">
+                            <input type="text" id="questSearch" placeholder="Search quests..." class="search-input">
+                            <select id="questTypeFilter" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="Main Quest">Main Quest</option>
+                                <option value="Thieves Guild">Thieves Guild</option>
+                                <option value="Companions">Companions</option>
+                                <option value="College of Winterhold">College</option>
+                                <option value="Side Quest">Side Quests</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid-container" id="questsGrid"></div>
+                </section>
+
+                <!-- Skills Tab -->
+                <section class="tab-content" id="skills-tab">
+                    <div class="section-header">
+                        <h2>Skills & Perks</h2>
+                        <p class="subtitle">Explore the skill trees of Skyrim</p>
+                    </div>
+                    <div class="skills-container" id="skillsContainer"></div>
+                </section>
+
+                <!-- Items Tab -->
+                <section class="tab-content" id="items-tab">
+                    <div class="section-header">
+                        <h2>Items & Equipment</h2>
+                        <div class="controls">
+                            <input type="text" id="itemSearch" placeholder="Search items..." class="search-input">
+                            <select id="itemTypeFilter" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="Weapon">Weapons</option>
+                                <option value="Armor">Armor</option>
+                                <option value="Staff">Staves</option>
+                                <option value="Potion">Potions</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid-container" id="itemsGrid"></div>
+                </section>
+
+                <!-- Factions Tab -->
+                <section class="tab-content" id="factions-tab">
+                    <div class="section-header">
+                        <h2>Factions & Guilds</h2>
+                        <p class="subtitle">Organizations and groups across Skyrim</p>
+                    </div>
+                    <div class="grid-container" id="factionsGrid"></div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="codex-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="bestiary.html">Bestiary</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="map.html">Map</a>
+                </div>
+                <p>&copy; 2024 Skyrim Codex. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="codex.js"></script>
+</body>
+</html>
