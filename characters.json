@@ -29,58 +29,35 @@
   },
   {
     "id": 2,
-    "name": "Daedric Dremora",
-    "race": "Dremora",
-    "level": 30,
-    "location": "Oblivion Gates",
-    "faction": "Daedric Forces",
-    "difficulty": "Hard",
-    "description": "A fearsome Dremora warrior summoned from the planes of Oblivion. These demonic beings are equipped with daedric weaponry and radiate magical power.",
-    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23662200%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👿%3C/text%3E%3C/svg%3E",
+    "name": "Dragon Priest",
+    "race": "Undead",
+    "level": 50,
+    "location": "Dragon Priest Lairs",
+    "faction": "Dragon Cult",
+    "difficulty": "Deadly",
+    "description": "Ancient Nordic priests who served the Dragons during their rule. These powerful undead mages wield devastating magic and wear legendary masks that grant unique powers.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23552200%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👹%3C/text%3E%3C/svg%3E",
     "modelPath": "enhanced_mesh.obj",
     "stats": {
-      "health": 85,
-      "magicka": 90,
-      "stamina": 75
+      "health": 90,
+      "magicka": 100,
+      "stamina": 65
     },
     "skills": [
-      { "name": "Destruction Magic", "level": "Expert" },
-      { "name": "Melee Combat", "level": "Expert" },
-      { "name": "Intimidation", "level": "Expert" }
+      { "name": "Destruction Magic", "level": "Legendary" },
+      { "name": "Alteration Magic", "level": "Legendary" },
+      { "name": "Restoration Magic", "level": "Expert" },
+      { "name": "Conjuration", "level": "Expert" }
     ],
     "combat": [
-      { "name": "Daedric Sword", "value": "35-45", "type": "Physical" },
-      { "name": "Fireball", "value": "60", "type": "Magic" },
-      { "name": "Frost Resistance", "value": "50%", "type": "Frost" }
+      { "name": "Fireball", "value": "75", "type": "Fire" },
+      { "name": "Lightning Storm", "value": "80", "type": "Shock" },
+      { "name": "Staff Attack", "value": "40", "type": "Magic" },
+      { "name": "Magic Resistance", "value": "75%", "type": "Magic" }
     ]
   },
   {
     "id": 3,
-    "name": "Frostbite Spider",
-    "race": "Arachnid",
-    "level": 12,
-    "location": "Blackreach, Dwemer Ruins",
-    "faction": "Wildlife",
-    "difficulty": "Normal",
-    "description": "A giant ice-infused spider found in the depths of Blackreach. Highly venomous and capable of firing freezing venom projectiles.",
-    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2300ccff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🕷️%3C/text%3E%3C/svg%3E",
-    "modelPath": "enhanced_mesh.obj",
-    "stats": {
-      "health": 45,
-      "magicka": 20,
-      "stamina": 60
-    },
-    "skills": [
-      { "name": "Poison", "level": "Expert" },
-      { "name": "Melee Combat", "level": "Adept" }
-    ],
-    "combat": [
-      { "name": "Bite Damage", "value": "15-20", "type": "Physical" },
-      { "name": "Venom Spray", "value": "25", "type": "Frost" }
-    ]
-  },
-  {
-    "id": 4,
     "name": "Ancient Dragon",
     "race": "Dragon",
     "level": 45,
@@ -107,7 +84,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 4,
     "name": "Vampire Lord",
     "race": "Vampire",
     "level": 35,
@@ -134,58 +111,34 @@
     ]
   },
   {
+    "id": 5,
+    "name": "Werewolf",
+    "race": "Lycanthrope",
+    "level": 30,
+    "location": "Wilderness, Full Moon",
+    "faction": "The Circle",
+    "difficulty": "Hard",
+    "description": "A fearsome beast-form transformation that grants incredible strength and speed. Werewolves are relentless hunters with devastating melee attacks and regenerative abilities.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23222222%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐺%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 85,
+      "magicka": 0,
+      "stamina": 95
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Intimidation", "level": "Expert" },
+      { "name": "Regeneration", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Claw Damage", "value": "35-50", "type": "Physical" },
+      { "name": "Bite Damage", "value": "40-55", "type": "Physical" },
+      { "name": "Howl", "value": "Fear", "type": "Magic" }
+    ]
+  },
+  {
     "id": 6,
-    "name": "Frost Atronach",
-    "race": "Atronach",
-    "level": 20,
-    "location": "Nordic Ruins, Frozen Peaks",
-    "faction": "Daedric Constructs",
-    "difficulty": "Normal",
-    "description": "An elemental construct of pure frost magic. These creatures are immune to frost attacks and deal devastating cold damage to their enemies.",
-    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2300ffff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E❄️%3C/text%3E%3C/svg%3E",
-    "modelPath": "enhanced_mesh.obj",
-    "stats": {
-      "health": 70,
-      "magicka": 65,
-      "stamina": 50
-    },
-    "skills": [
-      { "name": "Restoration Magic", "level": "Expert" },
-      { "name": "Frost Magic", "level": "Legendary" }
-    ],
-    "combat": [
-      { "name": "Ice Spike", "value": "45", "type": "Frost" },
-      { "name": "Freeze", "value": "20", "type": "Frost" },
-      { "name": "Frost Resistance", "value": "100%", "type": "Frost" }
-    ]
-  },
-  {
-    "id": 7,
-    "name": "Sabre Cat",
-    "race": "Beast",
-    "level": 16,
-    "location": "Wilderness, Mountain Passes",
-    "faction": "Wildlife",
-    "difficulty": "Normal",
-    "description": "A large predatory feline with prominent saber-like teeth. These aggressive hunters are found throughout Skyrim and pose a significant threat to unprepared adventurers.",
-    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23cc8822%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐯%3C/text%3E%3C/svg%3E",
-    "modelPath": "enhanced_mesh.obj",
-    "stats": {
-      "health": 55,
-      "magicka": 10,
-      "stamina": 70
-    },
-    "skills": [
-      { "name": "Melee Combat", "level": "Adept" },
-      { "name": "Stealth", "level": "Expert" }
-    ],
-    "combat": [
-      { "name": "Bite Damage", "value": "20-30", "type": "Physical" },
-      { "name": "Claw Damage", "value": "15-20", "type": "Physical" }
-    ]
-  },
-  {
-    "id": 8,
     "name": "Deathlord",
     "race": "Draugr",
     "level": 28,
@@ -212,7 +165,192 @@
     ]
   },
   {
+    "id": 7,
+    "name": "Daedric Dremora",
+    "race": "Dremora",
+    "level": 30,
+    "location": "Oblivion Gates",
+    "faction": "Daedric Forces",
+    "difficulty": "Hard",
+    "description": "A fearsome Dremora warrior summoned from the planes of Oblivion. These demonic beings are equipped with daedric weaponry and radiate magical power.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23662200%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👿%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 85,
+      "magicka": 90,
+      "stamina": 75
+    },
+    "skills": [
+      { "name": "Destruction Magic", "level": "Expert" },
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Intimidation", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Daedric Sword", "value": "35-45", "type": "Physical" },
+      { "name": "Fireball", "value": "60", "type": "Magic" },
+      { "name": "Frost Resistance", "value": "50%", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Giant",
+    "race": "Giant",
+    "level": 32,
+    "location": "Plains, Giant Camps",
+    "faction": "Wildlife",
+    "difficulty": "Hard",
+    "description": "Massive humanoid creatures that herd mammoths across Skyrim's tundra. Giants are peaceful unless provoked, but their club attacks can send enemies flying through the air.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23886644%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗿%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 90,
+      "magicka": 0,
+      "stamina": 85
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Crushing Blow", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Club Damage", "value": "60-100", "type": "Physical" },
+      { "name": "Stomp", "value": "40", "type": "Physical" },
+      { "name": "Armor Rating", "value": "80", "type": "Physical" }
+    ]
+  },
+  {
     "id": 9,
+    "name": "Hagraven",
+    "race": "Hagraven",
+    "level": 28,
+    "location": "Forsworn Camps, Witches Covens",
+    "faction": "Forsworn",
+    "difficulty": "Hard",
+    "description": "Twisted witches transformed into bird-like creatures through dark magic. Hagravens are powerful spellcasters who lead Forsworn tribes and practice ancient magic.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23663399%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🦅%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 70,
+      "magicka": 95,
+      "stamina": 55
+    },
+    "skills": [
+      { "name": "Destruction Magic", "level": "Expert" },
+      { "name": "Conjuration", "level": "Expert" },
+      { "name": "Alchemy", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Fireball", "value": "55", "type": "Fire" },
+      { "name": "Lightning Bolt", "value": "50", "type": "Shock" },
+      { "name": "Claw Attack", "value": "25-35", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Frost Troll",
+    "race": "Troll",
+    "level": 22,
+    "location": "Mountain Passes, Snowy Regions",
+    "faction": "Wildlife",
+    "difficulty": "Normal",
+    "description": "Large, aggressive creatures with powerful regeneration abilities. Frost trolls are covered in icy fur and resist frost damage, making them formidable opponents in cold regions.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2399ccff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👹%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 75,
+      "magicka": 0,
+      "stamina": 70
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Adept" },
+      { "name": "Regeneration", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Claw Damage", "value": "30-45", "type": "Physical" },
+      { "name": "Regeneration", "value": "5/sec", "type": "Heal" },
+      { "name": "Frost Resistance", "value": "50%", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Falmer Shadowmaster",
+    "race": "Falmer",
+    "level": 35,
+    "location": "Blackreach, Dwemer Ruins",
+    "faction": "Falmer",
+    "difficulty": "Hard",
+    "description": "The blind, twisted descendants of the Snow Elves who were enslaved by the Dwemer. Shadowmasters are elite Falmer warriors who have mastered the art of fighting without sight.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23555577%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👽%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 78,
+      "magicka": 65,
+      "stamina": 80
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Poison", "level": "Expert" },
+      { "name": "Stealth", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Sword Damage", "value": "28-38", "type": "Physical" },
+      { "name": "Poison Arrow", "value": "35", "type": "Poison" },
+      { "name": "Armor Rating", "value": "65", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Chaurus Reaper",
+    "race": "Chaurus",
+    "level": 26,
+    "location": "Falmer Hives, Underground",
+    "faction": "Falmer Pets",
+    "difficulty": "Normal",
+    "description": "Large insectoid creatures bred by the Falmer. Reapers are the most dangerous variant, with deadly poison attacks and armored exoskeletons.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23336633%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🦂%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 72,
+      "magicka": 0,
+      "stamina": 65
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Adept" },
+      { "name": "Poison", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Bite Damage", "value": "25-35", "type": "Physical" },
+      { "name": "Poison Spit", "value": "45", "type": "Poison" },
+      { "name": "Armor Rating", "value": "70", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Frost Atronach",
+    "race": "Atronach",
+    "level": 20,
+    "location": "Nordic Ruins, Frozen Peaks",
+    "faction": "Daedric Constructs",
+    "difficulty": "Normal",
+    "description": "An elemental construct of pure frost magic. These creatures are immune to frost attacks and deal devastating cold damage to their enemies.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2300ffff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E❄️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 70,
+      "magicka": 65,
+      "stamina": 50
+    },
+    "skills": [
+      { "name": "Restoration Magic", "level": "Expert" },
+      { "name": "Frost Magic", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Ice Spike", "value": "45", "type": "Frost" },
+      { "name": "Freeze", "value": "20", "type": "Frost" },
+      { "name": "Frost Resistance", "value": "100%", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 14,
     "name": "Storm Atronach",
     "race": "Atronach",
     "level": 22,
@@ -238,7 +376,135 @@
     ]
   },
   {
-    "id": 10,
+    "id": 15,
+    "name": "Fire Atronach",
+    "race": "Atronach",
+    "level": 18,
+    "location": "Volcanic Areas, Summoned",
+    "faction": "Daedric Constructs",
+    "difficulty": "Normal",
+    "description": "An elemental creature made of pure flame. Fire Atronachs are completely immune to fire damage and attack with burning projectiles.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ff4400%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🔥%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 65,
+      "magicka": 60,
+      "stamina": 45
+    },
+    "skills": [
+      { "name": "Destruction Magic", "level": "Expert" },
+      { "name": "Fire Magic", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Fireball", "value": "40", "type": "Fire" },
+      { "name": "Flame Cloak", "value": "15/sec", "type": "Fire" },
+      { "name": "Fire Resistance", "value": "100%", "type": "Fire" }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Spriggan",
+    "race": "Spriggan",
+    "level": 24,
+    "location": "Forests, Sacred Groves",
+    "faction": "Nature Spirits",
+    "difficulty": "Normal",
+    "description": "Ancient nature spirits that guard the forests of Skyrim. Spriggans can command animals and regenerate health rapidly when near plants.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2344aa44%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🌳%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 68,
+      "magicka": 75,
+      "stamina": 60
+    },
+    "skills": [
+      { "name": "Conjuration", "level": "Expert" },
+      { "name": "Restoration Magic", "level": "Expert" },
+      { "name": "Nature Magic", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Swarm", "value": "30", "type": "Poison" },
+      { "name": "Melee Attack", "value": "20-30", "type": "Physical" },
+      { "name": "Summon Animals", "value": "Support", "type": "Magic" }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Ice Wraith",
+    "race": "Wraith",
+    "level": 16,
+    "location": "Snowy Mountains, Blizzards",
+    "faction": "Elemental Spirits",
+    "difficulty": "Easy",
+    "description": "Ethereal serpentine creatures made of ice and wind. Ice wraiths are difficult to hit and deal frost damage with their attacks.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23aaeeff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🌀%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 50,
+      "magicka": 45,
+      "stamina": 55
+    },
+    "skills": [
+      { "name": "Evasion", "level": "Expert" },
+      { "name": "Frost Magic", "level": "Adept" }
+    ],
+    "combat": [
+      { "name": "Frost Bite", "value": "25", "type": "Frost" },
+      { "name": "Frost Resistance", "value": "100%", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Sabre Cat",
+    "race": "Beast",
+    "level": 16,
+    "location": "Wilderness, Mountain Passes",
+    "faction": "Wildlife",
+    "difficulty": "Normal",
+    "description": "A large predatory feline with prominent saber-like teeth. These aggressive hunters are found throughout Skyrim and pose a significant threat to unprepared adventurers.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23cc8822%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐯%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 55,
+      "magicka": 10,
+      "stamina": 70
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Adept" },
+      { "name": "Stealth", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Bite Damage", "value": "20-30", "type": "Physical" },
+      { "name": "Claw Damage", "value": "15-20", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Frostbite Spider",
+    "race": "Arachnid",
+    "level": 12,
+    "location": "Blackreach, Dwemer Ruins",
+    "faction": "Wildlife",
+    "difficulty": "Easy",
+    "description": "A giant ice-infused spider found in the depths of Blackreach. Highly venomous and capable of firing freezing venom projectiles.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%2300ccff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🕷️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 45,
+      "magicka": 20,
+      "stamina": 60
+    },
+    "skills": [
+      { "name": "Poison", "level": "Expert" },
+      { "name": "Melee Combat", "level": "Adept" }
+    ],
+    "combat": [
+      { "name": "Bite Damage", "value": "15-20", "type": "Physical" },
+      { "name": "Venom Spray", "value": "25", "type": "Frost" }
+    ]
+  },
+  {
+    "id": 20,
     "name": "Daedric Sphere",
     "race": "Daedric Construct",
     "level": 18,
@@ -259,6 +525,138 @@
     "combat": [
       { "name": "Spike Barrage", "value": "35", "type": "Physical" },
       { "name": "Impact", "value": "20", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Mammoth",
+    "race": "Beast",
+    "level": 38,
+    "location": "Plains, Giant Camps",
+    "faction": "Wildlife",
+    "difficulty": "Hard",
+    "description": "Massive woolly beasts herded by giants across Skyrim's tundra. Mammoths are generally peaceful but will defend themselves and their giant herders fiercely.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23665544%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🦣%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 95,
+      "magicka": 0,
+      "stamina": 75
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Charge", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Tusk Gore", "value": "50-70", "type": "Physical" },
+      { "name": "Stomp", "value": "35", "type": "Physical" },
+      { "name": "Armor Rating", "value": "85", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Wisp Mother",
+    "race": "Spirit",
+    "level": 30,
+    "location": "Swamps, Marshes",
+    "faction": "Undead",
+    "difficulty": "Hard",
+    "description": "Ethereal female spirits that command wisps and drain the life force of their victims. Wisp mothers are highly resistant to physical damage.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23aa99ff%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👻%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 75,
+      "magicka": 90,
+      "stamina": 40
+    },
+    "skills": [
+      { "name": "Conjuration", "level": "Expert" },
+      { "name": "Destruction Magic", "level": "Expert" },
+      { "name": "Life Drain", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Shock Bolt", "value": "45", "type": "Shock" },
+      { "name": "Life Drain", "value": "40", "type": "Magic" },
+      { "name": "Summon Wisps", "value": "Support", "type": "Magic" }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Forsworn Briarheart",
+    "race": "Forsworn",
+    "level": 38,
+    "location": "Forsworn Camps, Reach",
+    "faction": "Forsworn",
+    "difficulty": "Hard",
+    "description": "Elite Forsworn warriors whose hearts have been replaced with briar hearts in a dark ritual. These undead champions are incredibly powerful and command respect within their tribes.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23884422%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗡️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 88,
+      "magicka": 70,
+      "stamina": 82
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Conjuration", "level": "Expert" },
+      { "name": "Berserker Rage", "level": "Legendary" }
+    ],
+    "combat": [
+      { "name": "Dual Wield", "value": "35-50", "type": "Physical" },
+      { "name": "Summon Familiar", "value": "Support", "type": "Magic" },
+      { "name": "Conjure Frost Atronach", "value": "Support", "type": "Magic" }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Lurker",
+    "race": "Daedric Beast",
+    "level": 32,
+    "location": "Apocrypha, Solstheim",
+    "faction": "Hermaeus Mora",
+    "difficulty": "Hard",
+    "description": "Grotesque creatures that serve Hermaeus Mora. These tentacled monstrosities emerge from pools of ink in Apocrypha to defend the Daedric Prince's realm.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23003322%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🐙%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 85,
+      "magicka": 50,
+      "stamina": 75
+    },
+    "skills": [
+      { "name": "Melee Combat", "level": "Expert" },
+      { "name": "Poison", "level": "Expert" }
+    ],
+    "combat": [
+      { "name": "Tentacle Slam", "value": "40-55", "type": "Physical" },
+      { "name": "Poison Cloud", "value": "35", "type": "Poison" },
+      { "name": "Armor Rating", "value": "75", "type": "Physical" }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Seeker",
+    "race": "Daedric Construct",
+    "level": 26,
+    "location": "Apocrypha",
+    "faction": "Hermaeus Mora",
+    "difficulty": "Normal",
+    "description": "Cloaked servants of Hermaeus Mora with numerous writhing tentacles. Seekers guard the forbidden knowledge within Apocrypha and attack intruders with magical energy.",
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23446655%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E👁️%3C/text%3E%3C/svg%3E",
+    "modelPath": "enhanced_mesh.obj",
+    "stats": {
+      "health": 70,
+      "magicka": 80,
+      "stamina": 55
+    },
+    "skills": [
+      { "name": "Destruction Magic", "level": "Expert" },
+      { "name": "Melee Combat", "level": "Adept" }
+    ],
+    "combat": [
+      { "name": "Eldritch Blast", "value": "45", "type": "Magic" },
+      { "name": "Tentacle Whip", "value": "25-35", "type": "Physical" },
+      { "name": "Magic Absorption", "value": "25%", "type": "Magic" }
     ]
   }
 ]

@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Maker - Home</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4a148c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Skyrim 3D">
+    <link rel="manifest" href="../public/manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Crect fill='%234a148c' width='192' height='192'/%3E%3Ctext x='50%25' y='50%25' font-size='100' text-anchor='middle' dominant-baseline='middle' fill='white'%3E🐉%3C/text%3E%3C/svg%3E">
+
     <link rel="stylesheet" href="../src/css/style.css">
     <link rel="stylesheet" href="../src/css/landing.css">
 </head>
 <body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="loader-icon">🐉</div>
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Loading 3D Maker...</div>
+        </div>
+    </div>
+
     <div class="app-container">
         <!-- Navigation -->
         <nav class="landing-nav">
@@ -20,11 +38,7 @@
                     <div class="nav-links">
                         <a href="#studio" class="nav-link">3D Studio</a>
                         <a href="#bestiary" class="nav-link">Bestiary</a>
-                        <a href="#locations" class="nav-link">Locations</a>
-                        <a href="#codex" class="nav-link">Codex</a>
-                        <a href="#map" class="nav-link">Map</a>
-                        <a href="#magic" class="nav-link">Magic</a>
-                        <a href="#tools" class="nav-link">Tools</a>
+                        <a href="#features" class="nav-link">Features</a>
                     </div>
                 </div>
             </div>
@@ -35,10 +49,11 @@
             <div class="container">
                 <div class="hero-content">
                     <h1 class="hero-title">Welcome to 3D Maker</h1>
-                    <p class="hero-subtitle">Transform photos into 3D assets and explore Skyrim creatures in stunning detail</p>
+                    <p class="hero-subtitle">Transform photos into 3D assets and explore Skyrim creatures in stunning detail with enhanced interactive features</p>
                     <div class="hero-buttons">
                         <a href="index.html" class="btn btn--primary btn--large">Start Creating</a>
                         <a href="bestiary.html" class="btn btn--secondary btn--large">Browse Bestiary</a>
+                        <a href="location.html" class="btn btn--secondary btn--large">Explore Locations</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -47,11 +62,105 @@
             </div>
         </section>
 
+        <!-- Quick Access Hub -->
+        <section class="quick-access-section animate-on-scroll">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Quick Access Hub</h2>
+                    <p>Jump directly to any section of the application</p>
+                </div>
+                <div class="quick-access-grid">
+                    <a href="index.html" class="quick-card">
+                        <div class="quick-icon">🎥</div>
+                        <h3>3D Studio</h3>
+                        <p>Create 3D models from photos</p>
+                        <span class="quick-badge">New: Keyboard shortcuts</span>
+                    </a>
+                    <a href="bestiary.html" class="quick-card">
+                        <div class="quick-icon">🗂️</div>
+                        <h3>Bestiary Gallery</h3>
+                        <p>Browse all creatures</p>
+                        <span class="quick-badge">New: Comparison mode</span>
+                    </a>
+                    <a href="character.html" class="quick-card">
+                        <div class="quick-icon">🐲</div>
+                        <h3>Character Viewer</h3>
+                        <p>Detailed 3D inspection</p>
+                        <span class="quick-badge">New: Screenshot & presets</span>
+                    </a>
+                    <a href="location.html" class="quick-card">
+                        <div class="quick-icon">🗺️</div>
+                        <h3>Location Guide</h3>
+                        <p>Explore Skyrim locations</p>
+                        <span class="quick-badge">New: Interactive maps</span>
+                    </a>
+                    <a href="stats.html" class="quick-card">
+                        <div class="quick-icon">📊</div>
+                        <h3>Statistics</h3>
+                        <p>Database analytics</p>
+                        <span class="quick-badge">New: Live data from API</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What's New Section -->
+        <section class="whats-new-section animate-on-scroll">
+            <div class="container">
+                <div class="section-header">
+                    <h2>✨ What's New</h2>
+                    <p>Latest interactive features and enhancements</p>
+                </div>
+                <div class="whats-new-grid">
+                    <div class="new-feature-card highlight">
+                        <div class="new-feature-icon">⌨️</div>
+                        <h4>Keyboard Navigation</h4>
+                        <p>Complete keyboard control for all viewers with shortcuts for navigation, camera control, and actions. Press <kbd>H</kbd> or <kbd>?</kbd> in any viewer for help.</p>
+                        <ul class="feature-list-compact">
+                            <li>Arrow keys to navigate characters</li>
+                            <li>Number keys for camera presets</li>
+                            <li>Spacebar for auto-rotation</li>
+                        </ul>
+                    </div>
+                    <div class="new-feature-card highlight">
+                        <div class="new-feature-icon">📸</div>
+                        <h4>Screenshot Capture</h4>
+                        <p>Take high-quality screenshots of 3D models with a single keystroke. Perfect for documentation or sharing your favorite creatures.</p>
+                        <ul class="feature-list-compact">
+                            <li>Press <kbd>S</kbd> to capture</li>
+                            <li>Auto-downloads as PNG</li>
+                            <li>Named with creature/timestamp</li>
+                        </ul>
+                    </div>
+                    <div class="new-feature-card">
+                        <div class="new-feature-icon">🎥</div>
+                        <h4>Camera Presets</h4>
+                        <p>4 camera angle presets for perfect model viewing</p>
+                    </div>
+                    <div class="new-feature-card">
+                        <div class="new-feature-icon">🎨</div>
+                        <h4>Background Themes</h4>
+                        <p>8 background colors to enhance 3D visualization</p>
+                    </div>
+                    <div class="new-feature-card">
+                        <div class="new-feature-icon">📊</div>
+                        <h4>Animated Stats</h4>
+                        <p>Smooth animations and hover effects on stat bars</p>
+                    </div>
+                    <div class="new-feature-card">
+                        <div class="new-feature-icon">⚡</div>
+                        <h4>Smooth Transitions</h4>
+                        <p>Fade effects when loading models</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Main Content -->
         <main class="landing-main">
             <div class="container">
                 <!-- 3D Studio Section -->
-                <section class="app-section" id="studio">
+                <section class="app-section animate-on-scroll" id="studio">
                     <div class="section-header">
                         <h2>3D Reconstruction Studio</h2>
                         <p>Convert photos and videos into interactive 3D models</p>
@@ -75,7 +184,7 @@
                 </section>
 
                 <!-- Bestiary Section -->
-                <section class="app-section" id="bestiary">
+                <section class="app-section animate-on-scroll" id="bestiary">
                     <div class="section-header">
                         <h2>Skyrim Bestiary</h2>
                         <p>Interactive 3D creature and character database</p>
@@ -93,166 +202,6 @@
                                     <span class="feature-tag">💾 Model Export</span>
                                 </div>
                                 <a href="bestiary.html" class="btn btn--primary">Enter Bestiary</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Locations Section -->
-                <section class="app-section" id="locations">
-                    <div class="section-header">
-                        <h2>Skyrim Locations</h2>
-                        <p>Explore iconic places across the land of Skyrim</p>
-                    </div>
-                    <div class="app-card large">
-                        <div class="app-card-content">
-                            <div class="app-icon">🏰</div>
-                            <div class="app-info">
-                                <h3>Discover Locations</h3>
-                                <p>Journey through 12+ iconic locations from Skyrim including cities, ruins, temples, and hidden realms. Each location features detailed information about quests, NPCs, shops, and lore.</p>
-                                <div class="feature-list">
-                                    <span class="feature-tag">🗺️ Cities & Settlements</span>
-                                    <span class="feature-tag">⚔️ Dungeons & Ruins</span>
-                                    <span class="feature-tag">🏔️ Sacred Sites</span>
-                                    <span class="feature-tag">🔄 3D Environments</span>
-                                </div>
-                                <a href="locations.html" class="btn btn--primary">Explore Locations</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Codex Section -->
-                <section class="app-section" id="codex">
-                    <div class="section-header">
-                        <h2>Skyrim Codex</h2>
-                        <p>Complete reference for quests, skills, items, and factions</p>
-                    </div>
-                    <div class="app-card large">
-                        <div class="app-card-content">
-                            <div class="app-icon">📚</div>
-                            <div class="app-info">
-                                <h3>Browse the Codex</h3>
-                                <p>Access comprehensive information about Skyrim's quests, skill trees, items, and factions all in one place. Filter, search, and explore every aspect of your adventure.</p>
-                                <div class="feature-list">
-                                    <span class="feature-tag">📜 Quest Database</span>
-                                    <span class="feature-tag">⭐ Skill Trees</span>
-                                    <span class="feature-tag">⚔️ Items & Equipment</span>
-                                    <span class="feature-tag">🏛️ Factions</span>
-                                </div>
-                                <a href="codex.html" class="btn btn--primary">Open Codex</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Map Section -->
-                <section class="app-section" id="map">
-                    <div class="section-header">
-                        <h2>Interactive Map</h2>
-                        <p>Navigate the world of Skyrim</p>
-                    </div>
-                    <div class="app-card large">
-                        <div class="app-card-content">
-                            <div class="app-icon">🗺️</div>
-                            <div class="app-info">
-                                <h3>Explore the Map</h3>
-                                <p>Interactive map of Skyrim with all major cities, dungeons, and landmarks. Pan, zoom, and click on markers to learn more about each location. Perfect for planning your next adventure.</p>
-                                <div class="feature-list">
-                                    <span class="feature-tag">📍 Location Markers</span>
-                                    <span class="feature-tag">🔍 Pan & Zoom</span>
-                                    <span class="feature-tag">🏰 Cities & Dungeons</span>
-                                    <span class="feature-tag">⛰️ Landmarks</span>
-                                </div>
-                                <a href="map.html" class="btn btn--primary">View Map</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Magic Section -->
-                <section class="app-section" id="magic">
-                    <div class="section-header">
-                        <h2>Magic & Shouts</h2>
-                        <p>Master the arcane arts and the Voice</p>
-                    </div>
-                    <div class="app-card large">
-                        <div class="app-card-content">
-                            <div class="app-icon">✨</div>
-                            <div class="app-info">
-                                <h3>Spells & Thu'um</h3>
-                                <p>Comprehensive database of spells across all magic schools and powerful dragon shouts. Learn about damage, magicka costs, locations, and the words of power that make up each shout.</p>
-                                <div class="feature-list">
-                                    <span class="feature-tag">🔥 Destruction</span>
-                                    <span class="feature-tag">✨ Restoration</span>
-                                    <span class="feature-tag">💨 Dragon Shouts</span>
-                                    <span class="feature-tag">📍 Tome Locations</span>
-                                </div>
-                                <a href="magic.html" class="btn btn--primary">Explore Magic</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Alchemy Section -->
-                <section class="app-section" id="alchemy">
-                    <div class="section-header">
-                        <h2>Alchemy Lab</h2>
-                        <p>Discover ingredients and brew powerful potions</p>
-                    </div>
-                    <div class="app-card large">
-                        <div class="app-card-content">
-                            <div class="app-icon">⚗️</div>
-                            <div class="app-info">
-                                <h3>Potion Calculator</h3>
-                                <p>Interactive alchemy calculator to combine ingredients and discover potion effects. Browse the complete ingredient database with effects, locations, and values.</p>
-                                <div class="feature-list">
-                                    <span class="feature-tag">🌿 Ingredients Database</span>
-                                    <span class="feature-tag">⚗️ Potion Calculator</span>
-                                    <span class="feature-tag">✨ Effect Finder</span>
-                                    <span class="feature-tag">📍 Harvest Locations</span>
-                                </div>
-                                <a href="alchemy.html" class="btn btn--primary">Open Lab</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Tools Section -->
-                <section class="app-section" id="tools">
-                    <div class="section-header">
-                        <h2>Player Tools</h2>
-                        <p>Plan your character and track your progress</p>
-                    </div>
-                    <div class="tools-grid">
-                        <div class="app-card">
-                            <div class="app-card-content">
-                                <div class="app-icon">🛠️</div>
-                                <div class="app-info">
-                                    <h3>Character Builder</h3>
-                                    <p>Plan your perfect build with race selection, skill allocation, equipment recommendations, and standing stone choices.</p>
-                                    <a href="character-builder.html" class="btn btn--primary">Build Character</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="app-card">
-                            <div class="app-card-content">
-                                <div class="app-icon">🏆</div>
-                                <div class="app-info">
-                                    <h3>Achievement Tracker</h3>
-                                    <p>Track your progress through all Skyrim achievements across quests, exploration, combat, and skills.</p>
-                                    <a href="achievements.html" class="btn btn--primary">Track Progress</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="app-card">
-                            <div class="app-card-content">
-                                <div class="app-icon">📚</div>
-                                <div class="app-info">
-                                    <h3>Library</h3>
-                                    <p>Browse Skyrim's vast collection of books, from skill books to lore, fiction, and historical texts.</p>
-                                    <a href="library.html" class="btn btn--primary">Read Books</a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -321,21 +270,13 @@
                 </section>
 
                 <!-- CTA Section -->
-                <section class="cta-section">
+                <section class="cta-section animate-on-scroll">
                     <div class="cta-content">
                         <h2>Ready to Explore?</h2>
                         <p>Dive into the world of 3D creation and Skyrim exploration</p>
                         <div class="cta-buttons">
                             <a href="index.html" class="btn btn--primary btn--large">Launch 3D Studio</a>
                             <a href="bestiary.html" class="btn btn--secondary btn--large">Explore Bestiary</a>
-                            <a href="locations.html" class="btn btn--secondary btn--large">Discover Locations</a>
-                            <a href="codex.html" class="btn btn--secondary btn--large">Open Codex</a>
-                            <a href="map.html" class="btn btn--secondary btn--large">View Map</a>
-                            <a href="magic.html" class="btn btn--secondary btn--large">Explore Magic</a>
-                            <a href="alchemy.html" class="btn btn--secondary btn--large">Alchemy Lab</a>
-                            <a href="character-builder.html" class="btn btn--secondary btn--large">Character Builder</a>
-                            <a href="achievements.html" class="btn btn--secondary btn--large">Achievements</a>
-                            <a href="library.html" class="btn btn--secondary btn--large">Library</a>
                         </div>
                     </div>
                 </section>
@@ -355,22 +296,15 @@
                         <ul>
                             <li><a href="index.html">3D Reconstruction Studio</a></li>
                             <li><a href="bestiary.html">Skyrim Bestiary</a></li>
-                            <li><a href="locations.html">Skyrim Locations</a></li>
-                            <li><a href="codex.html">Skyrim Codex</a></li>
-                            <li><a href="map.html">Interactive Map</a></li>
-                            <li><a href="magic.html">Magic & Shouts</a></li>
-                            <li><a href="alchemy.html">Alchemy Lab</a></li>
-                            <li><a href="character-builder.html">Character Builder</a></li>
-                            <li><a href="achievements.html">Achievement Tracker</a></li>
-                            <li><a href="library.html">Library</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h4>Technologies</h4>
+                        <h4>New Features</h4>
                         <ul>
-                            <li>Three.js for 3D rendering</li>
-                            <li>HTML5 & CSS3</li>
-                            <li>Vanilla JavaScript</li>
+                            <li>Keyboard navigation & shortcuts</li>
+                            <li>Screenshot capture system</li>
+                            <li>Camera presets & controls</li>
+                            <li>Background customization</li>
                         </ul>
                     </div>
                 </div>
@@ -382,5 +316,6 @@
     </div>
 
     <script src="../src/js/landing.js"></script>
+    <script type="module" src="../src/js/pwa-install.js"></script>
 </body>
 </html>

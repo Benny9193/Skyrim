@@ -24,6 +24,19 @@ let currentCreatureForCollection = null;
 // Favorites
 let favorites = [];
 
+// Debounce utility function to optimize search performance
+function debounce(func, wait = 300) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async () => {
     await loadCharacterData();
@@ -33,6 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initializeFilters();
     renderCollectionsList();
     setupEventListeners();
+    setupGalleryEventDelegation(); // Setup event delegation once
     renderGallery();
 });
 
@@ -94,10 +108,14 @@ function populateFilter(filterId, options, filterType) {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Search input
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        activeFilters.search = e.target.value.toLowerCase();
+    // Search input with debouncing to reduce filter recalculations
+    const debouncedSearch = debounce((value) => {
+        activeFilters.search = value.toLowerCase();
         applyFilters();
+    }, 300);
+    
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        debouncedSearch(e.target.value);
     });
 
     // Filter checkboxes
@@ -178,6 +196,94 @@ function setupEventListeners() {
     document.getElementById('addToCollectionModal').querySelector('.modal-overlay').addEventListener('click', () => {
         document.getElementById('addToCollectionModal').classList.add('hidden');
     });
+
+    // Keyboard navigation
+    setupKeyboardNavigation();
+}
+
+// Keyboard navigation for gallery
+function setupKeyboardNavigation() {
+    document.addEventListener('keydown', (e) => {
+        // Ignore if typing in input field
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        switch(e.key) {
+            case 'c':
+            case 'C':
+                e.preventDefault();
+                toggleComparisonMode();
+                break;
+            case 'Escape':
+                if (comparisonMode) {
+                    toggleComparisonMode();
+                }
+                break;
+            case 'h':
+            case 'H':
+            case '?':
+                e.preventDefault();
+                showKeyboardShortcuts();
+                break;
+        }
+    });
+}
+
+// Show keyboard shortcuts help for gallery
+function showKeyboardShortcuts() {
+    const shortcuts = `
+        <div style="padding: 20px; max-width: 500px;">
+            <h3 style="margin-top: 0; color: var(--color-primary);">⌨️ Keyboard Shortcuts</h3>
+            <div style="display: grid; grid-template-columns: auto 1fr; gap: 12px 20px; margin-top: 20px;">
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">C</kbd>
+                <span>Toggle comparison mode</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">Esc</kbd>
+                <span>Exit comparison mode</span>
+
+                <kbd style="padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-family: monospace;">H or ?</kbd>
+                <span>Show this help</span>
+            </div>
+            <button onclick="this.closest('.modal-overlay').parentElement.classList.add('hidden')"
+                    style="margin-top: 20px; padding: 10px 20px; background: var(--color-primary); color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%;">
+                Got it!
+            </button>
+        </div>
+    `;
+    showModal('Keyboard Shortcuts', shortcuts);
+}
+
+// Show modal helper for gallery
+function showModal(title, content) {
+    let modal = document.getElementById('helpModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'helpModal';
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-overlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;"></div>
+        `;
+        document.body.appendChild(modal);
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = 'position: relative; background: white; border-radius: 8px; max-width: 600px; z-index: 10000;';
+        modalContent.innerHTML = `
+            <div style="padding: 20px; border-bottom: 1px solid #eee;">
+                <h3 id="helpModalTitle" style="margin: 0;">${title}</h3>
+            </div>
+            <div id="helpModalBody" style="padding: 20px;"></div>
+        `;
+        modal.querySelector('.modal-overlay').appendChild(modalContent);
+
+        modal.querySelector('.modal-overlay').addEventListener('click', (e) => {
+            if (e.target === modal.querySelector('.modal-overlay')) {
+                modal.classList.add('hidden');
+            }
+        });
+    }
+
+    modal.querySelector('#helpModalTitle').textContent = title;
+    modal.querySelector('#helpModalBody').innerHTML = content;
+    modal.classList.remove('hidden');
 }
 
 // Collection management functions
@@ -443,7 +549,7 @@ function sortCharacters() {
     }
 }
 
-// Render gallery
+// Render gallery with event delegation to prevent memory leaks
 function renderGallery() {
     const grid = document.getElementById('creaturesGrid');
     const noResults = document.getElementById('noResults');
@@ -467,49 +573,64 @@ function renderGallery() {
     }
 
     noResults.classList.add('hidden');
-    grid.innerHTML = filteredCharacters.map(character => createCreatureCard(character)).join('');
+    grid.innerHTML = filteredCharacters.map((character, index) => 
+        createCreatureCard(character, index)
+    ).join('');
+}
 
-    // Add click handlers to cards
-    document.querySelectorAll('.creature-card').forEach((card, index) => {
-        const addBtn = card.querySelector('.creature-card-add-btn');
-        if (addBtn) {
-            addBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                showAddToCollectionModal(filteredCharacters[index]);
-            });
+// Setup event delegation for gallery (call once on initialization)
+function setupGalleryEventDelegation() {
+    const grid = document.getElementById('creaturesGrid');
+    
+    // Use event delegation instead of adding listeners to each card
+    grid.addEventListener('click', (e) => {
+        const card = e.target.closest('.creature-card');
+        if (!card) return;
+        
+        const index = parseInt(card.dataset.index);
+        const character = filteredCharacters[index];
+        if (!character) return;
+        
+        // Handle add to collection button
+        if (e.target.closest('.creature-card-add-btn')) {
+            e.stopPropagation();
+            showAddToCollectionModal(character);
+            return;
         }
-
-        const favoriteBtn = card.querySelector('.creature-card-favorite-btn');
-        if (favoriteBtn) {
-            favoriteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleFavorite(filteredCharacters[index].id);
-            });
+        
+        // Handle favorite button
+        if (e.target.closest('.creature-card-favorite-btn')) {
+            e.stopPropagation();
+            toggleFavorite(character.id);
+            // Update just this button instead of re-rendering
+            const btn = e.target.closest('.creature-card-favorite-btn');
+            btn.textContent = isFavorited(character.id) ? '❤️' : '🤍';
+            return;
         }
-
+        
+        // Handle comparison checkbox
         if (comparisonMode) {
-            const checkbox = card.querySelector('.creature-card-checkbox');
+            const checkbox = e.target.closest('.creature-card-checkbox');
             if (checkbox) {
-                checkbox.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    toggleComparisonSelection(filteredCharacters[index], card);
-                });
+                e.stopPropagation();
+                toggleComparisonSelection(character, card);
+                return;
             }
-            card.addEventListener('click', (e) => {
-                const checkbox = card.querySelector('.creature-card-checkbox');
-                checkbox.click();
-            });
+            // Click anywhere on card in comparison mode toggles checkbox
+            const cardCheckbox = card.querySelector('.creature-card-checkbox');
+            if (cardCheckbox) {
+                cardCheckbox.checked = !cardCheckbox.checked;
+                toggleComparisonSelection(character, card);
+            }
         } else {
-            card.addEventListener('click', () => {
-                const characterId = filteredCharacters[index].id;
-                window.location.href = `character.html?character=${characterId - 1}`;
-            });
+            // Navigate to character detail page
+            window.location.href = `character.html?character=${character.id - 1}`;
         }
     });
 }
 
-// Create creature card HTML
-function createCreatureCard(character) {
+// Create creature card HTML with data-index for event delegation
+function createCreatureCard(character, index) {
     const difficultyClass = character.difficulty.toLowerCase();
     const imagePath = character.imagePath || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/%3E%3C/svg%3E';
     const isSelected = selectedForComparison.some(c => c.id === character.id);
@@ -522,7 +643,7 @@ function createCreatureCard(character) {
     const favoriteBtn = !comparisonMode ? `<button class="creature-card-favorite-btn" title="Add to favorites" style="position: absolute; top: 8px; right: 8px; background: transparent; color: white; border: none; border-radius: 4px; width: 28px; height: 28px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; z-index: 10; text-shadow: 0 0 3px rgba(0,0,0,0.5);" data-creature-id="${character.id}">${heartIcon}</button>` : '';
 
     return `
-        <div class="creature-card ${comparisonClass} ${selectedClass}">
+        <div class="creature-card ${comparisonClass} ${selectedClass}" data-index="${index}">
             ${checkbox}
             ${addBtn}
             ${favoriteBtn}

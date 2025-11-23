@@ -2,15 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="3D Reconstruction Studio - Transform photos and videos into high-quality 3D assets with advanced reconstruction, mapping, and export capabilities">
+    <meta name="theme-color" content="#1a1a2e">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self' data:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
+    
     <title>3D Reconstruction Studio</title>
-    <link rel="stylesheet" href="../src/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+    
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Three.js ES Module Import Map -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
 </head>
 <body>
+    <noscript>
+        <div style="text-align: center; padding: 50px; font-family: sans-serif;">
+            <h1>JavaScript Required</h1>
+            <p>This application requires JavaScript to be enabled. Please enable JavaScript in your browser settings to use the 3D Reconstruction Studio.</p>
+        </div>
+    </noscript>
     <div class="app-container">
         <!-- Header -->
         <header class="app-header">
@@ -36,16 +67,22 @@
                         <div class="card upload-section">
                             <div class="card__body">
                                 <h3>Upload Media</h3>
-                                <div class="upload-area" id="uploadArea">
+                                <div class="upload-area" id="uploadArea" role="button" tabindex="0" aria-label="Upload media files - Drag and drop or click to browse">
                                     <div class="upload-content">
-                                        <div class="upload-icon">📷</div>
+                                        <div class="upload-icon" aria-hidden="true">📷</div>
                                         <p class="upload-text">Drag & drop images or videos here</p>
                                         <p class="upload-subtext">or click to browse files</p>
-                                        <button class="btn btn--primary" id="browseBtn">Browse Files</button>
-                                        <input type="file" id="fileInput" multiple accept="image/*,video/*" style="display: none;">
+                                        <p class="upload-limits" style="font-size: 0.85em; color: #888; margin-top: 0.5em;">Max file size: 500MB per file | Supported: JPG, PNG, MP4</p>
+                                        <button class="btn btn--primary" id="browseBtn" aria-label="Browse files to upload">Browse Files</button>
+                                        <input type="file" id="fileInput" multiple accept="image/*,video/*" style="display: none;" aria-label="File input for media upload">
                                     </div>
                                 </div>
-                                <div class="file-preview" id="filePreview"></div>
+                                <div class="file-preview" id="filePreview" aria-live="polite" aria-relevant="additions removals"></div>
+                                <div class="file-summary" id="fileSummary" style="margin-top: 1em; padding: 0.75em; background: rgba(255,255,255,0.05); border-radius: 4px; display: none;">
+                                    <strong>Selected Files:</strong>
+                                    <span id="fileCount">0</span> files
+                                    (<span id="totalSize">0 MB</span>)
+                                </div>
                             </div>
                         </div>
 
@@ -53,37 +90,37 @@
                         <div class="card pipeline-section">
                             <div class="card__body">
                                 <h3>Processing Pipeline</h3>
-                                <div class="pipeline-steps">
-                                    <div class="pipeline-step" id="step1">
-                                        <div class="step-indicator">1</div>
+                                <div class="pipeline-steps" role="progressbar" aria-label="Reconstruction pipeline progress" aria-live="polite">
+                                    <div class="pipeline-step" id="step1" data-step="1" data-status="pending">
+                                        <div class="step-indicator" aria-hidden="true">1</div>
                                         <div class="step-content">
                                             <span class="step-title">Image Processing</span>
                                             <div class="step-progress"></div>
                                         </div>
                                     </div>
-                                    <div class="pipeline-step" id="step2">
-                                        <div class="step-indicator">2</div>
+                                    <div class="pipeline-step" id="step2" data-step="2" data-status="pending">
+                                        <div class="step-indicator" aria-hidden="true">2</div>
                                         <div class="step-content">
                                             <span class="step-title">Feature Detection</span>
                                             <div class="step-progress"></div>
                                         </div>
                                     </div>
-                                    <div class="pipeline-step" id="step3">
-                                        <div class="step-indicator">3</div>
+                                    <div class="pipeline-step" id="step3" data-step="3" data-status="pending">
+                                        <div class="step-indicator" aria-hidden="true">3</div>
                                         <div class="step-content">
                                             <span class="step-title">3D Reconstruction</span>
                                             <div class="step-progress"></div>
                                         </div>
                                     </div>
-                                    <div class="pipeline-step" id="step4">
-                                        <div class="step-indicator">4</div>
+                                    <div class="pipeline-step" id="step4" data-step="4" data-status="pending">
+                                        <div class="step-indicator" aria-hidden="true">4</div>
                                         <div class="step-content">
                                             <span class="step-title">Mesh Generation</span>
                                             <div class="step-progress"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn--primary btn--full-width" id="startReconstructionBtn" disabled>
+                                <button class="btn btn--primary btn--full-width" id="startReconstructionBtn" disabled data-action="start-reconstruction" data-requires="files" aria-label="Start 3D reconstruction process">
                                     Start Reconstruction
                                 </button>
                             </div>
@@ -94,8 +131,8 @@
                             <div class="card__body">
                                 <h3>3D Mapping</h3>
                                 <div class="form-group">
-                                    <label class="form-label">Map Type</label>
-                                    <select class="form-control" id="mapTypeSelect">
+                                    <label class="form-label" for="mapTypeSelect">Map Type</label>
+                                    <select class="form-control" id="mapTypeSelect" aria-label="Select map type for 3D mapping">
                                         <option value="terrain">Terrain Map</option>
                                         <option value="topographic">Topographic</option>
                                         <option value="satellite">Satellite Overlay</option>
@@ -103,19 +140,19 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Map Resolution</label>
-                                    <input type="range" id="mapResolutionSlider" min="0.1" max="5.0" step="0.1" value="1.0" class="slider">
-                                    <span id="mapResolutionValue">1.0m</span>
+                                    <label class="form-label" for="mapResolutionSlider">Map Resolution</label>
+                                    <input type="range" id="mapResolutionSlider" min="0.1" max="5.0" step="0.1" value="1.0" class="slider" aria-label="Adjust map resolution in meters" aria-valuemin="0.1" aria-valuemax="5.0" aria-valuenow="1.0">
+                                    <span id="mapResolutionValue" aria-live="polite">1.0m</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">GPS Coordinates</label>
                                     <div class="coordinate-inputs">
-                                        <input type="number" id="latInput" placeholder="Latitude" step="0.000001" class="form-control coord-input">
-                                        <input type="number" id="lngInput" placeholder="Longitude" step="0.000001" class="form-control coord-input">
-                                        <input type="number" id="altInput" placeholder="Altitude (m)" step="0.1" class="form-control coord-input">
+                                        <input type="number" id="latInput" placeholder="Latitude" step="0.000001" min="-90" max="90" class="form-control coord-input" aria-label="Latitude coordinate" title="Enter latitude between -90 and 90 degrees">
+                                        <input type="number" id="lngInput" placeholder="Longitude" step="0.000001" min="-180" max="180" class="form-control coord-input" aria-label="Longitude coordinate" title="Enter longitude between -180 and 180 degrees">
+                                        <input type="number" id="altInput" placeholder="Altitude (m)" step="0.1" class="form-control coord-input" aria-label="Altitude in meters" title="Enter altitude in meters">
                                     </div>
                                 </div>
-                                <button class="btn btn--primary btn--full-width" id="generateMapBtn" disabled>
+                                <button class="btn btn--primary btn--full-width" id="generateMapBtn" disabled data-action="generate-map" data-requires="reconstruction" aria-label="Generate 3D map from reconstruction">
                                     Generate 3D Map
                                 </button>
                             </div>
@@ -126,21 +163,21 @@
                             <div class="card__body">
                                 <h3>Reconstruction Settings</h3>
                                 <div class="form-group">
-                                    <label class="form-label">Quality Level</label>
-                                    <select class="form-control" id="qualitySelect">
+                                    <label class="form-label" for="qualitySelect">Quality Level</label>
+                                    <select class="form-control" id="qualitySelect" aria-label="Select reconstruction quality level">
                                         <option value="draft">Draft</option>
                                         <option value="standard" selected>Standard</option>
                                         <option value="high">High Quality</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Point Cloud Density</label>
-                                    <input type="range" id="densitySlider" min="0.1" max="2.0" step="0.1" value="1.0" class="slider">
-                                    <span id="densityValue">1.0</span>
+                                    <label class="form-label" for="densitySlider">Point Cloud Density</label>
+                                    <input type="range" id="densitySlider" min="0.1" max="2.0" step="0.1" value="1.0" class="slider" aria-label="Adjust point cloud density" aria-valuemin="0.1" aria-valuemax="2.0" aria-valuenow="1.0">
+                                    <span id="densityValue" aria-live="polite">1.0</span>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Mesh Generation</label>
-                                    <select class="form-control" id="meshSelect">
+                                    <label class="form-label" for="meshSelect">Mesh Generation</label>
+                                    <select class="form-control" id="meshSelect" aria-label="Select mesh generation algorithm">
                                         <option value="poisson">Poisson Surface</option>
                                         <option value="delaunay">Delaunay Triangulation</option>
                                         <option value="marching">Marching Cubes</option>
@@ -154,24 +191,24 @@
                             <div class="card__body">
                                 <h3>Export Options</h3>
                                 <div class="export-buttons">
-                                    <button class="btn btn--outline" id="exportPLY" disabled>
-                                        <span class="export-icon">📊</span>
+                                    <button class="btn btn--outline" id="exportPLY" disabled data-action="export" data-format="ply" data-requires="reconstruction" aria-label="Export point cloud in PLY format">
+                                        <span class="export-icon" aria-hidden="true">📊</span>
                                         Export PLY (Point Cloud)
                                     </button>
-                                    <button class="btn btn--outline" id="exportOBJ" disabled>
-                                        <span class="export-icon">🎯</span>
+                                    <button class="btn btn--outline" id="exportOBJ" disabled data-action="export" data-format="obj" data-requires="reconstruction" aria-label="Export mesh in OBJ format">
+                                        <span class="export-icon" aria-hidden="true">🎯</span>
                                         Export OBJ (Mesh)
                                     </button>
-                                    <button class="btn btn--outline" id="exportSTL" disabled>
-                                        <span class="export-icon">🖨️</span>
+                                    <button class="btn btn--outline" id="exportSTL" disabled data-action="export" data-format="stl" data-requires="reconstruction" aria-label="Export model in STL format for 3D printing">
+                                        <span class="export-icon" aria-hidden="true">🖨️</span>
                                         Export STL (3D Print)
                                     </button>
-                                    <button class="btn btn--outline" id="exportGeoTIFF" disabled>
-                                        <span class="export-icon">🗺️</span>
+                                    <button class="btn btn--outline" id="exportGeoTIFF" disabled data-action="export" data-format="geotiff" data-requires="map" aria-label="Export map as GeoTIFF">
+                                        <span class="export-icon" aria-hidden="true">🗺️</span>
                                         Export GeoTIFF (Map)
                                     </button>
-                                    <button class="btn btn--outline" id="exportKML" disabled>
-                                        <span class="export-icon">📍</span>
+                                    <button class="btn btn--outline" id="exportKML" disabled data-action="export" data-format="kml" data-requires="map" aria-label="Export for Google Earth in KML format">
+                                        <span class="export-icon" aria-hidden="true">📍</span>
                                         Export KML (Google Earth)
                                     </button>
                                 </div>
@@ -185,34 +222,39 @@
                             <div class="viewer-header">
                                 <h3>3D Viewer</h3>
                                 <div class="viewer-controls">
-                                    <button class="btn btn--sm" id="pointCloudBtn">Point Cloud</button>
-                                    <button class="btn btn--sm" id="meshBtn">Mesh</button>
-                                    <button class="btn btn--sm" id="wireframeBtn">Wireframe</button>
-                                    <button class="btn btn--sm" id="mapViewBtn">Map View</button>
-                                    <button class="btn btn--sm" id="fullscreenBtn">⛶</button>
+                                    <button class="btn btn--sm" id="pointCloudBtn" data-action="view-mode" data-mode="pointcloud" aria-label="Switch to point cloud view">Point Cloud</button>
+                                    <button class="btn btn--sm" id="meshBtn" data-action="view-mode" data-mode="mesh" aria-label="Switch to mesh view">Mesh</button>
+                                    <button class="btn btn--sm" id="wireframeBtn" data-action="view-mode" data-mode="wireframe" aria-label="Switch to wireframe view">Wireframe</button>
+                                    <button class="btn btn--sm" id="mapViewBtn" data-action="view-mode" data-mode="map" aria-label="Switch to map view">Map View</button>
+                                    <button class="btn btn--sm" id="fullscreenBtn" data-action="fullscreen" aria-label="Toggle fullscreen mode">⛶</button>
                                 </div>
                             </div>
-                            <div class="viewer-content">
-                                <canvas id="threeCanvas"></canvas>
+                            <div class="viewer-content" role="region" aria-label="3D model viewer">
+                                <canvas id="threeCanvas" role="img" aria-label="3D model canvas"></canvas>
                                 <div class="viewer-overlay" id="viewerOverlay">
                                     <div class="overlay-content">
                                         <div class="upload-placeholder">
-                                            <div class="placeholder-icon">🎬</div>
+                                            <div class="placeholder-icon" aria-hidden="true">🎬</div>
                                             <h4>Ready for 3D Reconstruction</h4>
                                             <p>Upload images or videos to begin generating your 3D asset</p>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="viewer-error" id="viewerError" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(220, 38, 38, 0.95); padding: 2em; border-radius: 8px; text-align: center; max-width: 400px;" role="alert" aria-live="assertive">
+                                    <h4 style="margin: 0 0 1em 0; color: white;">Viewer Error</h4>
+                                    <p id="viewerErrorMessage" style="color: white; margin-bottom: 1.5em;">An error occurred while loading the 3D model.</p>
+                                    <button class="btn btn--primary" id="viewerRetryBtn" data-action="retry-viewer" aria-label="Retry loading the 3D model">Retry</button>
+                                </div>
                             </div>
                             <div class="viewer-footer">
-                                <div class="viewer-stats" id="viewerStats">
+                                <div class="viewer-stats" id="viewerStats" role="status" aria-live="polite">
                                     <span id="pointCount">Points: 0</span>
                                     <span id="faceCount">Faces: 0</span>
                                     <span id="cameraCount">Cameras: 0</span>
                                 </div>
                                 <div class="viewer-settings">
-                                    <label>Lighting:</label>
-                                    <input type="range" id="lightingSlider" min="0.1" max="2.0" step="0.1" value="1.0">
+                                    <label for="lightingSlider">Lighting:</label>
+                                    <input type="range" id="lightingSlider" min="0.1" max="2.0" step="0.1" value="1.0" aria-label="Adjust lighting intensity" aria-valuemin="0.1" aria-valuemax="2.0" aria-valuenow="1.0">
                                 </div>
                             </div>
                         </div>
@@ -222,23 +264,26 @@
         </main>
 
         <!-- Processing Modal -->
-        <div class="modal hidden" id="processingModal">
+        <div class="modal hidden" id="processingModal" role="dialog" aria-modal="true" aria-labelledby="processingModalTitle">
             <div class="modal-overlay"></div>
             <div class="modal-content">
-                <h3>Processing Reconstruction</h3>
+                <h3 id="processingModalTitle">Processing Reconstruction</h3>
                 <div class="processing-progress">
-                    <div class="progress-bar">
+                    <div class="progress-bar" role="progressbar" aria-label="Reconstruction progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                         <div class="progress-fill" id="progressFill"></div>
                     </div>
-                    <p class="progress-text" id="progressText">Initializing...</p>
+                    <p class="progress-text" id="progressText" aria-live="polite">Initializing...</p>
                 </div>
-                <div class="processing-details" id="processingDetails">
+                <div class="processing-details" id="processingDetails" aria-live="polite">
                     <p>Analyzing uploaded media files...</p>
                 </div>
             </div>
         </div>
+        
+        <!-- Toast Container -->
+        <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true" style="position: fixed; top: 20px; right: 20px; z-index: 10000;"></div>
     </div>
 
-    <script src="../src/js/app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
