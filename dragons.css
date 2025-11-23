@@ -1,0 +1,399 @@
+/* Dragons Styles */
+
+/* Header */
+.dragons-header {
+    background: linear-gradient(135deg, #8B0000 0%, #4B0000 100%);
+}
+
+/* Main Content */
+.dragons-main {
+    padding: 32px 0;
+    min-height: 60vh;
+}
+
+.section-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-card-border);
+}
+
+.section-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+}
+
+.subtitle {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background: var(--color-background);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #8B0000;
+}
+
+.filter-select {
+    padding: 10px 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background: var(--color-background);
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #8B0000;
+}
+
+/* Dragons Grid */
+.dragons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.dragon-card {
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.dragon-card:hover {
+    border-color: #8B0000;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(139, 0, 0, 0.2);
+}
+
+.dragon-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-card-border);
+}
+
+.dragon-card-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.dragon-card-title {
+    flex: 1;
+}
+
+.dragon-card-title h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 4px 0;
+}
+
+.dragon-card-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin: 0;
+}
+
+.dragon-card-body {
+    margin-bottom: 16px;
+}
+
+.dragon-type-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid rgba(139, 0, 0, 0.3);
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: #8B0000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.dragon-breath {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.dragon-breath strong {
+    color: #8B0000;
+}
+
+.dragon-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-card-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+}
+
+.quest-badge {
+    padding: 4px 8px;
+    background: #FFD700;
+    color: #333;
+    border-radius: 4px;
+    font-weight: var(--font-weight-semibold);
+}
+
+.friend-badge {
+    padding: 4px 8px;
+    background: #228B22;
+    color: white;
+    border-radius: 4px;
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Dragon Modal */
+.dragon-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dragon-modal.hidden {
+    display: none;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: 12px;
+    max-width: 800px;
+    max-height: 90vh;
+    width: 90%;
+    overflow-y: auto;
+    z-index: 1001;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: var(--color-text);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #8B0000 0%, #4B0000 100%);
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dragon-icon {
+    font-size: 80px;
+}
+
+.dragon-title-section h2 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: var(--font-weight-bold);
+    color: white;
+}
+
+.dragon-subtitle {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    margin: 0;
+}
+
+.modal-body {
+    padding: 32px;
+}
+
+.dragon-stats-section,
+.dragon-lore-section,
+.dragon-shouts-section,
+.dragon-location-section,
+.dragon-quest-section,
+.dragon-weakness-section {
+    margin-bottom: 24px;
+}
+
+.modal-body h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-card-border);
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.stat-item {
+    padding: 12px;
+    background: var(--color-gray-200);
+    border-radius: 6px;
+}
+
+.stat-label {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    display: block;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+}
+
+.shouts-list,
+.abilities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.shout-item,
+.ability-item {
+    padding: 10px 12px;
+    background: rgba(139, 0, 0, 0.05);
+    border-left: 3px solid #8B0000;
+    border-radius: 4px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+/* Footer */
+.dragons-footer {
+    margin-top: 60px;
+    padding: 32px 0;
+    border-top: 1px solid var(--color-card-border);
+    text-align: center;
+}
+
+.footer-links {
+    margin-bottom: 12px;
+    font-size: var(--font-size-sm);
+}
+
+.footer-links a {
+    color: #8B0000;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+}
+
+.footer-links .separator {
+    color: var(--color-text-secondary);
+    margin: 0 8px;
+}
+
+.dragons-footer p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dragons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-header {
+        padding: 24px 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .dragon-icon {
+        font-size: 60px;
+    }
+
+    .dragon-title-section h2 {
+        font-size: 24px;
+    }
+
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+}

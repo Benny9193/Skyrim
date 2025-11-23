@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daedric Artifacts - Skyrim Reference</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="daedric-artifacts.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="artifacts-header">
+        <div class="container">
+            <h1>⚫ Daedric Artifacts</h1>
+            <p>Legendary artifacts bestowed by the Daedric Princes</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="artifacts-main">
+        <div class="container">
+            <!-- Section Header with Filters -->
+            <div class="section-header">
+                <h2>Artifact Gallery</h2>
+                <p class="subtitle">Collect all 15 artifacts for the "Oblivion Walker" achievement</p>
+
+                <div class="controls">
+                    <input type="text" id="artifactSearch" class="search-input" placeholder="Search artifacts...">
+                    <select id="princeFilter" class="filter-select">
+                        <option value="">All Daedric Princes</option>
+                        <option value="Mehrunes Dagon">Mehrunes Dagon</option>
+                        <option value="Azura">Azura</option>
+                        <option value="Sheogorath">Sheogorath</option>
+                        <option value="Molag Bal">Molag Bal</option>
+                        <option value="Mephala">Mephala</option>
+                        <option value="Malacath">Malacath</option>
+                        <option value="Peryite">Peryite</option>
+                        <option value="Meridia">Meridia</option>
+                        <option value="Sanguine">Sanguine</option>
+                        <option value="Boethiah">Boethiah</option>
+                        <option value="Clavicus Vile">Clavicus Vile</option>
+                        <option value="Hermaeus Mora">Hermaeus Mora</option>
+                    </select>
+                    <select id="typeFilter" class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="Weapon">Weapons</option>
+                        <option value="Armor">Armor</option>
+                        <option value="Book">Books</option>
+                    </select>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="Dagger">Dagger</option>
+                        <option value="Mace">Mace</option>
+                        <option value="Sword">Sword</option>
+                        <option value="Warhammer">Warhammer</option>
+                        <option value="Bow">Bow</option>
+                        <option value="Shield">Shield</option>
+                        <option value="Armor">Armor</option>
+                        <option value="Mask">Mask</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Knowledge">Knowledge</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Artifacts Grid -->
+            <div id="artifactsGrid" class="artifacts-grid">
+                <!-- Artifacts will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Artifact Detail Modal -->
+    <div id="artifactModal" class="artifact-modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+
+            <div class="modal-header">
+                <div class="artifact-icon" id="artifactIcon">⚫</div>
+                <h2 id="artifactName">Artifact Name</h2>
+                <p class="daedric-prince" id="daedricPrince">Daedric Prince</p>
+            </div>
+
+            <div class="modal-body">
+                <div class="artifact-type-section">
+                    <span class="type-badge" id="artifactType">Type</span>
+                    <span class="category-badge" id="artifactCategory">Category</span>
+                    <span class="rarity-badge" id="artifactRarity">Rarity</span>
+                </div>
+
+                <div class="artifact-description-section">
+                    <h3>Description</h3>
+                    <p id="artifactDescription">Description text</p>
+                </div>
+
+                <div class="artifact-stats-section">
+                    <h3>Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Weight</span>
+                            <span class="stat-value" id="artifactWeight">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Value</span>
+                            <span class="stat-value" id="artifactValue">-</span>
+                        </div>
+                        <div class="stat-item" id="damageSection" style="display: none;">
+                            <span class="stat-label">Damage</span>
+                            <span class="stat-value" id="artifactDamage">-</span>
+                        </div>
+                        <div class="stat-item" id="armorSection" style="display: none;">
+                            <span class="stat-label">Armor Rating</span>
+                            <span class="stat-value" id="artifactArmor">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artifact-enchantment-section">
+                    <h3>Enchantment</h3>
+                    <p class="enchantment-text" id="artifactEnchantment">Enchantment details</p>
+                </div>
+
+                <div class="artifact-quest-section">
+                    <h3>Quest</h3>
+                    <p><strong>Quest:</strong> <span id="artifactQuest">Quest name</span></p>
+                    <p><strong>Quest Giver:</strong> <span id="questGiver">Quest giver</span></p>
+                    <p><strong>Location:</strong> <span id="artifactLocation">Location</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="artifacts-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="landing.html">Home</a>
+                <span class="separator">•</span>
+                <a href="codex.html">Codex</a>
+                <span class="separator">•</span>
+                <a href="bestiary.html">Bestiary</a>
+            </div>
+            <p>&copy; 2024 Skyrim Reference. Fan-made resource for The Elder Scrolls V: Skyrim.</p>
+        </div>
+    </footer>
+
+    <script src="daedric-artifacts.js"></script>
+</body>
+</html>

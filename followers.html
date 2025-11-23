@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Followers - Skyrim Reference</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="followers.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="followers-header">
+        <div class="container">
+            <h1>👥 Followers & Companions</h1>
+            <p>Your allies in the adventures across Skyrim</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="followers-main">
+        <div class="container">
+            <!-- Section Header with Filters -->
+            <div class="section-header">
+                <h2>Companion Database</h2>
+                <p class="subtitle">Find the perfect follower for your playstyle</p>
+
+                <div class="controls">
+                    <input type="text" id="followerSearch" class="search-input" placeholder="Search followers...">
+                    <select id="raceFilter" class="filter-select">
+                        <option value="">All Races</option>
+                        <option value="Nord">Nord</option>
+                        <option value="Imperial">Imperial</option>
+                        <option value="Khajiit">Khajiit</option>
+                        <option value="Dark Elf">Dark Elf</option>
+                        <option value="Nord Vampire">Nord Vampire</option>
+                        <option value="Dog (Daedric)">Dog (Daedric)</option>
+                    </select>
+                    <select id="classFilter" class="filter-select">
+                        <option value="">All Classes</option>
+                        <option value="Warrior">Warrior</option>
+                        <option value="Thief">Thief</option>
+                        <option value="Sorcerer">Sorcerer</option>
+                        <option value="Housecarl">Housecarl</option>
+                        <option value="Assassin">Assassin</option>
+                        <option value="Vampire">Vampire</option>
+                        <option value="Spellsword">Spellsword</option>
+                        <option value="War Dog">War Dog</option>
+                    </select>
+                    <select id="marriageFilter" class="filter-select">
+                        <option value="">Marriageable</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    <select id="essentialFilter" class="filter-select">
+                        <option value="">Essential</option>
+                        <option value="true">Yes (Immortal)</option>
+                        <option value="false">No (Can Die)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Followers Grid -->
+            <div id="followersGrid" class="followers-grid">
+                <!-- Followers will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Follower Detail Modal -->
+    <div id="followerModal" class="follower-modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+
+            <div class="modal-header">
+                <div class="follower-icon" id="followerIcon">👤</div>
+                <h2 id="followerName">Follower Name</h2>
+                <p class="follower-subtitle">
+                    <span id="followerRace">Race</span> •
+                    <span id="followerClass">Class</span> •
+                    <span id="followerGender">Gender</span>
+                </p>
+            </div>
+
+            <div class="modal-body">
+                <div class="follower-badges-section">
+                    <span class="faction-badge" id="followerFaction">Faction</span>
+                    <span class="level-badge" id="followerLevel">Level</span>
+                    <span class="marriage-badge" id="marriageBadge" style="display: none;">💍 Marriageable</span>
+                    <span class="essential-badge" id="essentialBadge" style="display: none;">⚡ Essential</span>
+                </div>
+
+                <div class="follower-description-section">
+                    <h3>Description</h3>
+                    <p id="followerDescription">Description text</p>
+                </div>
+
+                <div class="follower-personality-section">
+                    <h3>Personality</h3>
+                    <p id="followerPersonality">Personality traits</p>
+                </div>
+
+                <div class="follower-skills-section">
+                    <h3>Skills</h3>
+                    <div id="followerSkills" class="skills-list">
+                        <!-- Skills will be populated -->
+                    </div>
+                </div>
+
+                <div class="follower-location-section">
+                    <h3>Location</h3>
+                    <p id="followerLocation">Location details</p>
+                </div>
+
+                <div class="follower-recruitment-section">
+                    <h3>How to Recruit</h3>
+                    <p class="recruitment-text" id="followerRecruitment">Recruitment requirements</p>
+                </div>
+
+                <div class="follower-morality-section">
+                    <h3>Morality</h3>
+                    <p id="followerMorality">Morality details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="followers-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="landing.html">Home</a>
+                <span class="separator">•</span>
+                <a href="codex.html">Codex</a>
+                <span class="separator">•</span>
+                <a href="bestiary.html">Bestiary</a>
+            </div>
+            <p>&copy; 2024 Skyrim Reference. Fan-made resource for The Elder Scrolls V: Skyrim.</p>
+        </div>
+    </footer>
+
+    <script src="followers.js"></script>
+</body>
+</html>

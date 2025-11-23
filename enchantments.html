@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchantments - Skyrim Reference</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="enchantments.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="enchantments-header">
+        <div class="container">
+            <h1>✨ Enchantments</h1>
+            <p>Master the mystical art of enchanting</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="enchantments-main">
+        <div class="container">
+            <!-- Section Header with Filters -->
+            <div class="section-header">
+                <h2>Enchantment Database</h2>
+                <p class="subtitle">Discover and apply magical enchantments to your gear</p>
+
+                <div class="controls">
+                    <input type="text" id="enchantmentSearch" class="search-input" placeholder="Search enchantments...">
+                    <select id="typeFilter" class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="Weapon">Weapon Enchantments</option>
+                        <option value="Armor">Armor Enchantments</option>
+                    </select>
+                    <select id="schoolFilter" class="filter-select">
+                        <option value="">All Schools</option>
+                        <option value="Destruction">Destruction</option>
+                        <option value="Restoration">Restoration</option>
+                        <option value="Alteration">Alteration</option>
+                        <option value="Illusion">Illusion</option>
+                        <option value="Conjuration">Conjuration</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Enchantments Grid -->
+            <div id="enchantmentsGrid" class="enchantments-grid">
+                <!-- Enchantments will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Enchantment Detail Modal -->
+    <div id="enchantmentModal" class="enchantment-modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+
+            <div class="modal-header">
+                <div class="enchantment-icon" id="enchantmentIcon">✨</div>
+                <h2 id="enchantmentName">Enchantment Name</h2>
+                <p class="school-text" id="enchantmentSchool">School</p>
+            </div>
+
+            <div class="modal-body">
+                <div class="enchantment-badges-section">
+                    <span class="type-badge" id="enchantmentType">Type</span>
+                    <span class="school-badge" id="schoolBadge">School</span>
+                </div>
+
+                <div class="enchantment-description-section">
+                    <h3>Description</h3>
+                    <p id="enchantmentDescription">Description text</p>
+                </div>
+
+                <div class="enchantment-effect-section">
+                    <h3>Effect</h3>
+                    <p class="effect-text" id="enchantmentEffect">Effect details</p>
+                </div>
+
+                <div class="enchantment-stats-section">
+                    <h3>Enchantment Details</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Magnitude</span>
+                            <span class="stat-value" id="enchantmentMagnitude">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Soul Gem</span>
+                            <span class="stat-value" id="enchantmentSoulGem">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Base Value</span>
+                            <span class="stat-value" id="enchantmentValue">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="enchantment-items-section">
+                    <h3>Compatible Items</h3>
+                    <div id="compatibleItems" class="items-list">
+                        <!-- Compatible items will be populated -->
+                    </div>
+                </div>
+
+                <div class="enchantment-location-section">
+                    <h3>How to Obtain</h3>
+                    <div id="enchantmentLocations" class="locations-list">
+                        <!-- Locations will be populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="enchantments-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="landing.html">Home</a>
+                <span class="separator">•</span>
+                <a href="codex.html">Codex</a>
+                <span class="separator">•</span>
+                <a href="bestiary.html">Bestiary</a>
+            </div>
+            <p>&copy; 2024 Skyrim Reference. Fan-made resource for The Elder Scrolls V: Skyrim.</p>
+        </div>
+    </footer>
+
+    <script src="enchantments.js"></script>
+</body>
+</html>

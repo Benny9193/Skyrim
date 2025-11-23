@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standing Stones - Skyrim Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="standing-stones.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header stones-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Standing Stones</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="stones-main">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <h2>Guardian Stones of Skyrim</h2>
+                    <p class="subtitle">Celestial blessings to enhance your journey</p>
+                    <div class="controls">
+                        <input type="text" id="stoneSearch" class="search-input" placeholder="Search stones...">
+                        <select id="typeFilter" class="filter-select">
+                            <option value="">All Types</option>
+                            <option value="Guardian">Guardian Stones</option>
+                            <option value="Special">Special Stones</option>
+                        </select>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="Combat">Combat</option>
+                            <option value="Magic">Magic</option>
+                            <option value="Stealth">Stealth</option>
+                            <option value="General">General</option>
+                            <option value="Defense">Defense</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Stones Grid -->
+                <div class="stones-grid" id="stonesGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Stone Modal -->
+        <div class="stone-modal hidden" id="stoneModal">
+            <div class="modal-backdrop" id="modalBackdrop"></div>
+            <div class="modal-content">
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+
+                <div class="modal-header">
+                    <div class="stone-icon" id="modalIcon">🪨</div>
+                    <h2 id="modalStoneName">Stone Name</h2>
+                </div>
+
+                <div class="modal-body">
+                    <div class="stone-type-section">
+                        <span class="type-badge" id="modalType">Type</span>
+                        <span class="category-badge" id="modalCategory">Category</span>
+                    </div>
+
+                    <div class="stone-effect-section">
+                        <h3>Effect</h3>
+                        <p id="modalEffect" class="effect-text">Effect description...</p>
+                    </div>
+
+                    <div class="stone-description-section">
+                        <h3>Description</h3>
+                        <p id="modalDescription">Stone description...</p>
+                    </div>
+
+                    <div class="stone-skills-section" id="modalSkillsSection">
+                        <h3>Affected Skills</h3>
+                        <div id="modalSkills" class="skills-list">
+                            <!-- Skills populated here -->
+                        </div>
+                    </div>
+
+                    <div class="stone-location-section">
+                        <h3>Location</h3>
+                        <p id="modalLocation">Location info...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="stones-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="magic.html">Magic</a>
+                    <span class="separator">•</span>
+                    <a href="character-builder.html">Character Builder</a>
+                    <span class="separator">•</span>
+                    <a href="dragons.html">Dragons</a>
+                </div>
+                <p>&copy; 2024 Skyrim Reference. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="standing-stones.js"></script>
+</body>
+</html>
