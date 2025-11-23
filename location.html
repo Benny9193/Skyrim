@@ -1,286 +1,329 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Interactive Skyrim Location Viewer - Explore locations from The Elder Scrolls V: Skyrim in stunning 3D">
-    <meta name="keywords" content="Skyrim, Locations, 3D, Elder Scrolls, Interactive Map">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Interactive Skyrim Location Viewer - Explore locations from The Elder Scrolls V: Skyrim in stunning 3D"
+    />
+    <meta name="keywords" content="Skyrim, Locations, 3D, Elder Scrolls, Interactive Map" />
     <title>Skyrim Location Viewer</title>
-    
+
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="location.css">
-    
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="location.css" />
+
     <!-- Three.js and Extensions -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="app-container">
-        <!-- Navigation Header -->
-        <header class="app-header location-header">
-            <div class="container">
-                <div class="header-content">
-                    <div class="header-nav">
-                        <a href="landing.html" class="header-link">← Home</a>
-                        <span class="separator">|</span>
-                        <a href="locations.html" class="header-link">All Locations</a>
-                        <span class="separator">|</span>
-                        <a href="map.html" class="header-link">Map</a>
-                    </div>
-                    <h1 class="location-name" id="locationName">Loading...</h1>
-                    <p class="location-type" id="locationType"></p>
-                </div>
+      <!-- Navigation Header -->
+      <header class="app-header location-header">
+        <div class="container">
+          <div class="header-content">
+            <div class="header-nav">
+              <a href="landing.html" class="header-link">← Home</a>
+              <span class="separator">|</span>
+              <a href="locations.html" class="header-link">All Locations</a>
+              <span class="separator">|</span>
+              <a href="map.html" class="header-link">Map</a>
             </div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="main-content location-main">
-            <div class="container">
-                <div class="location-layout">
-                    <!-- Left Panel - Location Details -->
-                    <aside class="location-sidebar">
-                        <!-- Overview Card -->
-                        <div class="card location-overview">
-                            <div class="card-header">
-                                <h3>Overview</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="detail-row">
-                                    <span class="detail-label">Hold:</span>
-                                    <span class="detail-value" id="locationHold">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Region:</span>
-                                    <span class="detail-value" id="locationRegion">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Climate:</span>
-                                    <span class="detail-value" id="locationClimate">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Difficulty:</span>
-                                    <span class="detail-value difficulty-badge" id="locationDifficulty">-</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Fast Travel:</span>
-                                    <span class="detail-value" id="locationFastTravel">-</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Description Card -->
-                        <div class="card location-description">
-                            <div class="card-header">
-                                <h3>Description</h3>
-                            </div>
-                            <div class="card-body">
-                                <p id="locationDescription">Loading location description...</p>
-                            </div>
-                        </div>
-
-                        <!-- Features Card -->
-                        <div class="card location-features">
-                            <div class="card-header">
-                                <h3>Notable Features</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="features-list" id="featuresList">
-                                    <!-- Populated by JavaScript -->
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- NPCs Card -->
-                        <div class="card location-npcs">
-                            <div class="card-header">
-                                <h3>Notable NPCs</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="npcs-list" id="npcsList">
-                                    <!-- Populated by JavaScript -->
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Shops Card -->
-                        <div class="card location-shops" id="shopsCard">
-                            <div class="card-header">
-                                <h3>Shops & Services</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="shops-list" id="shopsList">
-                                    <!-- Populated by JavaScript -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Quests Card -->
-                        <div class="card location-quests">
-                            <div class="card-header">
-                                <h3>Related Quests</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="quests-list" id="questsList">
-                                    <!-- Populated by JavaScript -->
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Discovery Toggle -->
-                        <button class="btn btn--primary btn--full-width discovery-btn" id="discoveryBtn">
-                            <span id="discoveryIcon">☐</span>
-                            <span id="discoveryText">Mark as Discovered</span>
-                        </button>
-                    </aside>
-
-                    <!-- Right Panel - 3D Viewer -->
-                    <section class="location-viewer">
-                        <!-- 3D Viewer Card -->
-                        <div class="card viewer-card">
-                            <div class="viewer-header">
-                                <h3>3D View</h3>
-                                <div class="viewer-controls">
-                                    <button class="btn btn--sm" id="resetCameraBtn" title="Reset Camera">
-                                        🔄
-                                    </button>
-                                    <button class="btn btn--sm" id="wireframeBtn" title="Toggle Wireframe">
-                                        📐
-                                    </button>
-                                    <button class="btn btn--sm" id="screenshotBtn" title="Take Screenshot">
-                                        📸
-                                    </button>
-                                    <button class="btn btn--sm" id="fullscreenBtn" title="Fullscreen">
-                                        ⛶
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="viewer-content">
-                                <canvas id="locationCanvas"></canvas>
-                                <div class="viewer-overlay" id="viewerOverlay">
-                                    <div class="loading-spinner">
-                                        <div class="spinner"></div>
-                                        <p>Loading 3D model...</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="viewer-footer">
-                                <div class="viewer-info">
-                                    <span>Use mouse to rotate • Scroll to zoom</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Background Selector -->
-                        <div class="card background-selector">
-                            <div class="card-header">
-                                <h3>Background</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="background-options">
-                                    <button class="bg-option active" data-color="#1a1a2e" style="background: #1a1a2e;" title="Dark Blue"></button>
-                                    <button class="bg-option" data-color="#2d2d2d" style="background: #2d2d2d;" title="Dark Gray"></button>
-                                    <button class="bg-option" data-color="#1a2332" style="background: #1a2332;" title="Midnight"></button>
-                                    <button class="bg-option" data-color="#3d2814" style="background: #3d2814;" title="Brown"></button>
-                                    <button class="bg-option" data-color="#1f3a3d" style="background: #1f3a3d;" title="Teal"></button>
-                                    <button class="bg-option" data-color="#2c1f2e" style="background: #2c1f2e;" title="Purple"></button>
-                                    <button class="bg-option" data-color="#4a4a4a" style="background: #4a4a4a;" title="Gray"></button>
-                                    <button class="bg-option" data-color="#ffffff" style="background: #ffffff; border: 1px solid #ccc;" title="White"></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Navigation -->
-                        <div class="card navigation-card">
-                            <div class="card-header">
-                                <h3>Navigation</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="navigation-buttons">
-                                    <button class="btn btn--outline nav-btn" id="prevLocationBtn">
-                                        ← Previous Location
-                                    </button>
-                                    <button class="btn btn--outline nav-btn" id="nextLocationBtn">
-                                        Next Location →
-                                    </button>
-                                </div>
-                                <button class="btn btn--primary btn--full-width" id="randomLocationBtn" style="margin-top: 12px;">
-                                    🎲 Random Location
-                                </button>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </main>
-
-        <!-- Keyboard Shortcuts Help Modal -->
-        <div class="modal hidden" id="helpModal">
-            <div class="modal-overlay"></div>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Keyboard Shortcuts</h3>
-                    <button class="modal-close" id="closeHelpBtn">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="shortcuts-grid">
-                        <div class="shortcut-item">
-                            <kbd>←</kbd><kbd>→</kbd>
-                            <span>Navigate between locations</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>R</kbd>
-                            <span>Random location</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>S</kbd>
-                            <span>Take screenshot</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>W</kbd>
-                            <span>Toggle wireframe</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>F</kbd>
-                            <span>Toggle fullscreen</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>H</kbd><kbd>?</kbd>
-                            <span>Show this help</span>
-                        </div>
-                        <div class="shortcut-item">
-                            <kbd>ESC</kbd>
-                            <span>Close modals</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h1 class="location-name" id="locationName">Loading...</h1>
+            <p class="location-type" id="locationType"></p>
+          </div>
         </div>
+      </header>
 
-        <!-- Footer -->
-        <footer class="location-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-links">
-                        <a href="landing.html">Home</a>
-                        <span class="separator">•</span>
-                        <a href="locations.html">All Locations</a>
-                        <span class="separator">•</span>
-                        <a href="map.html">Interactive Map</a>
-                        <span class="separator">•</span>
-                        <a href="bestiary.html">Bestiary</a>
-                    </div>
-                    <div class="footer-help">
-                        <button class="btn btn--sm" id="helpBtn">⌨️ Keyboard Shortcuts</button>
-                    </div>
+      <!-- Main Content -->
+      <main class="main-content location-main">
+        <div class="container">
+          <div class="location-layout">
+            <!-- Left Panel - Location Details -->
+            <aside class="location-sidebar">
+              <!-- Overview Card -->
+              <div class="card location-overview">
+                <div class="card-header">
+                  <h3>Overview</h3>
                 </div>
-                <p class="footer-copyright">&copy; 2024 Skyrim Location Viewer. All rights reserved.</p>
+                <div class="card-body">
+                  <div class="detail-row">
+                    <span class="detail-label">Hold:</span>
+                    <span class="detail-value" id="locationHold">-</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Region:</span>
+                    <span class="detail-value" id="locationRegion">-</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Climate:</span>
+                    <span class="detail-value" id="locationClimate">-</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Difficulty:</span>
+                    <span class="detail-value difficulty-badge" id="locationDifficulty">-</span>
+                  </div>
+                  <div class="detail-row">
+                    <span class="detail-label">Fast Travel:</span>
+                    <span class="detail-value" id="locationFastTravel">-</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description Card -->
+              <div class="card location-description">
+                <div class="card-header">
+                  <h3>Description</h3>
+                </div>
+                <div class="card-body">
+                  <p id="locationDescription">Loading location description...</p>
+                </div>
+              </div>
+
+              <!-- Features Card -->
+              <div class="card location-features">
+                <div class="card-header">
+                  <h3>Notable Features</h3>
+                </div>
+                <div class="card-body">
+                  <ul class="features-list" id="featuresList">
+                    <!-- Populated by JavaScript -->
+                  </ul>
+                </div>
+              </div>
+
+              <!-- NPCs Card -->
+              <div class="card location-npcs">
+                <div class="card-header">
+                  <h3>Notable NPCs</h3>
+                </div>
+                <div class="card-body">
+                  <ul class="npcs-list" id="npcsList">
+                    <!-- Populated by JavaScript -->
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Shops Card -->
+              <div class="card location-shops" id="shopsCard">
+                <div class="card-header">
+                  <h3>Shops & Services</h3>
+                </div>
+                <div class="card-body">
+                  <div class="shops-list" id="shopsList">
+                    <!-- Populated by JavaScript -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quests Card -->
+              <div class="card location-quests">
+                <div class="card-header">
+                  <h3>Related Quests</h3>
+                </div>
+                <div class="card-body">
+                  <ul class="quests-list" id="questsList">
+                    <!-- Populated by JavaScript -->
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Discovery Toggle -->
+              <button class="btn btn--primary btn--full-width discovery-btn" id="discoveryBtn">
+                <span id="discoveryIcon">☐</span>
+                <span id="discoveryText">Mark as Discovered</span>
+              </button>
+            </aside>
+
+            <!-- Right Panel - 3D Viewer -->
+            <section class="location-viewer">
+              <!-- 3D Viewer Card -->
+              <div class="card viewer-card">
+                <div class="viewer-header">
+                  <h3>3D View</h3>
+                  <div class="viewer-controls">
+                    <button class="btn btn--sm" id="resetCameraBtn" title="Reset Camera">🔄</button>
+                    <button class="btn btn--sm" id="wireframeBtn" title="Toggle Wireframe">
+                      📐
+                    </button>
+                    <button class="btn btn--sm" id="screenshotBtn" title="Take Screenshot">
+                      📸
+                    </button>
+                    <button class="btn btn--sm" id="fullscreenBtn" title="Fullscreen">⛶</button>
+                  </div>
+                </div>
+                <div class="viewer-content">
+                  <canvas id="locationCanvas"></canvas>
+                  <div class="viewer-overlay" id="viewerOverlay">
+                    <div class="loading-spinner">
+                      <div class="spinner"></div>
+                      <p>Loading 3D model...</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="viewer-footer">
+                  <div class="viewer-info">
+                    <span>Use mouse to rotate • Scroll to zoom</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Background Selector -->
+              <div class="card background-selector">
+                <div class="card-header">
+                  <h3>Background</h3>
+                </div>
+                <div class="card-body">
+                  <div class="background-options">
+                    <button
+                      class="bg-option active"
+                      data-color="#1a1a2e"
+                      style="background: #1a1a2e"
+                      title="Dark Blue"
+                    ></button>
+                    <button
+                      class="bg-option"
+                      data-color="#2d2d2d"
+                      style="background: #2d2d2d"
+                      title="Dark Gray"
+                    ></button>
+                    <button
+                      class="bg-option"
+                      data-color="#1a2332"
+                      style="background: #1a2332"
+                      title="Midnight"
+                    ></button>
+                    <button
+                      class="bg-option"
+                      data-color="#3d2814"
+                      style="background: #3d2814"
+                      title="Brown"
+                    ></button>
+                    <button
+                      class="bg-option"
+                      data-color="#1f3a3d"
+                      style="background: #1f3a3d"
+                      title="Teal"
+                    ></button>
+                    <button
+                      class="bg-option"
+                      data-color="#2c1f2e"
+                      style="background: #2c1f2e"
+                      title="Purple"
+                    ></button>
+                    <button
+                      class="bg-option"
+                      data-color="#4a4a4a"
+                      style="background: #4a4a4a"
+                      title="Gray"
+                    ></button>
+                    <button
+                      class="bg-option"
+                      data-color="#ffffff"
+                      style="background: #ffffff; border: 1px solid #ccc"
+                      title="White"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigation -->
+              <div class="card navigation-card">
+                <div class="card-header">
+                  <h3>Navigation</h3>
+                </div>
+                <div class="card-body">
+                  <div class="navigation-buttons">
+                    <button class="btn btn--outline nav-btn" id="prevLocationBtn">
+                      ← Previous Location
+                    </button>
+                    <button class="btn btn--outline nav-btn" id="nextLocationBtn">
+                      Next Location →
+                    </button>
+                  </div>
+                  <button
+                    class="btn btn--primary btn--full-width"
+                    id="randomLocationBtn"
+                    style="margin-top: 12px"
+                  >
+                    🎲 Random Location
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <!-- Keyboard Shortcuts Help Modal -->
+      <div class="modal hidden" id="helpModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Keyboard Shortcuts</h3>
+            <button class="modal-close" id="closeHelpBtn">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="shortcuts-grid">
+              <div class="shortcut-item">
+                <kbd>←</kbd><kbd>→</kbd>
+                <span>Navigate between locations</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>R</kbd>
+                <span>Random location</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>S</kbd>
+                <span>Take screenshot</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>W</kbd>
+                <span>Toggle wireframe</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>F</kbd>
+                <span>Toggle fullscreen</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>H</kbd><kbd>?</kbd>
+                <span>Show this help</span>
+              </div>
+              <div class="shortcut-item">
+                <kbd>ESC</kbd>
+                <span>Close modals</span>
+              </div>
             </div>
-        </footer>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="location-footer">
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-links">
+              <a href="landing.html">Home</a>
+              <span class="separator">•</span>
+              <a href="locations.html">All Locations</a>
+              <span class="separator">•</span>
+              <a href="map.html">Interactive Map</a>
+              <span class="separator">•</span>
+              <a href="bestiary.html">Bestiary</a>
+            </div>
+            <div class="footer-help">
+              <button class="btn btn--sm" id="helpBtn">⌨️ Keyboard Shortcuts</button>
+            </div>
+          </div>
+          <p class="footer-copyright">&copy; 2024 Skyrim Location Viewer. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
 
     <script src="location.js"></script>
-</body>
+  </body>
 </html>
