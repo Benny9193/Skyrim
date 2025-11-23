@@ -11,6 +11,8 @@ let scene, camera, renderer, orbitControls;
 let currentModel = null;
 let rotationSpeed = 1;
 let currentBackgroundIndex = 0;
+let animationFrameId = null;
+let isAnimationPaused = false;
 const backgroundColors = [
     { name: 'Light Gray', color: 0xf5f5f5 },
     { name: 'White', color: 0xffffff },
@@ -154,12 +156,41 @@ function initThreeJS() {
     orbitControls.enableDamping = true;
     orbitControls.dampingFactor = 0.05;
 
-    // Animation loop
+    // Animation loop - pauses when page is hidden to save resources
     function animate() {
-        requestAnimationFrame(animate);
-        orbitControls.update();
-        renderer.render(scene, camera);
+        if (!isAnimationPaused) {
+            animationFrameId = requestAnimationFrame(animate);
+            orbitControls.update();
+            renderer.render(scene, camera);
+        }
     }
+    
+    // Start animation
+    function startAnimation() {
+        if (isAnimationPaused) {
+            isAnimationPaused = false;
+            animate();
+        }
+    }
+    
+    // Stop animation
+    function stopAnimation() {
+        isAnimationPaused = true;
+        if (animationFrameId !== null) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+        }
+    }
+    
+    // Pause animation when page is hidden to save CPU/battery
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopAnimation();
+        } else {
+            startAnimation();
+        }
+    });
+    
     animate();
 
     // Handle window resize
@@ -233,30 +264,50 @@ function updateCharacterUI() {
     updateCombatInfo();
 }
 
-// Update stat bar width with animation
+// Update stat bar width with animation using requestAnimationFrame
 function updateStatBar(elementId, value) {
     const maxValue = 100;
-    const percentage = Math.min((value / maxValue) * 100, 100);
+    const targetPercentage = Math.min((value / maxValue) * 100, 100);
     const bar = document.getElementById(elementId);
 
-    if (bar) {
-        // Reset width to 0 first
-        bar.style.width = '0%';
+    if (!bar) return;
 
-        // Animate to target width
-        setTimeout(() => {
-            bar.style.transition = 'width 1s ease-out';
-            bar.style.width = percentage + '%';
-        }, 100);
+    // Reset width to 0 first
+    bar.style.width = '0%';
+    
+    // Animate to target width using requestAnimationFrame
+    const duration = 1000; // 1 second
+    const startTime = performance.now();
 
-        // Add hover effect
-        bar.parentElement.onmouseenter = () => {
+    const animateWidth = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease-out cubic for smooth animation
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const currentPercentage = targetPercentage * easedProgress;
+
+        bar.style.width = currentPercentage + '%';
+
+        if (progress < 1) {
+            requestAnimationFrame(animateWidth);
+        }
+    };
+
+    // Small delay before starting animation
+    setTimeout(() => {
+        requestAnimationFrame(animateWidth);
+    }, 100);
+
+    // Add hover effect (only add once per element)
+    if (!bar.parentElement.dataset.hoverAdded) {
+        bar.parentElement.dataset.hoverAdded = 'true';
+        bar.parentElement.addEventListener('mouseenter', () => {
             bar.style.transform = 'scaleY(1.1)';
             bar.style.transition = 'transform 0.2s ease';
-        };
-        bar.parentElement.onmouseleave = () => {
+        });
+        bar.parentElement.addEventListener('mouseleave', () => {
             bar.style.transform = 'scaleY(1)';
-        };
+        });
     }
 }
 
@@ -388,50 +439,73 @@ function setupModel(model) {
     fadeInModel(model);
 }
 
-// Fade in model animation
+// Fade in model animation using requestAnimationFrame for better performance
 function fadeInModel(model) {
-    let opacity = 0;
-    const fadeInterval = setInterval(() => {
-        opacity += 0.05;
-        if (opacity >= 1) {
-            opacity = 1;
-            clearInterval(fadeInterval);
-        }
+    const duration = 600; // 600ms fade
+    const startTime = performance.now();
+
+    function updateOpacity(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease-out quad for smooth animation
+        const easedProgress = progress * (2 - progress);
 
         model.traverse(child => {
             if (child.material) {
                 if (Array.isArray(child.material)) {
-                    child.material.forEach(mat => mat.opacity = opacity);
+                    child.material.forEach(mat => {
+                        mat.transparent = true;
+                        mat.opacity = easedProgress;
+                    });
                 } else {
-                    child.material.opacity = opacity;
+                    child.material.transparent = true;
+                    child.material.opacity = easedProgress;
                 }
             }
         });
-    }, 30);
+
+        if (progress < 1) {
+            requestAnimationFrame(updateOpacity);
+        }
+    }
+
+    requestAnimationFrame(updateOpacity);
 }
 
-// Fade out model animation
+// Fade out model animation using requestAnimationFrame for better performance
 function fadeOutModel(model) {
     return new Promise(resolve => {
-        let opacity = 1;
-        const fadeInterval = setInterval(() => {
-            opacity -= 0.1;
-            if (opacity <= 0) {
-                opacity = 0;
-                clearInterval(fadeInterval);
-                resolve();
-            }
+        const duration = 400; // 400ms fade out
+        const startTime = performance.now();
+
+        function updateOpacity(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-in quad for smooth animation
+            const easedProgress = 1 - (progress * progress);
 
             model.traverse(child => {
                 if (child.material) {
                     if (Array.isArray(child.material)) {
-                        child.material.forEach(mat => mat.opacity = opacity);
+                        child.material.forEach(mat => {
+                            mat.transparent = true;
+                            mat.opacity = easedProgress;
+                        });
                     } else {
-                        child.material.opacity = opacity;
+                        child.material.transparent = true;
+                        child.material.opacity = easedProgress;
                     }
                 }
             });
-        }, 30);
+
+            if (progress < 1) {
+                requestAnimationFrame(updateOpacity);
+            } else {
+                resolve();
+            }
+        }
+
+        requestAnimationFrame(updateOpacity);
     });
 }
 

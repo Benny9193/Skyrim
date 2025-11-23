@@ -12,6 +12,19 @@ let activeFilters = {
 let currentSort = 'name';
 let currentView = 'grid';
 
+// Debounce utility function to optimize search performance
+function debounce(func, wait = 300) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // DOM Elements
 const searchInput = document.getElementById('searchInput');
 const locationGrid = document.getElementById('locationGrid');
@@ -27,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadLocations();
     initializeFilters();
     initializeEventListeners();
+    setupLocationEventDelegation(); // Setup event delegation once
     displayLocations();
 });
 
@@ -83,10 +97,14 @@ function populateFilterSection(elementId, options, filterType) {
 
 // Event Listeners
 function initializeEventListeners() {
-    // Search
-    searchInput.addEventListener('input', (e) => {
-        activeFilters.search = e.target.value.toLowerCase();
+    // Search with debouncing to reduce filter recalculations
+    const debouncedSearch = debounce((value) => {
+        activeFilters.search = value.toLowerCase();
         applyFilters();
+    }, 300);
+    
+    searchInput.addEventListener('input', (e) => {
+        debouncedSearch(e.target.value);
     });
 
     // Sort buttons
@@ -206,13 +224,16 @@ function displayLocations() {
     noResults.style.display = 'none';
 
     locationGrid.innerHTML = filteredLocations.map(location => createLocationCard(location)).join('');
+}
 
-    // Add click listeners to cards
-    document.querySelectorAll('.location-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const locationId = parseInt(card.dataset.id);
-            showLocationDetail(locationId);
-        });
+// Setup event delegation for location cards (call once on initialization)
+function setupLocationEventDelegation() {
+    locationGrid.addEventListener('click', (e) => {
+        const card = e.target.closest('.location-card');
+        if (!card) return;
+        
+        const locationId = parseInt(card.dataset.id);
+        showLocationDetail(locationId);
     });
 }
 
