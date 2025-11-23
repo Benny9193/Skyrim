@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elder Scrolls Oblivion - NPCs Table</title>
+    <meta name="description" content="Comprehensive table of NPCs from The Elder Scrolls IV: Oblivion">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="oblivion-npcs.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav-top">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <a href="bestiary.html" class="header-link">Skyrim Bestiary</a>
+                    </div>
+                    <h1 class="app-title">Elder Scrolls IV: Oblivion</h1>
+                    <p class="app-tagline">Notable NPCs Database</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Controls Section -->
+                <div class="controls-section">
+                    <div class="search-box">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Search NPCs by name, race, or faction..." 
+                            aria-label="Search NPCs"
+                        >
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="raceFilter">Race:</label>
+                            <select id="raceFilter" aria-label="Filter by race">
+                                <option value="">All Races</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="factionFilter">Faction:</label>
+                            <select id="factionFilter" aria-label="Filter by faction">
+                                <option value="">All Factions</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="genderFilter">Gender:</label>
+                            <select id="genderFilter" aria-label="Filter by gender">
+                                <option value="">All</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="essentialFilter">Status:</label>
+                            <select id="essentialFilter" aria-label="Filter by essential status">
+                                <option value="">All</option>
+                                <option value="true">Essential</option>
+                                <option value="false">Non-Essential</option>
+                            </select>
+                        </div>
+                        
+                        <button id="clearFilters" class="btn btn--secondary">Clear Filters</button>
+                    </div>
+                </div>
+
+                <!-- Stats Summary -->
+                <div class="stats-summary" id="statsSummary">
+                    <div class="stat-item">
+                        <span class="stat-label">Total NPCs:</span>
+                        <span class="stat-value" id="totalNPCs">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Showing:</span>
+                        <span class="stat-value" id="filteredNPCs">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Essential:</span>
+                        <span class="stat-value" id="essentialCount">0</span>
+                    </div>
+                </div>
+
+                <!-- NPCs Table -->
+                <div class="table-container">
+                    <table class="npcs-table" id="npcsTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="id" class="sortable">ID <span class="sort-arrow">↕</span></th>
+                                <th data-sort="name" class="sortable">Name <span class="sort-arrow">↕</span></th>
+                                <th data-sort="race" class="sortable">Race <span class="sort-arrow">↕</span></th>
+                                <th data-sort="gender" class="sortable">Gender <span class="sort-arrow">↕</span></th>
+                                <th data-sort="class" class="sortable">Class <span class="sort-arrow">↕</span></th>
+                                <th data-sort="faction" class="sortable">Faction <span class="sort-arrow">↕</span></th>
+                                <th data-sort="location" class="sortable">Location <span class="sort-arrow">↕</span></th>
+                                <th data-sort="essential" class="sortable">Essential <span class="sort-arrow">↕</span></th>
+                                <th data-sort="role" class="sortable">Role <span class="sort-arrow">↕</span></th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="npcsTableBody">
+                            <!-- Table rows will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loader-spinner"></div>
+                    <p>Loading NPCs...</p>
+                </div>
+
+                <!-- Error State -->
+                <div class="error-state" id="errorState" style="display: none;">
+                    <p>⚠️ Error loading NPCs data. Please try refreshing the page.</p>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <p>No NPCs match your search criteria.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="container">
+                <p>&copy; 2024 Elder Scrolls Database. The Elder Scrolls IV: Oblivion is a trademark of Bethesda Softworks LLC.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="oblivion-npcs.js" type="module"></script>
+</body>
+</html>
