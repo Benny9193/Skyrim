@@ -1,0 +1,933 @@
+/* Mini-Games Collection Styles */
+
+/* Header */
+.games-header {
+    background: linear-gradient(135deg, var(--color-teal-600) 0%, var(--color-teal-800) 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Layout */
+.games-main {
+    padding: 32px 0;
+    min-height: calc(100vh - 80px);
+}
+
+/* Game Hub */
+.game-hub {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hub-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.hub-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 12px 0;
+}
+
+.hub-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Game Cards Grid */
+.game-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.game-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--color-primary);
+}
+
+.game-card-icon {
+    font-size: 48px;
+    text-align: center;
+}
+
+.game-card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin: 0;
+    text-align: center;
+}
+
+.game-card-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.game-card-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: var(--color-background);
+    border-radius: 8px;
+}
+
+.game-card-stats .stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm);
+}
+
+.game-card-stats .stat-label {
+    color: var(--color-text-secondary);
+}
+
+.game-card-stats .stat-value {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+}
+
+.game-card-button {
+    width: 100%;
+    padding: 12px 24px;
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text);
+    border: none;
+    border-radius: 8px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.game-card-button:hover {
+    background: var(--color-primary-hover);
+    transform: scale(1.02);
+}
+
+.game-card-button:active {
+    background: var(--color-primary-active);
+    transform: scale(0.98);
+}
+
+/* Game Container */
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.back-button {
+    padding: 8px 16px;
+    background: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background: var(--color-secondary-hover);
+}
+
+.game-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0;
+    flex-grow: 1;
+}
+
+.game-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.control-button {
+    padding: 8px 16px;
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text);
+    border: none;
+    border-radius: 6px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-button:hover {
+    background: var(--color-primary-hover);
+}
+
+.difficulty-select {
+    padding: 8px 16px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-base);
+    cursor: pointer;
+}
+
+/* Game Stats Bar */
+.game-stats {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 100px;
+}
+
+.stat-item .stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-item .stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+}
+
+/* Memory Match Game */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.memory-card:hover:not(.flipped):not(.matched) {
+    transform: scale(1.05);
+    border-color: var(--color-primary);
+}
+
+.memory-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched {
+    opacity: 0.6;
+    cursor: default;
+    border-color: var(--color-success);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.card-front {
+    background: linear-gradient(135deg, var(--color-teal-500) 0%, var(--color-teal-700) 100%);
+    color: white;
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--color-surface);
+}
+
+.card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card-back .card-name {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    font-size: var(--font-size-xs);
+    color: var(--color-text);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px;
+    border-radius: 4px;
+}
+
+/* Guess the Creature Game */
+.guess-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.guess-prompt {
+    text-align: center;
+}
+
+.creature-display {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 16px;
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.creature-display img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.creature-display .creature-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: 1.6;
+    text-align: left;
+    max-width: 260px;
+}
+
+.guess-question-text {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin: 0;
+}
+
+.guess-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.guess-option {
+    padding: 20px;
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.guess-option:hover:not(.correct):not(.incorrect) {
+    background: var(--color-secondary-hover);
+    border-color: var(--color-primary);
+    transform: scale(1.02);
+}
+
+.guess-option.correct {
+    background: rgba(var(--color-success-rgb), 0.2);
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+.guess-option.incorrect {
+    background: rgba(var(--color-error-rgb), 0.2);
+    border-color: var(--color-error);
+    color: var(--color-error);
+}
+
+.guess-option.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Trivia Challenge Game */
+.trivia-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.trivia-question-card {
+    padding: 32px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.trivia-category {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text);
+    border-radius: 16px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.trivia-question-text {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.trivia-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.trivia-option {
+    padding: 24px;
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.trivia-option:hover:not(.correct):not(.incorrect) {
+    background: var(--color-secondary-hover);
+    border-color: var(--color-primary);
+    transform: scale(1.02);
+}
+
+.trivia-option.correct {
+    background: rgba(var(--color-success-rgb), 0.2);
+    border-color: var(--color-success);
+}
+
+.trivia-option.incorrect {
+    background: rgba(var(--color-error-rgb), 0.2);
+    border-color: var(--color-error);
+}
+
+.trivia-option.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Leaderboard */
+.leaderboard-section {
+    margin-top: 48px;
+    padding: 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: 12px;
+}
+
+.leaderboard-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.leaderboard-entry {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: var(--color-background);
+    border-radius: 8px;
+}
+
+.leaderboard-rank {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    min-width: 40px;
+    text-align: center;
+}
+
+.leaderboard-rank.gold {
+    color: #FFD700;
+}
+
+.leaderboard-rank.silver {
+    color: #C0C0C0;
+}
+
+.leaderboard-rank.bronze {
+    color: #CD7F32;
+}
+
+.leaderboard-name {
+    flex-grow: 1;
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+}
+
+.leaderboard-score {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
+.leaderboard-empty {
+    text-align: center;
+    padding: 32px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+/* Speed Identification Game */
+.speed-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.speed-creature-display {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.speed-creature-display img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.speed-instructions {
+    text-align: center;
+    color: var(--color-text-secondary);
+}
+
+.speed-instructions p {
+    margin: 8px 0;
+    font-size: var(--font-size-lg);
+}
+
+.speed-instructions p:first-child {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+}
+
+.speed-input-section {
+    display: flex;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.speed-input {
+    flex-grow: 1;
+    padding: 16px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    font-size: var(--font-size-lg);
+    font-family: var(--font-family-base);
+}
+
+.speed-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+}
+
+.speed-submit-button,
+.speed-skip-button {
+    padding: 16px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.speed-submit-button {
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text);
+}
+
+.speed-submit-button:hover {
+    background: var(--color-primary-hover);
+}
+
+.speed-skip-button {
+    background: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-card-border);
+}
+
+.speed-skip-button:hover {
+    background: var(--color-secondary-hover);
+}
+
+.speed-feedback {
+    text-align: center;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.speed-feedback.correct {
+    color: var(--color-success);
+}
+
+.speed-feedback.incorrect {
+    color: var(--color-error);
+}
+
+/* Victory Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--color-surface);
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.victory-modal {
+    padding: 40px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-card-border);
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: var(--color-secondary-hover);
+}
+
+.victory-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.victory-icon {
+    font-size: 72px;
+    margin-bottom: 16px;
+}
+
+.victory-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0;
+}
+
+.victory-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.victory-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--color-background);
+    border-radius: 8px;
+}
+
+.victory-stat-label {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+}
+
+.victory-stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+}
+
+.victory-stat-value.highlight {
+    color: var(--color-success);
+}
+
+.victory-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.victory-button {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.victory-button.primary {
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text);
+}
+
+.victory-button.primary:hover {
+    background: var(--color-primary-hover);
+}
+
+.victory-button.secondary {
+    background: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-card-border);
+}
+
+.victory-button.secondary:hover {
+    background: var(--color-secondary-hover);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
+
+.pulse {
+    animation: pulse 0.5s ease;
+}
+
+.shake {
+    animation: shake 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-grid {
+        gap: 8px;
+    }
+
+    .guess-options,
+    .trivia-options {
+        grid-template-columns: 1fr;
+    }
+
+    .creature-display,
+    .speed-creature-display {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 1;
+    }
+
+    .game-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .game-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .speed-input-section {
+        flex-direction: column;
+    }
+
+    .victory-modal {
+        padding: 24px;
+    }
+
+    .victory-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .memory-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+    }
+
+    .hub-title {
+        font-size: var(--font-size-3xl);
+    }
+
+    .game-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .game-stats {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* Accessibility */
+.guess-option:focus,
+.trivia-option:focus,
+.memory-card:focus,
+.speed-input:focus {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+}
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Print styles */
+@media print {
+    .game-controls,
+    .back-button,
+    .modal {
+        display: none !important;
+    }
+}

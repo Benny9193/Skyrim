@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyrim Mini-Games Collection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mini-games.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header games-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <a href="bestiary.html" class="header-link">Bestiary</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Mini-Games Collection</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content games-main">
+            <div class="container">
+                <!-- Game Selection Hub -->
+                <div id="gameHub" class="game-hub">
+                    <div class="hub-header">
+                        <h2 class="hub-title">Choose Your Challenge</h2>
+                        <p class="hub-subtitle">Test your knowledge of Skyrim's creatures and beasts</p>
+                    </div>
+
+                    <div class="game-cards">
+                        <!-- Memory Match Card -->
+                        <div class="game-card" data-game="memory">
+                            <div class="game-card-icon">🃏</div>
+                            <h3 class="game-card-title">Memory Match</h3>
+                            <p class="game-card-description">Match pairs of creatures in this classic memory game</p>
+                            <div class="game-card-stats">
+                                <span class="stat">
+                                    <span class="stat-label">Best Time:</span>
+                                    <span class="stat-value" id="memoryBestTime">--</span>
+                                </span>
+                                <span class="stat">
+                                    <span class="stat-label">Best Moves:</span>
+                                    <span class="stat-value" id="memoryBestMoves">--</span>
+                                </span>
+                            </div>
+                            <button class="game-card-button" onclick="startGame('memory')">Play Now</button>
+                        </div>
+
+                        <!-- Guess the Creature Card -->
+                        <div class="game-card" data-game="guess">
+                            <div class="game-card-icon">🎯</div>
+                            <h3 class="game-card-title">Guess the Creature</h3>
+                            <p class="game-card-description">Identify creatures from images and descriptions</p>
+                            <div class="game-card-stats">
+                                <span class="stat">
+                                    <span class="stat-label">High Score:</span>
+                                    <span class="stat-value" id="guessHighScore">0</span>
+                                </span>
+                            </div>
+                            <button class="game-card-button" onclick="startGame('guess')">Play Now</button>
+                        </div>
+
+                        <!-- Trivia Challenge Card -->
+                        <div class="game-card" data-game="trivia">
+                            <div class="game-card-icon">📚</div>
+                            <h3 class="game-card-title">Trivia Challenge</h3>
+                            <p class="game-card-description">Answer questions about stats, lore, and abilities</p>
+                            <div class="game-card-stats">
+                                <span class="stat">
+                                    <span class="stat-label">Best Score:</span>
+                                    <span class="stat-value" id="triviaBestScore">0</span>
+                                </span>
+                            </div>
+                            <button class="game-card-button" onclick="startGame('trivia')">Play Now</button>
+                        </div>
+
+                        <!-- Speed Identification Card -->
+                        <div class="game-card" data-game="speed">
+                            <div class="game-card-icon">⚡</div>
+                            <h3 class="game-card-title">Speed Identification</h3>
+                            <p class="game-card-description">Rapid-fire creature naming challenge</p>
+                            <div class="game-card-stats">
+                                <span class="stat">
+                                    <span class="stat-label">High Score:</span>
+                                    <span class="stat-value" id="speedHighScore">0</span>
+                                </span>
+                                <span class="stat">
+                                    <span class="stat-label">Best Streak:</span>
+                                    <span class="stat-value" id="speedBestStreak">0</span>
+                                </span>
+                            </div>
+                            <button class="game-card-button" onclick="startGame('speed')">Play Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 1: Memory Match -->
+                <div id="memoryGame" class="game-container" style="display: none;">
+                    <div class="game-header">
+                        <button class="back-button" onclick="returnToHub()">← Back to Hub</button>
+                        <h2 class="game-title">Creature Memory Match</h2>
+                        <div class="game-controls">
+                            <button class="control-button" onclick="resetMemoryGame()">🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Time:</span>
+                            <span class="stat-value" id="memoryTimer">0:00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Moves:</span>
+                            <span class="stat-value" id="memoryMoves">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Pairs:</span>
+                            <span class="stat-value" id="memoryPairs">0/8</span>
+                        </div>
+                    </div>
+
+                    <div class="memory-grid" id="memoryGrid">
+                        <!-- Cards will be generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Game 2: Guess the Creature -->
+                <div id="guessGame" class="game-container" style="display: none;">
+                    <div class="game-header">
+                        <button class="back-button" onclick="returnToHub()">← Back to Hub</button>
+                        <h2 class="game-title">Guess the Creature</h2>
+                        <div class="game-controls">
+                            <select id="guessDifficulty" class="difficulty-select">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            <button class="control-button" onclick="resetGuessGame()">🔄 New Game</button>
+                        </div>
+                    </div>
+
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Question:</span>
+                            <span class="stat-value" id="guessQuestion">1/10</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Score:</span>
+                            <span class="stat-value" id="guessScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Streak:</span>
+                            <span class="stat-value" id="guessStreak">0</span>
+                        </div>
+                    </div>
+
+                    <div class="guess-content">
+                        <div class="guess-prompt">
+                            <div class="creature-display" id="guessCreatureDisplay">
+                                <!-- Image or description will be shown here -->
+                            </div>
+                            <p class="guess-question-text" id="guessQuestionText">Who is this creature?</p>
+                        </div>
+
+                        <div class="guess-options" id="guessOptions">
+                            <!-- Answer options will be generated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 3: Trivia Challenge -->
+                <div id="triviaGame" class="game-container" style="display: none;">
+                    <div class="game-header">
+                        <button class="back-button" onclick="returnToHub()">← Back to Hub</button>
+                        <h2 class="game-title">Creature Trivia Challenge</h2>
+                        <div class="game-controls">
+                            <select id="triviaCategory" class="difficulty-select">
+                                <option value="all">All Categories</option>
+                                <option value="stats">Stats</option>
+                                <option value="lore">Lore</option>
+                                <option value="combat">Combat</option>
+                                <option value="locations">Locations</option>
+                            </select>
+                            <button class="control-button" onclick="resetTriviaGame()">🔄 New Game</button>
+                        </div>
+                    </div>
+
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Question:</span>
+                            <span class="stat-value" id="triviaQuestion">1/10</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Score:</span>
+                            <span class="stat-value" id="triviaScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Time Left:</span>
+                            <span class="stat-value" id="triviaTimer">30s</span>
+                        </div>
+                    </div>
+
+                    <div class="trivia-content">
+                        <div class="trivia-question-card">
+                            <div class="trivia-category" id="triviaQuestionCategory">Stats</div>
+                            <p class="trivia-question-text" id="triviaQuestionText"></p>
+                        </div>
+
+                        <div class="trivia-options" id="triviaOptions">
+                            <!-- Answer options will be generated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Leaderboard Section -->
+                    <div class="leaderboard-section">
+                        <h3 class="leaderboard-title">🏆 Leaderboard</h3>
+                        <div class="leaderboard-list" id="triviaLeaderboard">
+                            <!-- Leaderboard entries will be generated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game 4: Speed Identification -->
+                <div id="speedGame" class="game-container" style="display: none;">
+                    <div class="game-header">
+                        <button class="back-button" onclick="returnToHub()">← Back to Hub</button>
+                        <h2 class="game-title">Speed Identification</h2>
+                        <div class="game-controls">
+                            <button class="control-button" id="speedStartButton" onclick="startSpeedRound()">▶ Start</button>
+                        </div>
+                    </div>
+
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Time:</span>
+                            <span class="stat-value" id="speedTimer">30s</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Score:</span>
+                            <span class="stat-value" id="speedScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Streak:</span>
+                            <span class="stat-value" id="speedStreak">0</span>
+                        </div>
+                    </div>
+
+                    <div class="speed-content">
+                        <div class="speed-creature-display" id="speedCreatureDisplay">
+                            <div class="speed-instructions">
+                                <p>🎯 Click START to begin the challenge!</p>
+                                <p>Identify as many creatures as you can in 30 seconds</p>
+                                <p>Build streaks for bonus points!</p>
+                            </div>
+                        </div>
+
+                        <div class="speed-input-section" id="speedInputSection" style="display: none;">
+                            <input
+                                type="text"
+                                id="speedInput"
+                                class="speed-input"
+                                placeholder="Type the creature name..."
+                                autocomplete="off"
+                            >
+                            <button class="speed-submit-button" onclick="submitSpeedAnswer()">Submit</button>
+                            <button class="speed-skip-button" onclick="skipSpeedQuestion()">Skip</button>
+                        </div>
+
+                        <div class="speed-feedback" id="speedFeedback"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Victory Modal -->
+        <div id="victoryModal" class="modal" style="display: none;">
+            <div class="modal-content victory-modal">
+                <button class="modal-close" onclick="closeVictoryModal()">×</button>
+                <div class="victory-header">
+                    <div class="victory-icon">🎉</div>
+                    <h2 class="victory-title" id="victoryTitle">Victory!</h2>
+                </div>
+                <div class="victory-stats" id="victoryStats">
+                    <!-- Stats will be populated by JS -->
+                </div>
+                <div class="victory-actions">
+                    <button class="victory-button primary" id="victoryPlayAgain">Play Again</button>
+                    <button class="victory-button secondary" onclick="closeVictoryModal(); returnToHub();">Back to Hub</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="mini-games.js"></script>
+</body>
+</html>
