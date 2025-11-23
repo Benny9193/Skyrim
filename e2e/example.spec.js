@@ -72,6 +72,54 @@ test.describe('Character Detail View', () => {
   });
 });
 
+test.describe('Location Detail View', () => {
+  test('should load location viewer', async ({ page }) => {
+    await page.goto('/location.html');
+
+    await expect(page).toHaveTitle(/Location Viewer/i);
+  });
+
+  test('should have 3D canvas', async ({ page }) => {
+    await page.goto('/location.html?id=1');
+
+    const canvas = await page.locator('#locationCanvas');
+    await expect(canvas).toBeVisible();
+  });
+
+  test('should have navigation controls', async ({ page }) => {
+    await page.goto('/location.html?id=1');
+
+    const prevBtn = await page.locator('#prevLocationBtn');
+    const nextBtn = await page.locator('#nextLocationBtn');
+    await expect(prevBtn).toBeVisible();
+    await expect(nextBtn).toBeVisible();
+  });
+
+  test('should have location information sections', async ({ page }) => {
+    await page.goto('/location.html?id=1');
+    await page.waitForLoadState('networkidle');
+
+    // Check for location info display
+    const locationInfo = await page.locator('[class*="location"], [id*="location"]').count();
+    expect(locationInfo).toBeGreaterThan(0);
+  });
+});
+
+test.describe('Locations Gallery', () => {
+  test('should load locations list', async ({ page }) => {
+    await page.goto('/locations.html');
+
+    await expect(page).toHaveTitle(/Locations/i);
+  });
+
+  test('should have filter controls', async ({ page }) => {
+    await page.goto('/locations.html');
+
+    const filters = await page.locator('[class*="filter"], [id*="filter"]').count();
+    expect(filters).toBeGreaterThan(0);
+  });
+});
+
 test.describe('Responsive Design', () => {
   test('should work on mobile viewport', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
