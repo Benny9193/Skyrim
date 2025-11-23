@@ -103,19 +103,34 @@ window.addEventListener('scroll', () => {
         // Parallax background
         hero.style.transform = `translateY(${scrollTop * 0.5}px)`;
 
-        // Parallax icon
+        // Parallax icon with enhanced rotation and scale
         if (heroIcon) {
-            heroIcon.style.transform = `translateY(${scrollTop * 0.3}px) rotate(${scrollTop * 0.05}deg)`;
+            const rotation = scrollTop * 0.05;
+            const scale = Math.max(1 - scrollTop * 0.0005, 0.7);
+            heroIcon.style.transform = `translateY(${scrollTop * 0.3}px) rotate(${rotation}deg) scale(${scale})`;
         }
     }
 
-    // Parallax for section icons
+    // Parallax for section icons with rotation
     const quickIcons = document.querySelectorAll('.quick-icon');
     quickIcons.forEach((icon, index) => {
         const rect = icon.getBoundingClientRect();
         const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
         if (scrollPercent > 0 && scrollPercent < 1) {
-            icon.style.transform = `translateY(${-(scrollPercent * 20 - 10)}px)`;
+            const translateY = -(scrollPercent * 20 - 10);
+            const rotate = (scrollPercent - 0.5) * 5;
+            icon.style.transform = `translateY(${translateY}px) rotate(${rotate}deg)`;
+        }
+    });
+
+    // Parallax for cards
+    const cards = document.querySelectorAll('.quick-card, .new-feature-card');
+    cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+        if (scrollPercent > 0 && scrollPercent < 1.2) {
+            const translateY = (scrollPercent - 0.5) * -30;
+            card.style.transform = `translateY(${translateY}px)`;
         }
     });
 
@@ -204,9 +219,93 @@ const animationObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
+// Add floating particles to hero section
+function createParticles() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const particleContainer = document.createElement('div');
+    particleContainer.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    `;
+    hero.insertBefore(particleContainer, hero.firstChild);
+
+    // Create 20 particles
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        const size = Math.random() * 4 + 2;
+        const left = Math.random() * 100;
+        const animationDuration = Math.random() * 20 + 15;
+        const delay = Math.random() * -20;
+
+        particle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: rgba(255, 255, 255, ${Math.random() * 0.3 + 0.2});
+            border-radius: 50%;
+            left: ${left}%;
+            bottom: -10px;
+            animation: floatUp ${animationDuration}s ${delay}s linear infinite;
+            box-shadow: 0 0 ${size * 2}px rgba(255, 255, 255, 0.5);
+        `;
+        particleContainer.appendChild(particle);
+    }
+
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Mouse movement effect on cards
+document.addEventListener('mousemove', (e) => {
+    const cards = document.querySelectorAll('.quick-card, .app-card, .feature-card');
+    cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const cardCenterX = rect.left + rect.width / 2;
+        const cardCenterY = rect.top + rect.height / 2;
+        const angleX = (e.clientY - cardCenterY) / 30;
+        const angleY = (cardCenterX - e.clientX) / 30;
+
+        if (Math.abs(e.clientX - cardCenterX) < 300 && Math.abs(e.clientY - cardCenterY) < 300) {
+            card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
+        } else {
+            card.style.transform = '';
+        }
+    });
+});
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Landing page loaded');
+
+    // Create particles
+    createParticles();
 
     // Hide loader when page is ready
     window.addEventListener('load', () => {
@@ -244,4 +343,43 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.animate-on-scroll').forEach(section => {
         animationObserver.observe(section);
     });
+
+    // Add ripple effect to buttons
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                left: ${x}px;
+                top: ${y}px;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+
+    // Add ripple animation
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(rippleStyle);
 });

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Builder - Skyrim Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="character-builder.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header builder-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Character Builder</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="builder-main">
+            <div class="container">
+                <!-- Character Info Section -->
+                <section class="character-info-section">
+                    <h2>Character Information</h2>
+                    <div class="character-form">
+                        <div class="form-group">
+                            <label for="characterName">Character Name</label>
+                            <input type="text" id="characterName" placeholder="Enter name..." class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="characterRace">Race</label>
+                            <select id="characterRace" class="form-select">
+                                <option value="">Select Race</option>
+                                <option value="Nord">Nord</option>
+                                <option value="Imperial">Imperial</option>
+                                <option value="Breton">Breton</option>
+                                <option value="Redguard">Redguard</option>
+                                <option value="High Elf">High Elf (Altmer)</option>
+                                <option value="Wood Elf">Wood Elf (Bosmer)</option>
+                                <option value="Dark Elf">Dark Elf (Dunmer)</option>
+                                <option value="Orc">Orc (Orsimer)</option>
+                                <option value="Khajiit">Khajiit</option>
+                                <option value="Argonian">Argonian</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="characterLevel">Target Level</label>
+                            <input type="number" id="characterLevel" min="1" max="81" value="50" class="form-input">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Build Type Section -->
+                <section class="build-type-section">
+                    <h2>Build Type</h2>
+                    <div class="build-types">
+                        <button class="build-type-btn" data-build="warrior">
+                            <span class="build-icon">⚔️</span>
+                            <span class="build-name">Warrior</span>
+                        </button>
+                        <button class="build-type-btn" data-build="mage">
+                            <span class="build-icon">🔮</span>
+                            <span class="build-name">Mage</span>
+                        </button>
+                        <button class="build-type-btn" data-build="thief">
+                            <span class="build-icon">🗡️</span>
+                            <span class="build-name">Thief</span>
+                        </button>
+                        <button class="build-type-btn" data-build="hybrid">
+                            <span class="build-icon">⭐</span>
+                            <span class="build-name">Hybrid</span>
+                        </button>
+                        <button class="build-type-btn" data-build="custom">
+                            <span class="build-icon">🛠️</span>
+                            <span class="build-name">Custom</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Skills Selection -->
+                <section class="skills-section">
+                    <h2>Primary Skills</h2>
+                    <p class="subtitle">Select 5-7 skills to focus on</p>
+                    <div class="skills-grid" id="skillsGrid">
+                        <!-- Combat Skills -->
+                        <div class="skill-category">
+                            <h3>Combat</h3>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="One-Handed">
+                                <span>⚔️ One-Handed</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Two-Handed">
+                                <span>🪓 Two-Handed</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Archery">
+                                <span>🏹 Archery</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Block">
+                                <span>🛡️ Block</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Heavy Armor">
+                                <span>🛡️ Heavy Armor</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Smithing">
+                                <span>🔨 Smithing</span>
+                            </label>
+                        </div>
+
+                        <!-- Magic Skills -->
+                        <div class="skill-category">
+                            <h3>Magic</h3>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Destruction">
+                                <span>💥 Destruction</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Restoration">
+                                <span>✨ Restoration</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Alteration">
+                                <span>🔄 Alteration</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Illusion">
+                                <span>👁️ Illusion</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Conjuration">
+                                <span>👻 Conjuration</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Enchanting">
+                                <span>✨ Enchanting</span>
+                            </label>
+                        </div>
+
+                        <!-- Stealth Skills -->
+                        <div class="skill-category">
+                            <h3>Stealth</h3>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Sneak">
+                                <span>🌙 Sneak</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Light Armor">
+                                <span>🥋 Light Armor</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Pickpocket">
+                                <span>👜 Pickpocket</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Lockpicking">
+                                <span>🔓 Lockpicking</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Speech">
+                                <span>💬 Speech</span>
+                            </label>
+                            <label class="skill-checkbox">
+                                <input type="checkbox" name="skill" value="Alchemy">
+                                <span>⚗️ Alchemy</span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recommended Equipment -->
+                <section class="equipment-section">
+                    <h2>Recommended Equipment</h2>
+                    <div id="equipmentRecommendations">
+                        <p class="no-recommendations">Select a build type to see equipment recommendations</p>
+                    </div>
+                </section>
+
+                <!-- Standing Stone -->
+                <section class="stone-section">
+                    <h2>Standing Stone</h2>
+                    <select id="standingStone" class="form-select">
+                        <option value="">Select Standing Stone</option>
+                        <option value="Warrior">The Warrior (Combat skills 20% faster)</option>
+                        <option value="Mage">The Mage (Magicka skills 20% faster)</option>
+                        <option value="Thief">The Thief (Stealth skills 20% faster)</option>
+                        <option value="Lord">The Lord (50 armor, 25% magic resistance)</option>
+                        <option value="Lady">The Lady (Regenerate Health and Stamina faster)</option>
+                        <option value="Steed">The Steed (+100 carry weight, no armor penalties)</option>
+                        <option value="Atronach">The Atronach (50 magicka, 50% spell absorption)</option>
+                        <option value="Apprentice">The Apprentice (Regenerate magicka faster)</option>
+                        <option value="Lover">The Lover (All skills improve 15% faster)</option>
+                    </select>
+                </section>
+
+                <!-- Build Summary -->
+                <section class="summary-section">
+                    <h2>Build Summary</h2>
+                    <div class="build-summary" id="buildSummary">
+                        <p class="no-summary">Configure your character to see a build summary</p>
+                    </div>
+                    <div class="summary-actions">
+                        <button class="btn btn--primary" id="saveBuildBtn">Save Build</button>
+                        <button class="btn btn--secondary" id="exportBuildBtn">Export Build</button>
+                        <button class="btn btn--secondary" id="resetBuildBtn">Reset</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="builder-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="magic.html">Magic</a>
+                    <span class="separator">•</span>
+                    <a href="alchemy.html">Alchemy</a>
+                </div>
+                <p>&copy; 2024 Skyrim Reference. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="character-builder.js"></script>
+</body>
+</html>

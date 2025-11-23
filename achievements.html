@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievement Tracker - Skyrim Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="achievements.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header achievements-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Achievement Tracker</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Progress Overview -->
+        <section class="progress-overview">
+            <div class="container">
+                <div class="progress-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="completedCount">0</div>
+                            <div class="stat-label">Completed</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="progressPercent">0%</div>
+                            <div class="stat-label">Progress</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="totalPoints">0</div>
+                            <div class="stat-label">Points Earned</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="achievements-main">
+            <div class="container">
+                <!-- Filters -->
+                <div class="section-header">
+                    <h2>Achievements</h2>
+                    <div class="controls">
+                        <input type="text" id="achievementSearch" class="search-input" placeholder="Search achievements...">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="Main Quest">Main Quest</option>
+                            <option value="Companions">Companions</option>
+                            <option value="College of Winterhold">College of Winterhold</option>
+                            <option value="Thieves Guild">Thieves Guild</option>
+                            <option value="Dark Brotherhood">Dark Brotherhood</option>
+                            <option value="Exploration">Exploration</option>
+                            <option value="General">General</option>
+                            <option value="Combat">Combat</option>
+                            <option value="Skills">Skills</option>
+                        </select>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="all">All Achievements</option>
+                            <option value="completed">Completed</option>
+                            <option value="incomplete">Incomplete</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Achievements Grid -->
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="achievements-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="map.html">Map</a>
+                    <span class="separator">•</span>
+                    <a href="magic.html">Magic</a>
+                </div>
+                <p>&copy; 2024 Skyrim Reference. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="achievements.js"></script>
+</body>
+</html>

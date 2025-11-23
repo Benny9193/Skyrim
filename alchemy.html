@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alchemy Lab - Skyrim Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="alchemy.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header alchemy-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Alchemy Lab</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="alchemy-main">
+            <div class="container">
+                <!-- Potion Calculator -->
+                <section class="calculator-section">
+                    <h2>Potion Calculator</h2>
+                    <p class="subtitle">Select up to 3 ingredients to discover potion effects</p>
+
+                    <div class="selected-ingredients">
+                        <div class="ingredient-slot" data-slot="1">
+                            <span class="slot-number">1</span>
+                            <span class="slot-text">Select Ingredient</span>
+                        </div>
+                        <div class="ingredient-slot" data-slot="2">
+                            <span class="slot-number">2</span>
+                            <span class="slot-text">Select Ingredient</span>
+                        </div>
+                        <div class="ingredient-slot" data-slot="3">
+                            <span class="slot-number">3</span>
+                            <span class="slot-text">Select Ingredient</span>
+                        </div>
+                    </div>
+
+                    <div class="potion-result" id="potionResult">
+                        <h3>Potion Effects</h3>
+                        <div id="potionEffects">
+                            <p class="no-effects">Select 2 or 3 ingredients to see effects</p>
+                        </div>
+                        <button class="btn btn--secondary btn--sm" id="clearBtn">Clear All</button>
+                    </div>
+                </section>
+
+                <!-- Ingredients List -->
+                <section class="ingredients-section">
+                    <div class="section-header">
+                        <h2>Ingredients Database</h2>
+                        <p class="subtitle">All alchemical ingredients in Skyrim</p>
+                        <div class="controls">
+                            <input type="text" id="ingredientSearch" class="search-input" placeholder="Search ingredients...">
+                            <select id="typeFilter" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="Plant">Plant</option>
+                                <option value="Animal Part">Animal Part</option>
+                                <option value="Fungus">Fungus</option>
+                                <option value="Daedric">Daedric</option>
+                            </select>
+                            <select id="effectFilter" class="filter-select">
+                                <option value="">All Effects</option>
+                                <option value="Restore Health">Restore Health</option>
+                                <option value="Restore Magicka">Restore Magicka</option>
+                                <option value="Restore Stamina">Restore Stamina</option>
+                                <option value="Damage Health">Damage Health</option>
+                                <option value="Damage Magicka">Damage Magicka</option>
+                                <option value="Damage Stamina">Damage Stamina</option>
+                                <option value="Fortify Health">Fortify Health</option>
+                                <option value="Invisibility">Invisibility</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-container" id="ingredientsGrid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="alchemy-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="map.html">Map</a>
+                    <span class="separator">•</span>
+                    <a href="magic.html">Magic</a>
+                </div>
+                <p>&copy; 2024 Skyrim Reference. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="alchemy.js"></script>
+</body>
+</html>

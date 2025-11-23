@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "name": "Unrelenting Force",
+    "words": ["Fus", "Ro", "Dah"],
+    "effects": [
+      "Fus - Staggers enemies",
+      "Fus Ro - Staggers and pushes enemies back",
+      "Fus Ro Dah - Massive force pushes enemies away"
+    ],
+    "cooldown": [15, 20, 45],
+    "locations": [
+      "Bleak Falls Barrow (Fus)",
+      "High Hrothgar (Ro, Dah)",
+      "Main Quest reward"
+    ],
+    "description": "The signature Thu'um of the Dragonborn. Shouts enemies back with the force of a dragon's voice."
+  },
+  {
+    "id": 2,
+    "name": "Fire Breath",
+    "words": ["Yol", "Toor", "Shul"],
+    "effects": [
+      "Yol - Breathes fire dealing 50 damage",
+      "Yol Toor - Breathes fire dealing 70 damage",
+      "Yol Toor Shul - Breathes fire dealing 90 damage"
+    ],
+    "cooldown": [30, 50, 100],
+    "locations": [
+      "Dustman's Cairn (Yol)",
+      "Shalidor's Maze (Toor)",
+      "Throat of the World - Paarthurnax teaches (Shul)"
+    ],
+    "description": "Inhale air, exhale flame, and behold the Thu'um as inferno."
+  },
+  {
+    "id": 3,
+    "name": "Whirlwind Sprint",
+    "words": ["Wuld", "Nah", "Kest"],
+    "effects": [
+      "Wuld - Sprint forward rapidly",
+      "Wuld Nah - Sprint forward very rapidly",
+      "Wuld Nah Kest - Sprint forward extremely rapidly"
+    ],
+    "cooldown": [20, 25, 35],
+    "locations": [
+      "High Hrothgar - Dead Crone Rock (Wuld)",
+      "Volskygge (Nah)",
+      "Shriekwind Bastion (Kest)"
+    ],
+    "description": "The Thu'um rushes forward, carrying you in its wake with the speed of a tempest."
+  },
+  {
+    "id": 4,
+    "name": "Become Ethereal",
+    "words": ["Feim", "Zii", "Gron"],
+    "effects": [
+      "Feim - Ethereal for 8 seconds",
+      "Feim Zii - Ethereal for 13 seconds",
+      "Feim Zii Gron - Ethereal for 18 seconds"
+    ],
+    "cooldown": [40, 50, 60],
+    "locations": [
+      "Ironbind Barrow (Feim)",
+      "Ustengrav (Zii)",
+      "Lost Valley Redoubt (Gron)"
+    ],
+    "description": "The Thu'um reaches out to the Void, changing your form to one that cannot harm, or be harmed."
+  },
+  {
+    "id": 5,
+    "name": "Dragonrend",
+    "words": ["Joor", "Zah", "Frul"],
+    "effects": [
+      "Joor Zah Frul - Forces dragons to land and drains their vitality"
+    ],
+    "cooldown": [15],
+    "locations": [
+      "Learned during 'Alduin's Bane' main quest"
+    ],
+    "description": "Your voice lashes out at a dragon's very soul, forcing the beast to land. Created by mortals, dragons cannot learn this shout."
+  },
+  {
+    "id": 6,
+    "name": "Marked for Death",
+    "words": ["Krii", "Lun", "Aus"],
+    "effects": [
+      "Krii - Drains 75 armor and 25 health per second for 30 seconds",
+      "Krii Lun - Drains 150 armor and 50 health per second for 40 seconds",
+      "Krii Lun Aus - Drains 225 armor and 75 health per second for 60 seconds"
+    ],
+    "cooldown": [20, 30, 40],
+    "locations": [
+      "Autumnwatch Tower (Krii)",
+      "Forsaken Cave (Lun)",
+      "Dark Brotherhood Sanctuary (Aus)"
+    ],
+    "description": "Speak and let your voice herald doom, as an opponent's armor and lifeforce are weakened."
+  },
+  {
+    "id": 7,
+    "name": "Slow Time",
+    "words": ["Tiid", "Klo", "Ul"],
+    "effects": [
+      "Tiid - Slows time by 50% for 8 seconds",
+      "Tiid Klo - Slows time by 70% for 12 seconds",
+      "Tiid Klo Ul - Slows time by 90% for 16 seconds"
+    ],
+    "cooldown": [30, 50, 90],
+    "locations": [
+      "Hag's End (Tiid)",
+      "Korvanjund (Klo)",
+      "Labyrinthian (Ul)"
+    ],
+    "description": "Shout at time, and command it to obey, as the world around you stands still."
+  },
+  {
+    "id": 8,
+    "name": "Call Dragon",
+    "words": ["Od", "Ah", "Viing"],
+    "effects": [
+      "Od Ah Viing - Summons Odahviing to fight for you"
+    ],
+    "cooldown": [300],
+    "locations": [
+      "Learned during 'The Fallen' main quest"
+    ],
+    "description": "Calls the dragon Odahviing to fight by your side. Can only be used outdoors."
+  }
+]

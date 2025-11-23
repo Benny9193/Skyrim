@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "name": "One-Handed",
+    "type": "Combat",
+    "description": "The One-Handed skill determines your damage with one-handed weapons including daggers, swords, maces, and war axes.",
+    "governing": "Warrior",
+    "icon": "⚔️",
+    "perks": [
+      {"name": "Armsman", "ranks": 5, "description": "One-Handed weapons do 20% more damage per rank", "required": 0},
+      {"name": "Bladesman", "ranks": 3, "description": "Attacks with swords have a 10% chance per rank of doing critical damage", "required": 30},
+      {"name": "Bone Breaker", "ranks": 3, "description": "Attacks with maces ignore 25% of armor per rank", "required": 30},
+      {"name": "Hack and Slash", "ranks": 3, "description": "Attacks with war axes cause extra bleeding damage", "required": 30},
+      {"name": "Dual Flurry", "ranks": 2, "description": "Dual wielding attacks are 20% faster per rank", "required": 30},
+      {"name": "Savage Strike", "ranks": 1, "description": "Standing power attacks do 25% bonus damage with a chance to decapitate", "required": 50},
+      {"name": "Critical Charge", "ranks": 1, "description": "Can do a one-handed power attack while sprinting", "required": 50},
+      {"name": "Dual Savagery", "ranks": 1, "description": "Dual wielding power attacks do 50% bonus damage", "required": 70},
+      {"name": "Paralyzing Strike", "ranks": 1, "description": "Backwards power attack has a 25% chance to paralyze", "required": 100}
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Destruction",
+    "type": "Magic",
+    "description": "The Destruction skill determines the effectiveness of offensive spells like fire, frost, and shock magic.",
+    "governing": "Mage",
+    "icon": "🔥",
+    "perks": [
+      {"name": "Novice Destruction", "ranks": 1, "description": "Cast Novice level Destruction spells for half magicka", "required": 0},
+      {"name": "Destruction Dual Casting", "ranks": 1, "description": "Dual casting a Destruction spell overcharges it for more effectiveness", "required": 20},
+      {"name": "Augmented Flames", "ranks": 2, "description": "Fire spells do 25% more damage per rank", "required": 30},
+      {"name": "Augmented Frost", "ranks": 2, "description": "Frost spells do 25% more damage per rank", "required": 30},
+      {"name": "Augmented Shock", "ranks": 2, "description": "Shock spells do 25% more damage per rank", "required": 30},
+      {"name": "Intense Flames", "ranks": 1, "description": "Fire spells can set enemies on fire", "required": 50},
+      {"name": "Deep Freeze", "ranks": 1, "description": "Frost spells can freeze enemies", "required": 60},
+      {"name": "Disintegrate", "ranks": 1, "description": "Shock spells disintegrate targets", "required": 70},
+      {"name": "Master Destruction", "ranks": 1, "description": "Cast Master level Destruction spells for half magicka", "required": 100}
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Sneak",
+    "type": "Stealth",
+    "description": "The Sneak skill governs your ability to escape detection. Higher skill levels improve stealth and sneak attack damage.",
+    "governing": "Thief",
+    "icon": "🥷",
+    "perks": [
+      {"name": "Stealth", "ranks": 5, "description": "You are 20% harder to detect per rank when sneaking", "required": 0},
+      {"name": "Muffled Movement", "ranks": 1, "description": "Noise from armor is reduced 50%", "required": 30},
+      {"name": "Light Foot", "ranks": 1, "description": "You won't trigger pressure plates", "required": 40},
+      {"name": "Silent Roll", "ranks": 1, "description": "Sprinting while sneaking executes a silent forward roll", "required": 50},
+      {"name": "Backstab", "ranks": 1, "description": "Sneak attacks with one-handed weapons do 6x damage", "required": 30},
+      {"name": "Deadly Aim", "ranks": 1, "description": "Sneak attacks with bows do 3x damage", "required": 40},
+      {"name": "Assassin's Blade", "ranks": 1, "description": "Sneak attacks with daggers do 15x damage", "required": 50},
+      {"name": "Silence", "ranks": 1, "description": "Walking and running does not affect detection", "required": 70},
+      {"name": "Shadow Warrior", "ranks": 1, "description": "Crouching stops combat for a moment and forces distant opponents to search for a target", "required": 100}
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Archery",
+    "type": "Combat",
+    "description": "The Archery skill affects your damage and accuracy with bows and crossbows.",
+    "governing": "Thief",
+    "icon": "🏹",
+    "perks": [
+      {"name": "Overdraw", "ranks": 5, "description": "Bows do 20% more damage per rank", "required": 0},
+      {"name": "Eagle Eye", "ranks": 1, "description": "Pressing Block while aiming will zoom in your view", "required": 30},
+      {"name": "Steady Hand", "ranks": 2, "description": "Zooming in with a bow slows time by 25% per rank", "required": 40},
+      {"name": "Power Shot", "ranks": 1, "description": "Arrows stagger all but the largest opponents 50% of the time", "required": 50},
+      {"name": "Quick Shot", "ranks": 1, "description": "Can draw a bow 30% faster", "required": 70},
+      {"name": "Ranger", "ranks": 1, "description": "Able to move faster with a drawn bow", "required": 60},
+      {"name": "Critical Shot", "ranks": 3, "description": "10% chance per rank of a critical hit that does extra damage", "required": 30},
+      {"name": "Bullseye", "ranks": 1, "description": "15% chance of paralyzing the target for a few seconds", "required": 100}
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Smithing",
+    "type": "Crafting",
+    "description": "The Smithing skill allows you to forge weapons and armor at forges and improve them at grindstones and workbenches.",
+    "governing": "Warrior",
+    "icon": "🔨",
+    "perks": [
+      {"name": "Steel Smithing", "ranks": 1, "description": "Can create Steel armor and weapons at forges", "required": 0},
+      {"name": "Arcane Blacksmith", "ranks": 1, "description": "You can improve magical weapons and armor", "required": 60},
+      {"name": "Dwarven Smithing", "ranks": 1, "description": "Can create Dwarven armor and weapons at forges", "required": 30},
+      {"name": "Elven Smithing", "ranks": 1, "description": "Can create Elven armor and weapons at forges", "required": 30},
+      {"name": "Advanced Armors", "ranks": 1, "description": "Can create Scaled and Plate armor at forges", "required": 50},
+      {"name": "Glass Smithing", "ranks": 1, "description": "Can create Glass armor and weapons at forges", "required": 70},
+      {"name": "Ebony Smithing", "ranks": 1, "description": "Can create Ebony armor and weapons at forges", "required": 80},
+      {"name": "Daedric Smithing", "ranks": 1, "description": "Can create Daedric armor and weapons at forges", "required": 90},
+      {"name": "Dragon Armor", "ranks": 1, "description": "Can create Dragon armor at forges", "required": 100}
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Enchanting",
+    "type": "Magic",
+    "description": "The Enchanting skill allows you to add magical effects to your weapons and armor via the use of filled soul gems.",
+    "governing": "Mage",
+    "icon": "✨",
+    "perks": [
+      {"name": "Enchanter", "ranks": 5, "description": "New enchantments are 20% stronger per rank", "required": 0},
+      {"name": "Fire Enchanter", "ranks": 1, "description": "Fire enchantments are 25% stronger", "required": 30},
+      {"name": "Frost Enchanter", "ranks": 1, "description": "Frost enchantments are 25% stronger", "required": 40},
+      {"name": "Storm Enchanter", "ranks": 1, "description": "Shock enchantments are 25% stronger", "required": 50},
+      {"name": "Insightful Enchanter", "ranks": 1, "description": "Skill enchantments are 25% stronger", "required": 50},
+      {"name": "Corpus Enchanter", "ranks": 1, "description": "Health, magicka, and stamina enchantments are 25% stronger", "required": 70},
+      {"name": "Extra Effect", "ranks": 1, "description": "Can put two enchantments on the same item", "required": 100}
+    ]
+  }
+]

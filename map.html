@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Skyrim Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="map.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="app-header map-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Interactive Skyrim Map</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Map Controls -->
+        <div class="map-controls">
+            <div class="container">
+                <div class="controls-row">
+                    <div class="control-group">
+                        <label>Filter:</label>
+                        <button class="control-btn active" data-filter="all">All</button>
+                        <button class="control-btn" data-filter="cities">Cities</button>
+                        <button class="control-btn" data-filter="dungeons">Dungeons</button>
+                        <button class="control-btn" data-filter="landmarks">Landmarks</button>
+                    </div>
+                    <div class="control-group">
+                        <button class="btn btn--sm" id="resetZoomBtn">Reset Zoom</button>
+                        <button class="btn btn--sm" id="toggleLabelsBtn">Toggle Labels</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Map Content -->
+        <main class="map-main">
+            <div class="map-container" id="mapContainer">
+                <div class="map-canvas" id="mapCanvas">
+                    <!-- Map background -->
+                    <div class="map-background">
+                        <svg width="1200" height="800" viewBox="0 0 1200 800" id="mapSvg">
+                            <!-- Background -->
+                            <rect width="1200" height="800" fill="#f4e4c1"/>
+
+                            <!-- Regions -->
+                            <g id="regions" opacity="0.3">
+                                <path d="M 200,100 L 400,80 L 500,150 L 450,250 L 300,220 Z" fill="#8B7355" stroke="#654321" stroke-width="2"/>
+                                <path d="M 400,80 L 650,100 L 700,200 L 550,250 L 500,150 Z" fill="#9acd32" stroke="#6b8e23" stroke-width="2"/>
+                                <path d="M 650,100 L 900,120 L 950,250 L 700,280 L 700,200 Z" fill="#4682b4" stroke="#2f4f4f" stroke-width="2"/>
+                                <path d="M 300,220 L 450,250 L 500,400 L 350,450 L 250,350 Z" fill="#d2691e" stroke="#8b4513" stroke-width="2"/>
+                                <path d="M 550,250 L 700,280 L 750,450 L 550,500 L 500,400 L 450,250 Z" fill="#deb887" stroke="#a0522d" stroke-width="2"/>
+                                <path d="M 700,280 L 950,300 L 1000,500 L 750,550 L 750,450 Z" fill="#778899" stroke="#2f4f4f" stroke-width="2"/>
+                                <path d="M 250,350 L 350,450 L 300,600 L 150,550 Z" fill="#8fbc8f" stroke="#556b2f" stroke-width="2"/>
+                                <path d="M 350,450 L 550,500 L 600,650 L 400,700 L 300,600 Z" fill="#b8860b" stroke="#8b6914" stroke-width="2"/>
+                                <path d="M 550,500 L 750,550 L 800,700 L 600,750 L 600,650 Z" fill="#cd853f" stroke="#8b4513" stroke-width="2"/>
+                            </g>
+
+                            <!-- Location markers -->
+                            <g id="markers">
+                                <!-- Cities -->
+                                <g class="marker" data-type="cities" data-location="1">
+                                    <circle cx="450" cy="200" r="8" fill="#cc0000" stroke="white" stroke-width="2"/>
+                                    <text x="450" y="185" text-anchor="middle" class="map-label" fill="#333" font-size="14" font-weight="bold">Whiterun</text>
+                                </g>
+                                <g class="marker" data-type="cities" data-location="3">
+                                    <circle cx="250" cy="150" r="8" fill="#cc0000" stroke="white" stroke-width="2"/>
+                                    <text x="250" y="135" text-anchor="middle" class="map-label" fill="#333" font-size="14" font-weight="bold">Solitude</text>
+                                </g>
+                                <g class="marker" data-type="cities" data-location="5">
+                                    <circle cx="650" cy="500" r="8" fill="#cc0000" stroke="white" stroke-width="2"/>
+                                    <text x="650" y="485" text-anchor="middle" class="map-label" fill="#333" font-size="14" font-weight="bold">Riften</text>
+                                </g>
+                                <g class="marker" data-type="cities" data-location="6">
+                                    <circle cx="850" cy="180" r="8" fill="#cc0000" stroke="white" stroke-width="2"/>
+                                    <text x="850" y="165" text-anchor="middle" class="map-label" fill="#333" font-size="14" font-weight="bold">Winterhold</text>
+                                </g>
+                                <g class="marker" data-type="cities" data-location="8">
+                                    <circle cx="300" cy="400" r="8" fill="#cc0000" stroke="white" stroke-width="2"/>
+                                    <text x="300" y="385" text-anchor="middle" class="map-label" fill="#333" font-size="14" font-weight="bold">Markarth</text>
+                                </g>
+
+                                <!-- Dungeons -->
+                                <g class="marker" data-type="dungeons" data-location="9">
+                                    <circle cx="400" cy="300" r="6" fill="#666666" stroke="white" stroke-width="2"/>
+                                    <text x="400" y="285" text-anchor="middle" class="map-label" fill="#333" font-size="12">Bleak Falls Barrow</text>
+                                </g>
+                                <g class="marker" data-type="dungeons" data-location="2">
+                                    <circle cx="550" cy="350" r="6" fill="#3366cc" stroke="white" stroke-width="2"/>
+                                    <text x="550" y="335" text-anchor="middle" class="map-label" fill="#333" font-size="12">Blackreach</text>
+                                </g>
+
+                                <!-- Landmarks -->
+                                <g class="marker" data-type="landmarks" data-location="4">
+                                    <circle cx="500" cy="250" r="6" fill="#ffd700" stroke="white" stroke-width="2"/>
+                                    <text x="500" y="235" text-anchor="middle" class="map-label" fill="#333" font-size="12">High Hrothgar</text>
+                                </g>
+                                <g class="marker" data-type="landmarks" data-location="12">
+                                    <circle cx="520" cy="220" r="6" fill="#ffd700" stroke="white" stroke-width="2"/>
+                                    <text x="520" y="205" text-anchor="middle" class="map-label" fill="#333" font-size="12">Throat of the World</text>
+                                </g>
+                                <g class="marker" data-type="landmarks" data-location="10">
+                                    <circle cx="250" cy="450" r="6" fill="#ffd700" stroke="white" stroke-width="2"/>
+                                    <text x="250" y="435" text-anchor="middle" class="map-label" fill="#333" font-size="12">Sky Haven Temple</text>
+                                </g>
+                                <g class="marker" data-type="landmarks" data-location="7">
+                                    <circle cx="600" cy="100" r="6" fill="#ff6600" stroke="white" stroke-width="2"/>
+                                    <text x="600" y="85" text-anchor="middle" class="map-label" fill="#333" font-size="12">Sovngarde</text>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Location Info Panel -->
+                <div class="location-info-panel hidden" id="locationInfo">
+                    <button class="close-btn" id="closeInfoBtn">&times;</button>
+                    <h3 id="infoName">Location Name</h3>
+                    <p id="infoType">Type</p>
+                    <p id="infoDescription">Description...</p>
+                    <a href="#" id="infoLink" class="btn btn--primary btn--sm">View Details</a>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="map-legend">
+                <h4>Legend</h4>
+                <div class="legend-item">
+                    <span class="legend-marker" style="background: #cc0000;"></span>
+                    <span>Cities</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-marker" style="background: #666666;"></span>
+                    <span>Dungeons</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-marker" style="background: #ffd700;"></span>
+                    <span>Landmarks</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-marker" style="background: #3366cc;"></span>
+                    <span>Special</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="map-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="bestiary.html">Bestiary</a>
+                </div>
+                <p>&copy; 2024 Skyrim Map. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="map.js"></script>
+</body>
+</html>

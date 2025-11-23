@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - Skyrim Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="library.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header library-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Library of Skyrim</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="library-main">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <h2>Books & Lore</h2>
+                    <p class="subtitle">Discover the knowledge and stories of Tamriel</p>
+                    <div class="controls">
+                        <input type="text" id="bookSearch" class="search-input" placeholder="Search books...">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">All Categories</option>
+                            <option value="Skill Book">Skill Books</option>
+                            <option value="Lore">Lore</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Historical">Historical</option>
+                            <option value="Poetry">Poetry</option>
+                        </select>
+                        <select id="skillFilter" class="filter-select">
+                            <option value="">All Skills</option>
+                            <option value="Archery">Archery</option>
+                            <option value="Two-Handed">Two-Handed</option>
+                            <option value="One-Handed">One-Handed</option>
+                            <option value="Conjuration">Conjuration</option>
+                            <option value="Illusion">Illusion</option>
+                            <option value="Enchanting">Enchanting</option>
+                        </select>
+                        <select id="rarityFilter" class="filter-select">
+                            <option value="">All Rarities</option>
+                            <option value="Common">Common</option>
+                            <option value="Uncommon">Uncommon</option>
+                            <option value="Rare">Rare</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Books Grid -->
+                <div class="books-grid" id="booksGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Book Modal -->
+        <div class="book-modal hidden" id="bookModal">
+            <div class="modal-backdrop" id="modalBackdrop"></div>
+            <div class="modal-content">
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+                <div class="book-cover">
+                    <div class="book-spine"></div>
+                    <div class="book-title" id="modalBookTitle">Book Title</div>
+                </div>
+                <div class="book-details">
+                    <h2 id="modalTitle">Book Title</h2>
+                    <p class="book-author" id="modalAuthor">By Author</p>
+                    <div class="book-meta">
+                        <span class="meta-item" id="modalCategory">Category</span>
+                        <span class="meta-item" id="modalValue">Value: 0 gold</span>
+                        <span class="meta-item" id="modalRarity">Rarity</span>
+                    </div>
+                    <div class="skill-info" id="modalSkillInfo">
+                        <!-- Only shown for skill books -->
+                    </div>
+                    <p class="book-description" id="modalDescription">Description</p>
+                    <div class="book-excerpt">
+                        <h3>Excerpt</h3>
+                        <p id="modalExcerpt">Book excerpt...</p>
+                    </div>
+                    <div class="book-locations">
+                        <h3>Where to Find</h3>
+                        <ul id="modalLocations">
+                            <!-- Locations list -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="library-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="map.html">Map</a>
+                    <span class="separator">•</span>
+                    <a href="magic.html">Magic</a>
+                </div>
+                <p>&copy; 2024 Skyrim Reference. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="library.js"></script>
+</body>
+</html>
