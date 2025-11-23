@@ -1,0 +1,430 @@
+/* Codex Styles */
+
+/* Header */
+.codex-header {
+    background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+}
+
+/* Tabs Navigation */
+.tabs-nav {
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-card-border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.tabs {
+    display: flex;
+    gap: 4px;
+    padding: 8px 0;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: var(--color-text);
+    background: rgba(139, 69, 19, 0.1);
+}
+
+.tab-btn.active {
+    color: #8B4513;
+    border-bottom-color: #8B4513;
+    background: rgba(139, 69, 19, 0.05);
+}
+
+/* Main Content */
+.codex-main {
+    padding: 32px 0;
+    min-height: 60vh;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.section-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-card-border);
+}
+
+.section-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+}
+
+.subtitle {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background: var(--color-background);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #8B4513;
+}
+
+.filter-select {
+    padding: 10px 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background: var(--color-background);
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #8B4513;
+}
+
+/* Grid Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Card Styles */
+.card-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card-item:hover {
+    border-color: #8B4513;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    background: var(--color-gray-200);
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 8px 0;
+}
+
+.card-type {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 12px 0;
+}
+
+.card-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+}
+
+.card-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+}
+
+.badge-main {
+    background: #FFD700;
+    color: #333;
+}
+
+.badge-guild {
+    background: #4169E1;
+    color: white;
+}
+
+.badge-side {
+    background: #32CD32;
+    color: white;
+}
+
+.badge-easy {
+    background: #90EE90;
+    color: #333;
+}
+
+.badge-normal {
+    background: #FFA500;
+    color: white;
+}
+
+.badge-hard {
+    background: #FF4500;
+    color: white;
+}
+
+.badge-deadly {
+    background: #8B008B;
+    color: white;
+}
+
+/* Skills Specific */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.skill-card {
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    border-color: #8B4513;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-card-border);
+}
+
+.skill-icon {
+    font-size: 40px;
+}
+
+.skill-info h3 {
+    margin: 0 0 4px 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+}
+
+.skill-type {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.skill-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.perks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.perk-item {
+    padding: 10px 12px;
+    background: var(--color-gray-200);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+}
+
+.perk-name {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-right: 8px;
+}
+
+.perk-ranks {
+    display: inline-block;
+    padding: 2px 6px;
+    background: #8B4513;
+    color: white;
+    border-radius: 3px;
+    font-size: var(--font-size-xs);
+    margin-right: 8px;
+}
+
+.perk-desc {
+    color: var(--color-text-secondary);
+}
+
+/* Items Specific */
+.item-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-card-border);
+}
+
+.stat-item {
+    font-size: var(--font-size-xs);
+}
+
+.stat-label {
+    color: var(--color-text-secondary);
+    display: block;
+}
+
+.stat-value {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+    display: block;
+}
+
+/* Factions Specific */
+.faction-members {
+    margin-top: 12px;
+}
+
+.faction-members-title {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+}
+
+.members-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.member-badge {
+    padding: 4px 8px;
+    background: rgba(139, 69, 19, 0.1);
+    border: 1px solid rgba(139, 69, 19, 0.3);
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    color: var(--color-text);
+}
+
+/* Footer */
+.codex-footer {
+    margin-top: 60px;
+    padding: 32px 0;
+    border-top: 1px solid var(--color-card-border);
+    text-align: center;
+}
+
+.footer-links {
+    margin-bottom: 12px;
+    font-size: var(--font-size-sm);
+}
+
+.footer-links a {
+    color: #8B4513;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+}
+
+.footer-links .separator {
+    color: var(--color-text-secondary);
+    margin: 0 8px;
+}
+
+.codex-footer p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .codex-main {
+        padding: 16px 0;
+    }
+
+    .section-header h2 {
+        font-size: 24px;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tabs {
+        gap: 0;
+    }
+
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: var(--font-size-sm);
+    }
+}

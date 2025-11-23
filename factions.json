@@ -1,0 +1,176 @@
+[
+  {
+    "id": 1,
+    "name": "The Companions",
+    "type": "Guild",
+    "location": "Jorrvaskr, Whiterun",
+    "leader": "Kodlak Whitemane",
+    "alignment": "Neutral",
+    "description": "The Companions are the warriors guild of Skyrim. Founded by Ysgramor, they are the most renowned group of mercenaries and warriors in the province. The Circle, the inner leadership, harbors a dark secret - they are werewolves.",
+    "joinable": true,
+    "questline": "The Companions",
+    "benefits": [
+      "Access to Jorrvaskr",
+      "Follower recruits available",
+      "Radiant quests for gold",
+      "Werewolf transformation (optional)"
+    ],
+    "members": [
+      "Kodlak Whitemane",
+      "Vilkas",
+      "Farkas",
+      "Aela the Huntress",
+      "Skjor",
+      "Ria",
+      "Torvar",
+      "Athis",
+      "Njada Stonearm"
+    ],
+    "enemies": ["Silver Hand"],
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cc6600%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E⚔️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 2,
+    "name": "Thieves Guild",
+    "type": "Guild",
+    "location": "The Ragged Flagon, Riften",
+    "leader": "Mercer Frey (initially), Brynjolf (later)",
+    "alignment": "Criminal",
+    "description": "The Thieves Guild is a criminal organization operating in the shadows of Skyrim's cities. Once a powerful force, the Guild has fallen on hard times due to a mysterious curse. Members follow the code of no killing during heists.",
+    "joinable": true,
+    "questline": "Thieves Guild",
+    "benefits": [
+      "Access to The Ragged Flagon",
+      "Fence services for stolen goods",
+      "Special armor sets",
+      "Nightingale powers",
+      "Protected by Nocturnal"
+    ],
+    "members": [
+      "Brynjolf",
+      "Mercer Frey",
+      "Karliah",
+      "Vex",
+      "Delvin Mallory",
+      "Tonilia",
+      "Vipir the Fleet",
+      "Niruin"
+    ],
+    "enemies": ["Corrupt City Guards"],
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23333333%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗝️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 3,
+    "name": "College of Winterhold",
+    "type": "Guild",
+    "location": "Winterhold",
+    "leader": "Arch-Mage Savos Aren (initially)",
+    "alignment": "Neutral",
+    "description": "The College of Winterhold is the premier institution for magical learning in Skyrim. Despite being mistrusted by Nords, it stands as a beacon of arcane knowledge. The College guards powerful artifacts and ancient secrets.",
+    "joinable": true,
+    "questline": "College of Winterhold",
+    "benefits": [
+      "Access to master-level spell tomes",
+      "Enchanting and alchemy facilities",
+      "Free sleeping quarters",
+      "Arch-Mage quarters (after completing questline)",
+      "Staff of Magnus"
+    ],
+    "members": [
+      "Savos Aren",
+      "Mirabelle Ervine",
+      "Tolfdir",
+      "Faralda",
+      "Phinis Gestor",
+      "Drevis Neloren",
+      "Colette Marence",
+      "J'zargo",
+      "Brelyna Maryon",
+      "Onmund"
+    ],
+    "enemies": ["Thalmor (potentially)"],
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%2399ccff%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23003366%22%3E🔮%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 4,
+    "name": "Dark Brotherhood",
+    "type": "Assassin Guild",
+    "location": "Dark Brotherhood Sanctuary",
+    "leader": "Astrid (initially), The Night Mother",
+    "alignment": "Evil",
+    "description": "The Dark Brotherhood is a guild of assassins shrouded in shadow and mystery. They worship the Dread Father Sithis and follow the commands of the Night Mother. Members perform the Black Sacrament to summon contracts.",
+    "joinable": true,
+    "questline": "Dark Brotherhood",
+    "benefits": [
+      "High-paying assassination contracts",
+      "Unique armor sets",
+      "Spectral steed Shadowmere",
+      "Access to secret sanctuary",
+      "Blade of Woe"
+    ],
+    "members": [
+      "Astrid",
+      "The Night Mother",
+      "Cicero",
+      "Nazir",
+      "Babette",
+      "Festus Krex",
+      "Gabriella",
+      "Arnbjorn",
+      "Veezara"
+    ],
+    "enemies": ["Penitus Oculatus"],
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23660000%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗡️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 5,
+    "name": "The Greybeards",
+    "type": "Religious Order",
+    "location": "High Hrothgar",
+    "leader": "Paarthurnax",
+    "alignment": "Good",
+    "description": "The Greybeards are an ancient and honored order that follow the Way of the Voice. They live in absolute silence and contemplation at High Hrothgar. They are the masters of the Thu'um and train the Dragonborn.",
+    "joinable": false,
+    "questline": "Main Quest",
+    "benefits": [
+      "Thu'um training",
+      "Word Wall locations revealed",
+      "Meditation bonuses",
+      "Access to High Hrothgar"
+    ],
+    "members": [
+      "Paarthurnax",
+      "Arngeir",
+      "Borri",
+      "Einarth",
+      "Wulfgar"
+    ],
+    "enemies": ["The Blades (potentially)"],
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cccccc%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23333333%22%3E⛰️%3C/text%3E%3C/svg%3E"
+  },
+  {
+    "id": 6,
+    "name": "The Blades",
+    "type": "Ancient Order",
+    "location": "Sky Haven Temple",
+    "leader": "Delphine",
+    "alignment": "Good",
+    "description": "The Blades were once the protectors of the Emperor and dragon slayers of legend. Now reduced to two members, Delphine and Esbern work to rebuild the order and defeat Alduin. They are sworn enemies of all dragons.",
+    "joinable": true,
+    "questline": "Main Quest",
+    "benefits": [
+      "Dragon hunting quests",
+      "Blades armor",
+      "Dragonbane sword",
+      "Follower recruits",
+      "Sky Haven Temple as base"
+    ],
+    "members": [
+      "Delphine",
+      "Esbern",
+      "Recruitable followers"
+    ],
+    "enemies": ["Thalmor", "Dragons", "Greybeards (potentially)"],
+    "imagePath": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23cc9966%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22white%22%3E🗡️%3C/text%3E%3C/svg%3E"
+  }
+]
