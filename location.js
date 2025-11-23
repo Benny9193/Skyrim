@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadLocationData() {
   try {
     const response = await fetch('locations.json');
-    if (!response.ok) throw new Error('Failed to load locations.json');
+    if (!response.ok)
+      throw new Error(`Failed to load locations.json: ${response.status} ${response.statusText}`);
     allLocations = await response.json();
 
     if (!Array.isArray(allLocations) || allLocations.length === 0) {
@@ -30,7 +31,7 @@ async function loadLocationData() {
     }
   } catch (error) {
     console.error('Error loading locations:', error);
-    showError('Failed to load location data');
+    showError(`Failed to load location data: ${error.message}`);
   }
 }
 
@@ -145,7 +146,7 @@ function loadLocation(location) {
   difficultyEl.textContent = location.difficulty || 'Unknown';
   difficultyEl.className =
     'detail-value difficulty-badge ' +
-    (location.difficulty || 'normal').toLowerCase().replace(' ', '-');
+    (location.difficulty || 'normal').toLowerCase().replace(/\s+/g, '-');
 
   document.getElementById('locationFastTravel').textContent = location.fastTravel
     ? 'Available ✓'
@@ -355,7 +356,7 @@ function resetCamera() {
 
 // Take screenshot
 function takeScreenshot() {
-  if (!renderer) return;
+  if (!renderer || !currentLocation) return;
 
   renderer.render(scene, camera);
 
