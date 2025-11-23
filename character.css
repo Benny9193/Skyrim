@@ -535,6 +535,184 @@
     text-align: center;
 }
 
+/* Environment Controls */
+.environment-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 16px;
+    background: var(--color-bg-1);
+    border-radius: 8px;
+    margin: 12px 0;
+}
+
+.environment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.environment-section-title {
+    margin: 0 0 8px 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-teal-500);
+}
+
+.environment-section-title i {
+    margin-right: 6px;
+    color: var(--color-teal-500);
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--font-size-sm);
+}
+
+.control-row label {
+    flex-shrink: 0;
+    min-width: 120px;
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.control-row label i {
+    margin-right: 6px;
+    width: 16px;
+    text-align: center;
+}
+
+.environment-select {
+    flex: 1;
+    padding: 6px 10px;
+    background: var(--color-gray-200);
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.environment-select:hover {
+    border-color: var(--color-teal-500);
+    background: var(--color-gray-300);
+}
+
+.environment-select:focus {
+    outline: none;
+    border-color: var(--color-teal-500);
+    box-shadow: 0 0 0 3px rgba(var(--color-teal-500-rgb), 0.1);
+}
+
+.control-value {
+    flex-shrink: 0;
+    min-width: 50px;
+    text-align: right;
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xs);
+}
+
+.control-row .slider {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color-gray-200);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.control-row .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-teal-500);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-row .slider::-webkit-slider-thumb:hover {
+    background: var(--color-teal-400);
+    transform: scale(1.1);
+}
+
+.control-row .slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-teal-500);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.control-row .slider::-moz-range-thumb:hover {
+    background: var(--color-teal-400);
+    transform: scale(1.1);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-gray-300);
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background-color: var(--color-teal-500);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(26px);
+}
+
+.toggle-slider:hover {
+    opacity: 0.9;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .character-layout {
@@ -577,5 +755,28 @@
 
     .character-grid {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .environment-controls {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 12px;
+    }
+
+    .control-row {
+        flex-wrap: wrap;
+    }
+
+    .control-row label {
+        min-width: 100px;
+        font-size: var(--font-size-xs);
+    }
+
+    .control-row .slider {
+        min-width: 120px;
+    }
+
+    .environment-section-title {
+        font-size: var(--font-size-xs);
     }
 }

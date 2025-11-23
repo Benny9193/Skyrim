@@ -24,6 +24,27 @@ const backgroundColors = [
     { name: 'Green', color: 0x1b5e20 }
 ];
 
+// Environment system variables
+let currentEnvironment = 'default';
+let currentWeather = 'clear';
+let timeOfDay = 0.5; // 0 = night, 1 = day
+let particleSystems = [];
+let environmentLights = {
+    ambient: null,
+    directional: null,
+    point: null
+};
+let fogEnabled = false;
+
+// Particle system constants
+const PARTICLE_BOUNDS = {
+    X_LIMIT: 10,
+    Y_MIN: 0,
+    Y_MAX: 15,
+    Z_LIMIT: 10,
+    SPAWN_AREA: 20
+};
+
 // Initialize the application
 async function initApplication() {
     try {
@@ -136,18 +157,21 @@ function initThreeJS() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.shadowMap.enabled = true;
 
-    // Lighting
+    // Lighting - Store references for environment system
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
+    environmentLights.ambient = ambientLight;
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(5, 5, 5);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
+    environmentLights.directional = directionalLight;
 
     const pointLight = new THREE.PointLight(0xffffff, 0.4);
     pointLight.position.set(-5, 3, 2);
     scene.add(pointLight);
+    environmentLights.point = pointLight;
 
     // Controls
     orbitControls = new THREE.OrbitControls(camera, canvas);
@@ -161,6 +185,7 @@ function initThreeJS() {
         if (!isAnimationPaused) {
             animationFrameId = requestAnimationFrame(animate);
             orbitControls.update();
+            animateParticles(); // Animate environment particles
             renderer.render(scene, camera);
         }
     }
@@ -200,6 +225,348 @@ function initThreeJS() {
         camera.aspect = newWidth / newHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(newWidth, newHeight);
+    });
+}
+
+// Environment Presets Configuration
+const environmentPresets = {
+    default: {
+        name: 'Default',
+        background: { type: 'color', value: 0xf5f5f5 },
+        ambientLight: { color: 0xffffff, intensity: 0.6 },
+        directionalLight: { color: 0xffffff, intensity: 0.8, position: [5, 5, 5] },
+        pointLight: { color: 0xffffff, intensity: 0.4, position: [-5, 3, 2] },
+        fog: null,
+        particles: []
+    },
+    cave: {
+        name: 'Cave',
+        background: { type: 'gradient', top: 0x0a0a0f, bottom: 0x1a1a2a },
+        ambientLight: { color: 0x4a4a6a, intensity: 0.3 },
+        directionalLight: { color: 0xff8844, intensity: 0.4, position: [0, 5, 2] },
+        pointLight: { color: 0xff6622, intensity: 1.2, position: [3, 2, 1] },
+        fog: { color: 0x0a0a0f, near: 3, far: 15 },
+        particles: ['dust', 'embers']
+    },
+    forest: {
+        name: 'Forest',
+        background: { type: 'gradient', top: 0x87ceeb, bottom: 0x228b22 },
+        ambientLight: { color: 0xd4e8d4, intensity: 0.5 },
+        directionalLight: { color: 0xfff4e6, intensity: 0.9, position: [5, 10, 3] },
+        pointLight: { color: 0x88ff88, intensity: 0.3, position: [-3, 1, 2] },
+        fog: { color: 0xb0d0b0, near: 10, far: 30 },
+        particles: ['mist']
+    },
+    tundra: {
+        name: 'Tundra',
+        background: { type: 'gradient', top: 0xd0e0f0, bottom: 0xffffff },
+        ambientLight: { color: 0xe8f4ff, intensity: 0.7 },
+        directionalLight: { color: 0xffffff, intensity: 1.0, position: [3, 8, 5] },
+        pointLight: { color: 0xccddff, intensity: 0.4, position: [-4, 2, 3] },
+        fog: { color: 0xf0f8ff, near: 15, far: 50 },
+        particles: ['snow']
+    },
+    ruins: {
+        name: 'Ruins',
+        background: { type: 'gradient', top: 0x4a4a5a, bottom: 0x2a2a3a },
+        ambientLight: { color: 0x8888aa, intensity: 0.4 },
+        directionalLight: { color: 0xaabbcc, intensity: 0.6, position: [4, 6, 4] },
+        pointLight: { color: 0x6666aa, intensity: 0.8, position: [-2, 3, 1] },
+        fog: { color: 0x3a3a4a, near: 5, far: 25 },
+        particles: ['dust', 'mist']
+    },
+    snowyMountain: {
+        name: 'Snowy Mountain',
+        background: { type: 'gradient', top: 0xb0c4de, bottom: 0xfffafa },
+        ambientLight: { color: 0xddeeff, intensity: 0.8 },
+        directionalLight: { color: 0xffffff, intensity: 1.2, position: [6, 10, 4] },
+        pointLight: { color: 0xaaccff, intensity: 0.3, position: [-5, 4, 2] },
+        fog: { color: 0xe0f0ff, near: 8, far: 35 },
+        particles: ['snow', 'mist']
+    }
+};
+
+// Apply environment preset
+function applyEnvironment(presetName) {
+    const preset = environmentPresets[presetName];
+    if (!preset) return;
+
+    currentEnvironment = presetName;
+
+    // Update background
+    if (preset.background.type === 'color') {
+        scene.background = new THREE.Color(preset.background.value);
+    } else if (preset.background.type === 'gradient') {
+        // Create gradient background using canvas
+        const canvas = document.createElement('canvas');
+        canvas.width = 2;
+        canvas.height = 256;
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 256);
+        gradient.addColorStop(0, '#' + preset.background.top.toString(16).padStart(6, '0'));
+        gradient.addColorStop(1, '#' + preset.background.bottom.toString(16).padStart(6, '0'));
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 2, 256);
+        
+        const texture = new THREE.CanvasTexture(canvas);
+        scene.background = texture;
+    }
+
+    // Update lights
+    if (environmentLights.ambient) {
+        environmentLights.ambient.color.setHex(preset.ambientLight.color);
+        environmentLights.ambient.intensity = preset.ambientLight.intensity * timeOfDay;
+    }
+
+    if (environmentLights.directional) {
+        environmentLights.directional.color.setHex(preset.directionalLight.color);
+        environmentLights.directional.intensity = preset.directionalLight.intensity * timeOfDay;
+        environmentLights.directional.position.set(...preset.directionalLight.position);
+    }
+
+    if (environmentLights.point) {
+        environmentLights.point.color.setHex(preset.pointLight.color);
+        environmentLights.point.intensity = preset.pointLight.intensity;
+        environmentLights.point.position.set(...preset.pointLight.position);
+    }
+
+    // Update fog
+    if (preset.fog) {
+        scene.fog = new THREE.Fog(preset.fog.color, preset.fog.near, preset.fog.far);
+        fogEnabled = true;
+    } else {
+        scene.fog = null;
+        fogEnabled = false;
+    }
+
+    // Update particles based on current weather
+    updateParticles();
+    
+    showNotification(`Environment: ${preset.name}`);
+}
+
+// Update time of day
+function updateTimeOfDay(value) {
+    timeOfDay = Math.max(0, Math.min(1, value));
+    
+    // Recalculate lighting based on time
+    const preset = environmentPresets[currentEnvironment];
+    if (preset && environmentLights.ambient) {
+        // Night is darker, day is brighter
+        const dayMultiplier = 0.3 + (timeOfDay * 0.7); // 0.3 at night, 1.0 at day
+        environmentLights.ambient.intensity = preset.ambientLight.intensity * dayMultiplier;
+        environmentLights.directional.intensity = preset.directionalLight.intensity * dayMultiplier;
+    }
+    
+    // Adjust directional light color for sunrise/sunset
+    if (environmentLights.directional) {
+        if (timeOfDay < 0.3) {
+            // Night - cooler blue tones
+            environmentLights.directional.color.setHex(0x8899ff);
+        } else if (timeOfDay < 0.45) {
+            // Sunrise - warm orange
+            environmentLights.directional.color.setHex(0xff8844);
+        } else if (timeOfDay > 0.7) {
+            // Sunset - warm red-orange
+            environmentLights.directional.color.setHex(0xff6633);
+        } else {
+            // Day - neutral white
+            const preset = environmentPresets[currentEnvironment];
+            if (preset) {
+                environmentLights.directional.color.setHex(preset.directionalLight.color);
+            }
+        }
+    }
+}
+
+// Apply weather effects
+function applyWeather(weatherType) {
+    currentWeather = weatherType;
+    updateParticles();
+    
+    const weatherNames = {
+        clear: 'Clear',
+        snow: 'Snow',
+        rain: 'Rain',
+        fog: 'Fog'
+    };
+    
+    showNotification(`Weather: ${weatherNames[weatherType] || weatherType}`);
+}
+
+// Create particle systems
+function createParticleSystem(type, count = 1000) {
+    const particles = new THREE.BufferGeometry();
+    const positions = [];
+    const velocities = [];
+
+    for (let i = 0; i < count; i++) {
+        // Spread particles in a volume around the model
+        positions.push(
+            (Math.random() - 0.5) * PARTICLE_BOUNDS.SPAWN_AREA,
+            Math.random() * PARTICLE_BOUNDS.Y_MAX,
+            (Math.random() - 0.5) * PARTICLE_BOUNDS.SPAWN_AREA
+        );
+
+        // Initial velocities
+        if (type === 'snow') {
+            velocities.push(
+                (Math.random() - 0.5) * 0.02,
+                -0.02 - Math.random() * 0.02,
+                (Math.random() - 0.5) * 0.02
+            );
+        } else if (type === 'rain') {
+            velocities.push(
+                0,
+                -0.1 - Math.random() * 0.1,
+                0
+            );
+        } else if (type === 'dust' || type === 'mist') {
+            velocities.push(
+                (Math.random() - 0.5) * 0.01,
+                Math.random() * 0.01,
+                (Math.random() - 0.5) * 0.01
+            );
+        } else if (type === 'embers') {
+            velocities.push(
+                (Math.random() - 0.5) * 0.02,
+                0.02 + Math.random() * 0.03,
+                (Math.random() - 0.5) * 0.02
+            );
+        }
+    }
+
+    particles.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    particles.setAttribute('velocity', new THREE.Float32BufferAttribute(velocities, 3));
+
+    let material;
+    if (type === 'snow') {
+        material = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.05,
+            transparent: true,
+            opacity: 0.8
+        });
+    } else if (type === 'rain') {
+        material = new THREE.PointsMaterial({
+            color: 0x8888ff,
+            size: 0.02,
+            transparent: true,
+            opacity: 0.6
+        });
+    } else if (type === 'dust') {
+        material = new THREE.PointsMaterial({
+            color: 0xccccaa,
+            size: 0.03,
+            transparent: true,
+            opacity: 0.3
+        });
+    } else if (type === 'mist') {
+        material = new THREE.PointsMaterial({
+            color: 0xdddddd,
+            size: 0.2,
+            transparent: true,
+            opacity: 0.2
+        });
+    } else if (type === 'embers') {
+        material = new THREE.PointsMaterial({
+            color: 0xff6622,
+            size: 0.04,
+            transparent: true,
+            opacity: 0.7
+        });
+    }
+
+    const particleSystem = new THREE.Points(particles, material);
+    particleSystem.userData.type = type;
+    particleSystem.userData.count = count;
+    
+    return particleSystem;
+}
+
+// Update particles based on environment and weather
+function updateParticles() {
+    // Clear existing particles
+    particleSystems.forEach(ps => scene.remove(ps));
+    particleSystems = [];
+
+    const preset = environmentPresets[currentEnvironment];
+    if (!preset) return;
+
+    // Add environment-based particles
+    if (preset.particles.includes('dust')) {
+        const dustSystem = createParticleSystem('dust', 300);
+        scene.add(dustSystem);
+        particleSystems.push(dustSystem);
+    }
+
+    if (preset.particles.includes('embers')) {
+        const emberSystem = createParticleSystem('embers', 150);
+        scene.add(emberSystem);
+        particleSystems.push(emberSystem);
+    }
+
+    if (preset.particles.includes('mist')) {
+        const mistSystem = createParticleSystem('mist', 200);
+        scene.add(mistSystem);
+        particleSystems.push(mistSystem);
+    }
+
+    // Add weather-based particles
+    if (currentWeather === 'snow') {
+        const snowSystem = createParticleSystem('snow', 800);
+        scene.add(snowSystem);
+        particleSystems.push(snowSystem);
+    } else if (currentWeather === 'rain') {
+        const rainSystem = createParticleSystem('rain', 1000);
+        scene.add(rainSystem);
+        particleSystems.push(rainSystem);
+    } else if (currentWeather === 'fog') {
+        // Add fog effect
+        const fogColor = preset.fog ? preset.fog.color : 0xcccccc;
+        scene.fog = new THREE.Fog(fogColor, 2, 12);
+        
+        // Add mist particles for fog
+        const mistSystem = createParticleSystem('mist', 400);
+        scene.add(mistSystem);
+        particleSystems.push(mistSystem);
+    }
+}
+
+// Animate particles
+function animateParticles() {
+    particleSystems.forEach(ps => {
+        const positions = ps.geometry.attributes.position.array;
+        const velocities = ps.geometry.attributes.velocity.array;
+
+        for (let i = 0; i < positions.length; i += 3) {
+            // Update positions
+            positions[i] += velocities[i];
+            positions[i + 1] += velocities[i + 1];
+            positions[i + 2] += velocities[i + 2];
+
+            // Reset particles that fall out of bounds
+            if (ps.userData.type === 'snow' || ps.userData.type === 'rain') {
+                if (positions[i + 1] < -5) {
+                    positions[i + 1] = PARTICLE_BOUNDS.Y_MAX;
+                    positions[i] = (Math.random() - 0.5) * PARTICLE_BOUNDS.SPAWN_AREA;
+                    positions[i + 2] = (Math.random() - 0.5) * PARTICLE_BOUNDS.SPAWN_AREA;
+                }
+            } else if (ps.userData.type === 'embers') {
+                if (positions[i + 1] > PARTICLE_BOUNDS.Y_MAX) {
+                    positions[i + 1] = PARTICLE_BOUNDS.Y_MIN;
+                    positions[i] = (Math.random() - 0.5) * PARTICLE_BOUNDS.SPAWN_AREA;
+                    positions[i + 2] = (Math.random() - 0.5) * PARTICLE_BOUNDS.SPAWN_AREA;
+                }
+            } else {
+                // Dust and mist - keep within bounds
+                if (Math.abs(positions[i]) > PARTICLE_BOUNDS.X_LIMIT) velocities[i] *= -1;
+                if (positions[i + 1] > PARTICLE_BOUNDS.Y_MAX || positions[i + 1] < PARTICLE_BOUNDS.Y_MIN) velocities[i + 1] *= -1;
+                if (Math.abs(positions[i + 2]) > PARTICLE_BOUNDS.Z_LIMIT) velocities[i + 2] *= -1;
+            }
+        }
+
+        ps.geometry.attributes.position.needsUpdate = true;
     });
 }
 
@@ -582,6 +949,54 @@ function setupEventListeners() {
 
     // Keyboard navigation
     setupKeyboardNavigation();
+
+    // Environment controls
+    document.getElementById('environmentPresetSelect')?.addEventListener('change', (e) => {
+        applyEnvironment(e.target.value);
+    });
+
+    document.getElementById('timeOfDaySlider')?.addEventListener('input', (e) => {
+        updateTimeOfDay(parseFloat(e.target.value));
+        document.getElementById('timeOfDayValue').textContent = 
+            e.target.value === '0' ? 'Night' : 
+            e.target.value < '0.3' ? 'Dawn' : 
+            e.target.value < '0.7' ? 'Day' : 
+            e.target.value === '1' ? 'Noon' : 'Dusk';
+    });
+
+    document.getElementById('weatherSelect')?.addEventListener('change', (e) => {
+        applyWeather(e.target.value);
+    });
+
+    document.getElementById('particlesToggle')?.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            updateParticles();
+            showNotification('Particles enabled');
+        } else {
+            particleSystems.forEach(ps => scene.remove(ps));
+            particleSystems = [];
+            showNotification('Particles disabled');
+        }
+    });
+
+    document.getElementById('fogIntensitySlider')?.addEventListener('input', (e) => {
+        const intensity = parseFloat(e.target.value);
+        if (scene.fog && scene.fog.isFog) {
+            scene.fog.near = 2 * intensity;
+            scene.fog.far = 12 * intensity;
+        }
+        document.getElementById('fogIntensityValue').textContent = Math.round(intensity * 100) + '%';
+    });
+
+    document.getElementById('particleIntensitySlider')?.addEventListener('input', (e) => {
+        const intensity = parseFloat(e.target.value);
+        particleSystems.forEach(ps => {
+            if (ps.material) {
+                ps.material.opacity = ps.material.opacity * intensity;
+            }
+        });
+        document.getElementById('particleIntensityValue').textContent = Math.round(intensity * 100) + '%';
+    });
 }
 
 // Keyboard navigation
