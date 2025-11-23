@@ -1,0 +1,207 @@
+[
+  {
+    "id": 1,
+    "name": "Iron Dagger",
+    "category": "Weapon",
+    "type": "Dagger",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 0,
+    "materials": [
+      {"item": "Iron Ingot", "quantity": 1},
+      {"item": "Leather Strips", "quantity": 1}
+    ],
+    "value": 10,
+    "weight": 1,
+    "damage": 4,
+    "perkRequired": null,
+    "improvementMaterial": "Iron Ingot",
+    "description": "A basic iron dagger. Useful for beginners to level up Smithing.",
+    "icon": "🗡️"
+  },
+  {
+    "id": 2,
+    "name": "Steel Sword",
+    "category": "Weapon",
+    "type": "Sword",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 20,
+    "materials": [
+      {"item": "Steel Ingot", "quantity": 1},
+      {"item": "Leather Strips", "quantity": 1}
+    ],
+    "value": 25,
+    "weight": 7,
+    "damage": 8,
+    "perkRequired": "Steel Smithing",
+    "improvementMaterial": "Steel Ingot",
+    "description": "A reliable steel sword for mid-level adventurers.",
+    "icon": "⚔️"
+  },
+  {
+    "id": 3,
+    "name": "Orcish Battleaxe",
+    "category": "Weapon",
+    "type": "Battleaxe",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 50,
+    "materials": [
+      {"item": "Orichalcum Ingot", "quantity": 3},
+      {"item": "Leather Strips", "quantity": 2},
+      {"item": "Iron Ingot", "quantity": 1}
+    ],
+    "value": 225,
+    "weight": 25,
+    "damage": 22,
+    "perkRequired": "Orcish Smithing",
+    "improvementMaterial": "Orichalcum Ingot",
+    "description": "A powerful Orcish battleaxe favored by stronghold warriors.",
+    "icon": "🪓"
+  },
+  {
+    "id": 4,
+    "name": "Ebony Armor",
+    "category": "Armor",
+    "type": "Heavy Armor",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 80,
+    "materials": [
+      {"item": "Ebony Ingot", "quantity": 5},
+      {"item": "Leather Strips", "quantity": 3}
+    ],
+    "value": 1500,
+    "weight": 38,
+    "armorRating": 43,
+    "perkRequired": "Ebony Smithing",
+    "improvementMaterial": "Ebony Ingot",
+    "description": "Exceptional heavy armor crafted from rare ebony ore.",
+    "icon": "🛡️"
+  },
+  {
+    "id": 5,
+    "name": "Daedric Warhammer",
+    "category": "Weapon",
+    "type": "Warhammer",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 90,
+    "materials": [
+      {"item": "Ebony Ingot", "quantity": 3},
+      {"item": "Daedra Heart", "quantity": 1},
+      {"item": "Leather Strips", "quantity": 3}
+    ],
+    "value": 1500,
+    "weight": 31,
+    "damage": 27,
+    "perkRequired": "Daedric Smithing",
+    "improvementMaterial": "Ebony Ingot",
+    "description": "The most powerful warhammer, forged with Daedric essence.",
+    "icon": "🔨"
+  },
+  {
+    "id": 6,
+    "name": "Dragonplate Armor",
+    "category": "Armor",
+    "type": "Heavy Armor",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 100,
+    "materials": [
+      {"item": "Dragon Bone", "quantity": 3},
+      {"item": "Dragon Scales", "quantity": 1},
+      {"item": "Leather Strips", "quantity": 3}
+    ],
+    "value": 2125,
+    "weight": 64,
+    "armorRating": 46,
+    "perkRequired": "Dragon Armor",
+    "improvementMaterial": "Dragon Bone",
+    "description": "The finest heavy armor in Skyrim, crafted from dragon bones.",
+    "icon": "🦴"
+  },
+  {
+    "id": 7,
+    "name": "Glass Bow",
+    "category": "Weapon",
+    "type": "Bow",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 70,
+    "materials": [
+      {"item": "Refined Malachite", "quantity": 2},
+      {"item": "Leather Strips", "quantity": 1}
+    ],
+    "value": 790,
+    "weight": 11,
+    "damage": 15,
+    "perkRequired": "Glass Smithing",
+    "improvementMaterial": "Refined Malachite",
+    "description": "An elegant and deadly bow made from refined malachite.",
+    "icon": "🏹"
+  },
+  {
+    "id": 8,
+    "name": "Elven Gilded Armor",
+    "category": "Armor",
+    "type": "Light Armor",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 30,
+    "materials": [
+      {"item": "Refined Moonstone", "quantity": 4},
+      {"item": "Iron Ingot", "quantity": 1},
+      {"item": "Leather Strips", "quantity": 3}
+    ],
+    "value": 950,
+    "weight": 11,
+    "armorRating": 23,
+    "perkRequired": "Elven Smithing",
+    "improvementMaterial": "Refined Moonstone",
+    "description": "Beautiful gilded armor favored by the Altmer.",
+    "icon": "✨"
+  },
+  {
+    "id": 9,
+    "name": "Dragonscale Shield",
+    "category": "Armor",
+    "type": "Shield",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 100,
+    "materials": [
+      {"item": "Dragon Scales", "quantity": 4},
+      {"item": "Iron Ingot", "quantity": 2},
+      {"item": "Leather Strips", "quantity": 1}
+    ],
+    "value": 750,
+    "weight": 6,
+    "armorRating": 29,
+    "perkRequired": "Dragon Armor",
+    "improvementMaterial": "Dragon Scales",
+    "description": "A lightweight but incredibly strong shield made from dragon scales.",
+    "icon": "🛡️"
+  },
+  {
+    "id": 10,
+    "name": "Dwarven Crossbow",
+    "category": "Weapon",
+    "type": "Crossbow",
+    "craftingStation": "Forge",
+    "skillRequired": "Smithing",
+    "skillLevel": 30,
+    "materials": [
+      {"item": "Dwarven Metal Ingot", "quantity": 2},
+      {"item": "Steel Ingot", "quantity": 1}
+    ],
+    "value": 350,
+    "weight": 20,
+    "damage": 22,
+    "perkRequired": "Dwarven Smithing",
+    "improvementMaterial": "Dwarven Metal Ingot",
+    "description": "A powerful crossbow using ancient Dwemer technology. Requires Dawnguard DLC.",
+    "icon": "🏹"
+  }
+]

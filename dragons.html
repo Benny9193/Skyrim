@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragons - Skyrim Reference</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dragons.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header dragons-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="landing.html" class="header-link">← Home</a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">Dragons of Skyrim</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dragons-main">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <h2>Named Dragons</h2>
+                    <p class="subtitle">Legendary dragons with unique powers and lore</p>
+                    <div class="controls">
+                        <input type="text" id="dragonSearch" class="search-input" placeholder="Search dragons...">
+                        <select id="typeFilter" class="filter-select">
+                            <option value="">All Types</option>
+                            <option value="Unique">Unique</option>
+                            <option value="Named">Named</option>
+                        </select>
+                        <select id="breathFilter" class="filter-select">
+                            <option value="">All Breath Types</option>
+                            <option value="Fire">Fire</option>
+                            <option value="Frost">Frost</option>
+                            <option value="Drain Life">Drain Life</option>
+                        </select>
+                        <select id="questFilter" class="filter-select">
+                            <option value="all">All Dragons</option>
+                            <option value="quest">Quest-Related</option>
+                            <option value="friendly">Can Be Friend</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dragons Grid -->
+                <div class="dragons-grid" id="dragonsGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Dragon Modal -->
+        <div class="dragon-modal hidden" id="dragonModal">
+            <div class="modal-backdrop" id="modalBackdrop"></div>
+            <div class="modal-content">
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+
+                <div class="modal-header">
+                    <div class="dragon-icon" id="modalIcon">🐉</div>
+                    <div class="dragon-title-section">
+                        <h2 id="modalDragonName">Dragon Name</h2>
+                        <p class="dragon-subtitle" id="modalTitle">The Title</p>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="dragon-stats-section">
+                        <h3>Statistics</h3>
+                        <div class="stats-row">
+                            <div class="stat-item">
+                                <span class="stat-label">Type</span>
+                                <span class="stat-value" id="modalType">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Level</span>
+                                <span class="stat-value" id="modalLevel">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Health</span>
+                                <span class="stat-value" id="modalHealth">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Breath Type</span>
+                                <span class="stat-value" id="modalBreath">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dragon-lore-section">
+                        <h3>Lore</h3>
+                        <p id="modalLore">Dragon lore...</p>
+                    </div>
+
+                    <div class="dragon-shouts-section">
+                        <h3>Shouts & Abilities</h3>
+                        <div id="modalShouts" class="shouts-list">
+                            <!-- Shouts populated here -->
+                        </div>
+                        <div id="modalAbilities" class="abilities-list">
+                            <!-- Abilities populated here -->
+                        </div>
+                    </div>
+
+                    <div class="dragon-location-section">
+                        <h3>Location</h3>
+                        <p id="modalLocation">Location info...</p>
+                    </div>
+
+                    <div class="dragon-quest-section" id="modalQuestSection">
+                        <h3>Quest Information</h3>
+                        <p id="modalQuest">Quest name...</p>
+                        <div class="quest-badge" id="modalFriendBadge">
+                            Can become ally
+                        </div>
+                    </div>
+
+                    <div class="dragon-weakness-section" id="modalWeaknessSection">
+                        <h3>Weakness</h3>
+                        <p id="modalWeakness">Weakness info...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dragons-footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="landing.html">Home</a>
+                    <span class="separator">•</span>
+                    <a href="bestiary.html">Bestiary</a>
+                    <span class="separator">•</span>
+                    <a href="locations.html">Locations</a>
+                    <span class="separator">•</span>
+                    <a href="codex.html">Codex</a>
+                    <span class="separator">•</span>
+                    <a href="magic.html">Magic</a>
+                </div>
+                <p>&copy; 2024 Skyrim Reference. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="dragons.js"></script>
+</body>
+</html>
