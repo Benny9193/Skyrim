@@ -153,9 +153,28 @@
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(circle at 20% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(155, 89, 182, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(74, 144, 226, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(155, 89, 182, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(74, 226, 196, 0.1) 0%, transparent 60%);
     animation: backgroundFloat 20s ease-in-out infinite;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.02) 2px,
+            rgba(255, 255, 255, 0.02) 4px
+        );
+    pointer-events: none;
 }
 
 @keyframes gradientShift {
@@ -335,6 +354,20 @@
     border-radius: 12px;
 }
 
+.quick-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(74, 226, 196, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: scale(0);
+    z-index: 0;
+}
+
 .quick-card:hover {
     border-color: var(--color-primary);
     transform: translateY(-12px) scale(1.02);
@@ -348,11 +381,25 @@
     opacity: 1;
 }
 
+.quick-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .quick-icon {
     font-size: 72px;
     margin-bottom: 16px;
     display: block;
     animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.quick-card:hover .quick-icon {
+    transform: translateY(-10px) scale(1.1);
+    filter: drop-shadow(0 8px 16px rgba(74, 144, 226, 0.3));
 }
 
 @keyframes bounce {
@@ -386,6 +433,15 @@
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(var(--color-teal-500-rgb), 0.3);
+    transition: all 0.3s ease;
+}
+
+.quick-card:hover .quick-badge {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(var(--color-teal-500-rgb), 0.5);
 }
 
 /* What's New Section */
@@ -702,6 +758,26 @@ kbd {
     padding: 60px 0;
     background: linear-gradient(135deg, var(--color-teal-500) 0%, var(--color-teal-600) 100%);
     border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+    animation: backgroundShimmer 8s ease-in-out infinite;
+}
+
+@keyframes backgroundShimmer {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
 }
 
 .stats-grid {
@@ -709,10 +785,18 @@ kbd {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 32px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .stat-box {
     color: var(--color-cream-50);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+.stat-box:hover {
+    transform: scale(1.1);
 }
 
 .stat-number {
@@ -720,6 +804,13 @@ kbd {
     font-size: 48px;
     font-weight: var(--font-weight-bold);
     margin-bottom: 8px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover .stat-number {
+    transform: translateY(-5px);
+    text-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .stat-label {
@@ -727,6 +818,11 @@ kbd {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
     opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.stat-box:hover .stat-label {
+    opacity: 1;
 }
 
 /* CTA Section */
