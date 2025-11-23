@@ -62,6 +62,19 @@ A web-based 3D reconstruction and visualization application with an interactive 
 - **Model Export**: Download 3D models as OBJ files
 - **Responsive Design**: Works on desktop, tablet, and mobile
 
+### Interactive Skill Tree Visualizer (`skill-tree.html`)
+- **Canvas-Based Visualization**: High-performance radial skill tree diagrams
+- **Interactive Nodes**: Hover for details, click to select/expand
+- **Skill Categorization**: Combat, Magic, Passive, and Special skills with color coding
+- **Mastery Levels**: Visual indicators for Novice, Adept, Expert, and Legendary skills
+- **Advanced Filtering**: Filter by skill type and mastery level
+- **Search Functionality**: Find skills across all creatures
+- **Comparison Mode**: Side-by-side skill tree comparison between creatures
+- **Zoom & Pan Controls**: Mouse/touch gestures and keyboard shortcuts
+- **Export Feature**: Save skill tree visualizations as PNG images
+- **Responsive Layout**: Optimized for desktop, tablet, and mobile devices
+- **Accessibility**: ARIA labels, keyboard navigation, and focus management
+
 ## Technologies Used
 
 - **Three.js** (v0.128) - 3D graphics and WebGL rendering
@@ -99,6 +112,7 @@ A web-based 3D reconstruction and visualization application with an interactive 
 ### HTML Files
 - **index.html**: Main 3D reconstruction application interface
 - **character.html**: Character/creature viewer with stats and information
+- **skill-tree.html**: Interactive skill tree visualization for creature abilities
 
 ### JavaScript
 - **app.js**: Core 3D reconstruction application logic
@@ -114,6 +128,16 @@ A web-based 3D reconstruction and visualization application with an interactive 
   - Navigation between characters
   - Model export and sharing
 
+- **skill-tree.js**: Skill tree visualization logic
+  - Canvas-based rendering engine
+  - Radial skill tree layout algorithm
+  - Interactive node system with hover/click detection
+  - Zoom and pan controls with gesture support
+  - Skill type categorization and filtering
+  - Comparison mode for side-by-side analysis
+  - Real-time search across all creatures
+  - PNG export functionality
+
 ### CSS
 - **style.css**: Main application stylesheet
   - Design tokens and color variables
@@ -127,6 +151,14 @@ A web-based 3D reconstruction and visualization application with an interactive 
   - Viewer controls
   - Modal dialogs
   - Mobile responsive design
+
+- **skill-tree.css**: Skill tree visualizer styles
+  - Control panel and sidebar layout
+  - Canvas container styling
+  - Tooltip and overlay components
+  - Legend and filter UI
+  - Responsive grid for mobile
+  - Accessibility enhancements
 
 ### Data Files
 - **characters.json**: Skyrim Bestiary database with 10 creatures
