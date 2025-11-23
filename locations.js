@@ -188,6 +188,20 @@ function setupEventListeners() {
         }
     }
 
+    // Location card clicks - navigate to detail page
+    const locationsGrid = document.getElementById('locationsGrid');
+    if (locationsGrid) {
+        locationsGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.location-card');
+            if (card) {
+                const locationId = card.dataset.locationId;
+                if (locationId) {
+                    viewLocation(parseInt(locationId));
+                }
+            }
+        });
+    }
+
     // Filter toggle buttons
     document.querySelectorAll('.filter-toggle').forEach(btn => {
         btn.addEventListener('click', (e) => {
