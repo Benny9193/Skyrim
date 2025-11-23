@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loot Calculator - Skyrim Bestiary</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4a148c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Skyrim Loot" />
+    <link rel="manifest" href="../public/manifest.json" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="loot-calculator.css" />
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+      <div class="loader-content">
+        <div class="loader-icon">💰</div>
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading Loot Calculator...</div>
+      </div>
+    </div>
+
+    <div class="app-container">
+      <!-- Navigation Header -->
+      <header class="app-header">
+        <div class="container">
+          <nav class="app-nav">
+            <div class="nav-left">
+              <a href="landing.html" class="nav-logo" aria-label="Back to Home">
+                <span class="logo-icon">💰</span>
+                <span class="logo-text">Loot Calculator</span>
+              </a>
+            </div>
+            <div class="nav-links">
+              <a href="bestiary.html" class="nav-link">Bestiary</a>
+              <a href="character.html" class="nav-link">Characters</a>
+              <a href="landing.html" class="nav-link">Home</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="loot-main">
+        <div class="container">
+          <!-- Page Title -->
+          <div class="page-header">
+            <h1 class="page-title">Interactive Loot Calculator</h1>
+            <p class="page-subtitle">
+              Simulate creature loot drops and calculate probability-based rewards
+            </p>
+          </div>
+
+          <!-- Creature Selection Panel -->
+          <div class="loot-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Creature Selection</h2>
+            </div>
+            <div class="panel-content">
+              <div class="creature-selector-grid">
+                <div class="selector-group">
+                  <label for="creatureSelect" class="selector-label">Select Creature:</label>
+                  <select
+                    id="creatureSelect"
+                    class="creature-select"
+                    aria-label="Select creature for loot simulation"
+                  >
+                    <option value="">-- Choose a creature --</option>
+                  </select>
+                </div>
+                <div class="selector-group">
+                  <label for="killCountInput" class="selector-label">Number of Kills:</label>
+                  <input
+                    type="number"
+                    id="killCountInput"
+                    class="kill-count-input"
+                    value="1"
+                    min="1"
+                    max="10000"
+                    aria-label="Number of kills to simulate"
+                  />
+                </div>
+              </div>
+
+              <!-- Luck Modifier -->
+              <div class="luck-modifier">
+                <label for="luckSlider" class="luck-label">
+                  Luck Modifier: <span id="luckValue">0</span>%
+                </label>
+                <input
+                  type="range"
+                  id="luckSlider"
+                  class="luck-slider"
+                  min="-50"
+                  max="50"
+                  value="0"
+                  step="5"
+                  aria-label="Luck modifier percentage"
+                />
+                <div class="luck-range">
+                  <span>-50%</span>
+                  <span>0%</span>
+                  <span>+50%</span>
+                </div>
+              </div>
+
+              <!-- Simulation Buttons -->
+              <div class="simulation-controls">
+                <button id="simulate1Btn" class="btn btn--primary">Simulate 1 Kill</button>
+                <button id="simulate10Btn" class="btn btn--secondary">Simulate 10 Kills</button>
+                <button id="simulate100Btn" class="btn btn--secondary">Simulate 100 Kills</button>
+                <button id="simulate1000Btn" class="btn btn--secondary">Simulate 1000 Kills</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Grid -->
+          <div class="results-grid">
+            <!-- Creature Info Panel -->
+            <div class="loot-panel creature-info-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Creature Information</h2>
+              </div>
+              <div class="panel-content" id="creatureInfo">
+                <div class="empty-state">
+                  <div class="empty-icon">🐉</div>
+                  <p>Select a creature to view its loot table</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Loot Distribution Chart -->
+            <div class="loot-panel chart-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Loot Distribution</h2>
+              </div>
+              <div class="panel-content">
+                <canvas id="lootChart" class="loot-chart" aria-label="Loot distribution chart"></canvas>
+                <div id="chartLegend" class="chart-legend"></div>
+              </div>
+            </div>
+
+            <!-- Results Summary -->
+            <div class="loot-panel results-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Simulation Results</h2>
+                <button id="exportBtn" class="btn btn--icon" aria-label="Export results" disabled>
+                  📥 Export
+                </button>
+              </div>
+              <div class="panel-content" id="resultsContent">
+                <div class="empty-state">
+                  <div class="empty-icon">🎲</div>
+                  <p>Run a simulation to see results</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Statistics Panel -->
+            <div class="loot-panel stats-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Statistics</h2>
+              </div>
+              <div class="panel-content" id="statsContent">
+                <div class="empty-state">
+                  <div class="empty-icon">📊</div>
+                  <p>No statistics available yet</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison Mode -->
+          <div class="loot-panel comparison-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Comparison Mode</h2>
+              <button id="toggleComparisonBtn" class="btn btn--secondary">Enable Comparison</button>
+            </div>
+            <div class="panel-content comparison-content" id="comparisonContent" style="display: none;">
+              <div class="comparison-grid">
+                <div class="comparison-selector">
+                  <label for="compareCreatureSelect" class="selector-label">Compare with:</label>
+                  <select
+                    id="compareCreatureSelect"
+                    class="creature-select"
+                    aria-label="Select creature for comparison"
+                  >
+                    <option value="">-- Choose a creature --</option>
+                  </select>
+                  <button id="runComparisonBtn" class="btn btn--primary" disabled>
+                    Run Comparison
+                  </button>
+                </div>
+                <div id="comparisonResults" class="comparison-results"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulation History -->
+          <div class="loot-panel history-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Simulation History</h2>
+              <button id="clearHistoryBtn" class="btn btn--icon" aria-label="Clear history">
+                🗑️ Clear
+              </button>
+            </div>
+            <div class="panel-content">
+              <div id="historyContent" class="history-content">
+                <div class="empty-state">
+                  <div class="empty-icon">📜</div>
+                  <p>No simulation history yet</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div class="container">
+          <p>&copy; 2024 Skyrim 3D Bestiary. All loot drops are based on probability calculations.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="loot-calculator.js"></script>
+  </body>
+</html>
