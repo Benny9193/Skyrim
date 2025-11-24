@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Interactive Skill Tree Visualizer - Explore creature skills and abilities in The Elder Scrolls V: Skyrim"
+    />
+    <meta
+      name="keywords"
+      content="Skyrim, Skills, Bestiary, Skill Tree, Interactive, Visualization"
+    />
+    <title>Skyrim Bestiary - Skill Tree Visualizer</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="skill-tree.css" />
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navigation Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="header-title">
+          <i class="fas fa-project-diagram"></i>
+          Skill Tree Visualizer
+        </h1>
+        <nav class="header-nav">
+          <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+          <a href="bestiary.html" class="nav-link">
+            <i class="fas fa-book"></i>
+            <span>Bestiary</span>
+          </a>
+          <a href="character.html" class="nav-link">
+            <i class="fas fa-dragon"></i>
+            <span>3D Viewer</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+      <!-- Control Panel -->
+      <aside class="control-panel">
+        <div class="panel-section">
+          <h2 class="section-title">
+            <i class="fas fa-sliders-h"></i>
+            Controls
+          </h2>
+
+          <!-- Creature Selector -->
+          <div class="control-group">
+            <label for="creature-select">
+              <i class="fas fa-dragon"></i>
+              Select Creature
+            </label>
+            <select id="creature-select" class="control-select">
+              <option value="">Loading creatures...</option>
+            </select>
+          </div>
+
+          <!-- Comparison Mode Toggle -->
+          <div class="control-group">
+            <label class="toggle-label">
+              <input type="checkbox" id="comparison-mode" class="toggle-input" />
+              <span class="toggle-slider"></span>
+              <span class="toggle-text">
+                <i class="fas fa-columns"></i>
+                Comparison Mode
+              </span>
+            </label>
+          </div>
+
+          <!-- Second Creature Selector (for comparison) -->
+          <div class="control-group comparison-only" style="display: none">
+            <label for="creature-compare">
+              <i class="fas fa-dragon"></i>
+              Compare With
+            </label>
+            <select id="creature-compare" class="control-select">
+              <option value="">Select creature...</option>
+            </select>
+          </div>
+
+          <!-- Skill Type Filters -->
+          <div class="control-group">
+            <label class="group-label">
+              <i class="fas fa-filter"></i>
+              Filter by Type
+            </label>
+            <div class="filter-checkboxes">
+              <label class="checkbox-label combat">
+                <input type="checkbox" value="combat" checked />
+                <span>Combat</span>
+              </label>
+              <label class="checkbox-label magic">
+                <input type="checkbox" value="magic" checked />
+                <span>Magic</span>
+              </label>
+              <label class="checkbox-label passive">
+                <input type="checkbox" value="passive" checked />
+                <span>Passive</span>
+              </label>
+              <label class="checkbox-label special">
+                <input type="checkbox" value="special" checked />
+                <span>Special</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Mastery Level Filter -->
+          <div class="control-group">
+            <label class="group-label">
+              <i class="fas fa-star"></i>
+              Mastery Level
+            </label>
+            <div class="filter-checkboxes">
+              <label class="checkbox-label">
+                <input type="checkbox" class="mastery-filter" value="Novice" checked />
+                <span>Novice</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="mastery-filter" value="Adept" checked />
+                <span>Adept</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="mastery-filter" value="Expert" checked />
+                <span>Expert</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="mastery-filter" value="Legendary" checked />
+                <span>Legendary</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="control-group">
+            <label for="skill-search">
+              <i class="fas fa-search"></i>
+              Search Skills
+            </label>
+            <input
+              type="text"
+              id="skill-search"
+              class="control-input"
+              placeholder="Type skill name..."
+              autocomplete="off"
+            />
+            <div id="search-results" class="search-results"></div>
+          </div>
+
+          <!-- Zoom Controls -->
+          <div class="control-group">
+            <label for="zoom-slider">
+              <i class="fas fa-search-plus"></i>
+              Zoom Level
+            </label>
+            <div class="slider-container">
+              <input
+                type="range"
+                id="zoom-slider"
+                class="control-slider"
+                min="0.5"
+                max="3"
+                step="0.1"
+                value="1"
+              />
+              <span id="zoom-value" class="slider-value">100%</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="control-group">
+            <button id="reset-view" class="action-button">
+              <i class="fas fa-redo"></i>
+              Reset View
+            </button>
+            <button id="export-image" class="action-button">
+              <i class="fas fa-download"></i>
+              Export PNG
+            </button>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="panel-section legend-section">
+          <h2 class="section-title">
+            <i class="fas fa-info-circle"></i>
+            Legend
+          </h2>
+          <div class="legend-items">
+            <div class="legend-item">
+              <div class="legend-color" style="background: #ff4444"></div>
+              <span>Combat Skills</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #4444ff"></div>
+              <span>Magic Skills</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #44ff44"></div>
+              <span>Passive Skills</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background: #ff44ff"></div>
+              <span>Special Skills</span>
+            </div>
+          </div>
+          <div class="legend-mastery">
+            <p class="legend-title">Mastery Levels:</p>
+            <div class="mastery-indicators">
+              <div class="mastery-item">
+                <div class="mastery-circle novice"></div>
+                <span>Novice</span>
+              </div>
+              <div class="mastery-item">
+                <div class="mastery-circle adept"></div>
+                <span>Adept</span>
+              </div>
+              <div class="mastery-item">
+                <div class="mastery-circle expert"></div>
+                <span>Expert</span>
+              </div>
+              <div class="mastery-item">
+                <div class="mastery-circle legendary"></div>
+                <span>Legendary</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Keyboard Shortcuts -->
+        <div class="panel-section shortcuts-section">
+          <h3 class="section-subtitle">
+            <i class="fas fa-keyboard"></i>
+            Keyboard Shortcuts
+          </h3>
+          <ul class="shortcuts-list">
+            <li><kbd>Space</kbd> - Reset view</li>
+            <li><kbd>+</kbd> / <kbd>-</kbd> - Zoom in/out</li>
+            <li><kbd>Arrow Keys</kbd> - Pan view</li>
+            <li><kbd>C</kbd> - Toggle comparison</li>
+            <li><kbd>E</kbd> - Export image</li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Canvas Container -->
+      <div class="canvas-container">
+        <canvas
+          id="skill-tree-canvas"
+          tabindex="0"
+          role="img"
+          aria-label="Skill tree visualization"
+        ></canvas>
+
+        <!-- Loading Indicator -->
+        <div id="loading-indicator" class="loading-indicator">
+          <div class="spinner"></div>
+          <p>Loading skill tree...</p>
+        </div>
+
+        <!-- Tooltip -->
+        <div id="skill-tooltip" class="skill-tooltip" role="tooltip" aria-hidden="true">
+          <h3 class="tooltip-title"></h3>
+          <p class="tooltip-type"></p>
+          <p class="tooltip-level"></p>
+          <p class="tooltip-description"></p>
+          <div class="tooltip-creatures"></div>
+        </div>
+
+        <!-- Canvas Controls Overlay -->
+        <div class="canvas-controls">
+          <button id="zoom-in" class="canvas-control-btn" aria-label="Zoom in">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button id="zoom-out" class="canvas-control-btn" aria-label="Zoom out">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button id="fit-view" class="canvas-control-btn" aria-label="Fit to view">
+            <i class="fas fa-expand"></i>
+          </button>
+        </div>
+
+        <!-- Creature Info Cards (for comparison mode) -->
+        <div id="comparison-cards" class="comparison-cards" style="display: none">
+          <div class="creature-card" id="card-primary">
+            <h3 class="card-title"></h3>
+            <div class="card-stats"></div>
+          </div>
+          <div class="creature-card" id="card-secondary">
+            <h3 class="card-title"></h3>
+            <div class="card-stats"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 Skyrim 3D Bestiary. Part of The Elder Scrolls community.</p>
+      <p class="footer-note">
+        <i class="fas fa-info-circle"></i>
+        Click and drag to pan • Mouse wheel to zoom • Click nodes for details
+      </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="skill-tree.js"></script>
+  </body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare Skyrim creature sizes side-by-side in 3D">
+    <meta name="keywords" content="Skyrim, Bestiary, Size Comparison, 3D, Creatures">
+    <title>Skyrim Bestiary - Creature Size Comparison Tool</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="size-comparison.css">
+    
+    <!-- Three.js and Extensions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header comparison-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-nav">
+                        <a href="bestiary.html" class="header-link" aria-label="Back to Bestiary">
+                            <i class="fas fa-arrow-left"></i> Bestiary
+                        </a>
+                        <span class="separator">|</span>
+                        <h1 class="app-title">
+                            <i class="fas fa-balance-scale"></i> Creature Size Comparison
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="comparison-layout">
+                    <!-- Left Panel: Creature Selection -->
+                    <aside class="selection-panel">
+                        <div class="card">
+                            <div class="card__header">
+                                <h2><i class="fas fa-list"></i> Select Creatures</h2>
+                                <p class="subtitle">Choose up to 3 creatures to compare</p>
+                            </div>
+                            <div class="card__body">
+                                <!-- Search Bar -->
+                                <div class="search-container">
+                                    <input 
+                                        type="text" 
+                                        id="creatureSearch" 
+                                        placeholder="Search creatures..."
+                                        aria-label="Search creatures"
+                                        class="search-input"
+                                    >
+                                    <i class="fas fa-search search-icon"></i>
+                                </div>
+
+                                <!-- Filter Options -->
+                                <div class="filter-section">
+                                    <label class="filter-label">Filter by type:</label>
+                                    <select id="creatureFilter" class="filter-select" aria-label="Filter by creature type">
+                                        <option value="all">All Creatures</option>
+                                        <option value="Dragon">Dragons</option>
+                                        <option value="Undead">Undead</option>
+                                        <option value="Daedric">Daedric</option>
+                                        <option value="Beast">Beasts</option>
+                                        <option value="Humanoid">Humanoids</option>
+                                    </select>
+                                </div>
+
+                                <!-- Creature List -->
+                                <div class="creature-list" id="creatureList">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Selected Creatures -->
+                        <div class="card selected-creatures-card">
+                            <div class="card__header">
+                                <h3><i class="fas fa-check-circle"></i> Selected for Comparison</h3>
+                            </div>
+                            <div class="card__body">
+                                <div class="selected-list" id="selectedList">
+                                    <p class="empty-state">No creatures selected. Click on creatures above to add them.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="card actions-card">
+                            <div class="card__body">
+                                <button class="btn btn--primary btn--block" id="compareBtn" disabled>
+                                    <i class="fas fa-balance-scale"></i> Start Comparison
+                                </button>
+                                <button class="btn btn--outline btn--block" id="clearAllBtn">
+                                    <i class="fas fa-trash"></i> Clear All
+                                </button>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Right Panel: 3D Viewer -->
+                    <div class="viewer-panel">
+                        <div class="card viewer-card">
+                            <div class="viewer-header">
+                                <h2><i class="fas fa-cube"></i> 3D Comparison Viewer</h2>
+                                <div class="viewer-controls">
+                                    <button class="btn btn--sm" id="resetCameraBtn" title="Reset Camera" aria-label="Reset camera view">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="toggleGridBtn" title="Toggle Grid" aria-label="Toggle floor grid">
+                                        <i class="fas fa-border-all"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="toggleLightsBtn" title="Toggle Lights" aria-label="Toggle lighting">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="screenshotBtn" title="Take Screenshot" aria-label="Capture screenshot">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                    <button class="btn btn--sm" id="fullscreenBtn" title="Fullscreen" aria-label="Toggle fullscreen">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Camera Presets -->
+                            <div class="camera-presets">
+                                <button class="preset-btn active" data-preset="front" aria-label="Front view">
+                                    <i class="fas fa-eye"></i> Eye Level
+                                </button>
+                                <button class="preset-btn" data-preset="top" aria-label="Top view">
+                                    <i class="fas fa-chevron-circle-up"></i> Bird's Eye
+                                </button>
+                                <button class="preset-btn" data-preset="dramatic" aria-label="Dramatic angle">
+                                    <i class="fas fa-film"></i> Dramatic
+                                </button>
+                            </div>
+
+                            <!-- 3D Canvas -->
+                            <div class="viewer-content">
+                                <canvas id="comparisonCanvas"></canvas>
+                                <div class="viewer-overlay" id="viewerOverlay">
+                                    <div class="overlay-content">
+                                        <div class="empty-state-large">
+                                            <i class="fas fa-cube"></i>
+                                            <h3>No Creatures Selected</h3>
+                                            <p>Select creatures from the list to start comparing their sizes in 3D</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="loading-overlay hidden" id="loadingOverlay">
+                                    <div class="loader-spinner"></div>
+                                    <p id="loadingText">Loading models...</p>
+                                </div>
+                            </div>
+
+                            <!-- Viewer Footer -->
+                            <div class="viewer-footer">
+                                <div class="controls-section">
+                                    <div class="control-group">
+                                        <label><i class="fas fa-sun"></i> Ambient Light</label>
+                                        <input type="range" id="ambientSlider" min="0" max="1" step="0.1" value="0.6" class="slider">
+                                    </div>
+                                    <div class="control-group">
+                                        <label><i class="fas fa-sun"></i> Directional Light</label>
+                                        <input type="range" id="directionalSlider" min="0" max="2" step="0.1" value="0.8" class="slider">
+                                    </div>
+                                </div>
+                                <div class="viewer-info">
+                                    <span><i class="fas fa-mouse"></i> Left-click: Rotate • Scroll: Zoom • Right-click: Pan</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Creature Info Cards -->
+                        <div class="creature-info-section" id="creatureInfoSection">
+                            <!-- Populated by JavaScript when creatures are loaded -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Size Adjustment Modal -->
+    <div class="modal hidden" id="sizeAdjustModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-sliders-h"></i> Adjust Creature Sizes</h3>
+                <button class="modal-close" id="closeSizeModal" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Adjust the relative size of each creature based on level or scale factor</p>
+                <div id="sizeSliders">
+                    <!-- Populated dynamically -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn--outline" id="resetSizesBtn">
+                        <i class="fas fa-undo"></i> Reset to Default
+                    </button>
+                    <button class="btn btn--primary" id="applySizesBtn">
+                        <i class="fas fa-check"></i> Apply Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal hidden" id="helpModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-question-circle"></i> How to Use</h3>
+                <button class="modal-close" id="closeHelpModal" aria-label="Close help">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="help-content">
+                    <h4>Getting Started</h4>
+                    <ol>
+                        <li>Select up to 3 creatures from the list on the left</li>
+                        <li>Click "Start Comparison" to load them in 3D</li>
+                        <li>Use your mouse to rotate, zoom, and pan the view</li>
+                        <li>Adjust camera presets for different viewing angles</li>
+                    </ol>
+
+                    <h4>Controls</h4>
+                    <ul>
+                        <li><strong>Left Click + Drag:</strong> Rotate view</li>
+                        <li><strong>Right Click + Drag:</strong> Pan view</li>
+                        <li><strong>Scroll Wheel:</strong> Zoom in/out</li>
+                        <li><strong>Camera Presets:</strong> Quick angle changes</li>
+                    </ul>
+
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Human silhouette for scale reference</li>
+                        <li>Floor grid for depth perception</li>
+                        <li>Adjustable lighting controls</li>
+                        <li>Screenshot capture functionality</li>
+                        <li>Real-time size information display</li>
+                    </ul>
+                </div>
+                <button class="btn btn--primary btn--block" onclick="document.getElementById('helpModal').classList.add('hidden')">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Button (Floating) -->
+    <button class="help-fab" id="helpBtn" title="Help" aria-label="Show help">
+        <i class="fas fa-question"></i>
+    </button>
+
+    <!-- Size Adjust Button (Floating) -->
+    <button class="adjust-fab hidden" id="adjustSizesBtn" title="Adjust Sizes" aria-label="Adjust creature sizes">
+        <i class="fas fa-sliders-h"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script type="module" src="size-comparison.js"></script>
+</body>
+</html>

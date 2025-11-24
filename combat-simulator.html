@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Combat Simulator - Skyrim Bestiary</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#4a148c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Skyrim Combat" />
+    <link rel="manifest" href="../public/manifest.json" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="combat-simulator.css" />
+  </head>
+  <body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+      <div class="loader-content">
+        <div class="loader-icon">⚔️</div>
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading Combat Simulator...</div>
+      </div>
+    </div>
+
+    <div class="app-container">
+      <!-- Navigation Header -->
+      <header class="app-header">
+        <div class="container">
+          <nav class="app-nav">
+            <div class="nav-left">
+              <a href="landing.html" class="nav-logo" aria-label="Back to Home">
+                <span class="logo-icon">⚔️</span>
+                <span class="logo-text">Combat Simulator</span>
+              </a>
+            </div>
+            <div class="nav-links">
+              <a href="bestiary.html" class="nav-link">Bestiary</a>
+              <a href="character.html" class="nav-link">Characters</a>
+              <a href="landing.html" class="nav-link">Home</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="combat-main">
+        <div class="container">
+          <!-- Page Title -->
+          <div class="page-header">
+            <h1 class="page-title">Interactive Combat Simulator</h1>
+            <p class="page-subtitle">
+              Test battles between Skyrim creatures using real stats and abilities
+            </p>
+          </div>
+
+          <!-- Control Panel -->
+          <div class="control-panel">
+            <button
+              id="randomEncounterBtn"
+              class="btn btn--secondary"
+              aria-label="Select random creatures"
+            >
+              🎲 Random Encounter
+            </button>
+            <button id="startBattleBtn" class="btn btn--primary" aria-label="Start battle" disabled>
+              ⚔️ Start Battle
+            </button>
+            <button
+              id="resetBtn"
+              class="btn btn--secondary"
+              aria-label="Reset battle"
+              style="display: none"
+            >
+              🔄 Reset
+            </button>
+          </div>
+
+          <!-- Combat Arena -->
+          <div class="combat-arena">
+            <!-- Fighter 1 Panel -->
+            <div class="fighter-panel" id="fighter1Panel">
+              <div class="fighter-header">
+                <h2 class="fighter-title">Fighter 1</h2>
+                <div class="fighter-status" id="fighter1Status"></div>
+              </div>
+
+              <div class="creature-selector">
+                <label for="creature1Select" class="selector-label">Select Creature:</label>
+                <select
+                  id="creature1Select"
+                  class="creature-select"
+                  aria-label="Select first creature"
+                >
+                  <option value="">-- Choose a creature --</option>
+                </select>
+              </div>
+
+              <div class="creature-display" id="creature1Display" style="display: none">
+                <div class="creature-image">
+                  <div class="image-placeholder" id="creature1Image">
+                    <span class="placeholder-icon">🐉</span>
+                  </div>
+                </div>
+
+                <div class="creature-info">
+                  <h3 class="creature-name" id="creature1Name">-</h3>
+                  <div class="creature-meta">
+                    <span class="meta-item" id="creature1Race">-</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-item" id="creature1Level">Level -</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-item" id="creature1Difficulty">-</span>
+                  </div>
+                </div>
+
+                <div class="stats-section">
+                  <h4 class="stats-title">Combat Stats</h4>
+
+                  <div class="stat-bar-group">
+                    <div class="stat-bar">
+                      <div class="stat-label">
+                        <span class="stat-name">Health</span>
+                        <span class="stat-value" id="creature1HealthValue">-/-</span>
+                      </div>
+                      <div class="stat-progress">
+                        <div
+                          class="stat-fill stat-fill--health"
+                          id="creature1HealthBar"
+                          style="width: 100%"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div class="stat-bar">
+                      <div class="stat-label">
+                        <span class="stat-name">Magicka</span>
+                        <span class="stat-value" id="creature1MagickaValue">-</span>
+                      </div>
+                      <div class="stat-progress">
+                        <div
+                          class="stat-fill stat-fill--magicka"
+                          id="creature1MagickaBar"
+                          style="width: 100%"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div class="stat-bar">
+                      <div class="stat-label">
+                        <span class="stat-name">Stamina</span>
+                        <span class="stat-value" id="creature1StaminaValue">-</span>
+                      </div>
+                      <div class="stat-progress">
+                        <div
+                          class="stat-fill stat-fill--stamina"
+                          id="creature1StaminaBar"
+                          style="width: 100%"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="abilities-list" id="creature1Abilities"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- VS Divider -->
+            <div class="vs-divider">
+              <div class="vs-circle">
+                <span class="vs-text">VS</span>
+              </div>
+            </div>
+
+            <!-- Fighter 2 Panel -->
+            <div class="fighter-panel" id="fighter2Panel">
+              <div class="fighter-header">
+                <h2 class="fighter-title">Fighter 2</h2>
+                <div class="fighter-status" id="fighter2Status"></div>
+              </div>
+
+              <div class="creature-selector">
+                <label for="creature2Select" class="selector-label">Select Creature:</label>
+                <select
+                  id="creature2Select"
+                  class="creature-select"
+                  aria-label="Select second creature"
+                >
+                  <option value="">-- Choose a creature --</option>
+                </select>
+              </div>
+
+              <div class="creature-display" id="creature2Display" style="display: none">
+                <div class="creature-image">
+                  <div class="image-placeholder" id="creature2Image">
+                    <span class="placeholder-icon">🐉</span>
+                  </div>
+                </div>
+
+                <div class="creature-info">
+                  <h3 class="creature-name" id="creature2Name">-</h3>
+                  <div class="creature-meta">
+                    <span class="meta-item" id="creature2Race">-</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-item" id="creature2Level">Level -</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-item" id="creature2Difficulty">-</span>
+                  </div>
+                </div>
+
+                <div class="stats-section">
+                  <h4 class="stats-title">Combat Stats</h4>
+
+                  <div class="stat-bar-group">
+                    <div class="stat-bar">
+                      <div class="stat-label">
+                        <span class="stat-name">Health</span>
+                        <span class="stat-value" id="creature2HealthValue">-/-</span>
+                      </div>
+                      <div class="stat-progress">
+                        <div
+                          class="stat-fill stat-fill--health"
+                          id="creature2HealthBar"
+                          style="width: 100%"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div class="stat-bar">
+                      <div class="stat-label">
+                        <span class="stat-name">Magicka</span>
+                        <span class="stat-value" id="creature2MagickaValue">-</span>
+                      </div>
+                      <div class="stat-progress">
+                        <div
+                          class="stat-fill stat-fill--magicka"
+                          id="creature2MagickaBar"
+                          style="width: 100%"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div class="stat-bar">
+                      <div class="stat-label">
+                        <span class="stat-name">Stamina</span>
+                        <span class="stat-value" id="creature2StaminaValue">-</span>
+                      </div>
+                      <div class="stat-progress">
+                        <div
+                          class="stat-fill stat-fill--stamina"
+                          id="creature2StaminaBar"
+                          style="width: 100%"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="abilities-list" id="creature2Abilities"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Battle Log -->
+          <div class="battle-log-container">
+            <div class="battle-log-header">
+              <h3 class="battle-log-title">Battle Log</h3>
+              <button
+                id="clearLogBtn"
+                class="btn-icon"
+                aria-label="Clear battle log"
+                title="Clear log"
+              >
+                🗑️
+              </button>
+            </div>
+            <div class="battle-log" id="battleLog">
+              <div class="log-entry log-entry--info">
+                <span class="log-icon">ℹ️</span>
+                <span class="log-text"
+                  >Select two creatures and click "Start Battle" to begin.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Victory Modal -->
+          <div class="modal" id="victoryModal" style="display: none">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="victoryTitle">Victory!</h2>
+              </div>
+              <div class="modal-body">
+                <div class="victory-icon" id="victoryIcon">🏆</div>
+                <p class="victory-message" id="victoryMessage"></p>
+                <div class="battle-stats" id="battleStats"></div>
+              </div>
+              <div class="modal-footer">
+                <button id="closeModalBtn" class="btn btn--primary">Close</button>
+                <button id="rematchBtn" class="btn btn--secondary">Rematch</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <div class="container">
+          <p>&copy; 2024 Skyrim Bestiary. Combat damage calculations based on in-game stats.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="combat-simulator.js"></script>
+  </body>
+</html>
