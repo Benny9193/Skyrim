@@ -221,11 +221,11 @@
                     fetch('/achievements.json').then(r => r.ok ? r.json() : []).catch(() => [])
                 ]);
                 
-                searchData = { characters, locations, dragons, achievements };
+                searchData = { creatures: characters, locations, dragons, achievements };
                 return searchData;
             } catch (error) {
                 console.error('Error loading search data:', error);
-                return { characters: [], locations: [], dragons: [], achievements: [] };
+                return { creatures: [], locations: [], dragons: [], achievements: [] };
             }
         }
 
@@ -252,8 +252,8 @@
             };
 
             // Search creatures
-            if (data.characters && Array.isArray(data.characters)) {
-                results.creatures = data.characters.filter(c => 
+            if (data.creatures && Array.isArray(data.creatures)) {
+                results.creatures = data.creatures.filter(c => 
                     c.name?.toLowerCase().includes(lowerQuery) ||
                     c.race?.toLowerCase().includes(lowerQuery) ||
                     c.description?.toLowerCase().includes(lowerQuery) ||
