@@ -1,0 +1,400 @@
+/* Followers Styles */
+
+/* Header */
+.followers-header {
+    background: linear-gradient(135deg, #0F4C5C 0%, #1B7F8E 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.followers-header h1 {
+    margin: 0 0 16px 0;
+    font-size: 48px;
+    font-weight: var(--font-weight-bold);
+}
+
+.followers-header p {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+}
+
+/* Main Content */
+.followers-main {
+    padding: 32px 0;
+    min-height: 60vh;
+}
+
+.section-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-card-border);
+}
+
+.section-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+}
+
+.subtitle {
+    margin: 0 0 16px 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.search-input, .filter-select {
+    padding: 10px 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background: var(--color-background);
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-input:focus, .filter-select:focus {
+    outline: none;
+    border-color: #1B7F8E;
+}
+
+.filter-select {
+    cursor: pointer;
+}
+
+/* Followers Grid */
+.followers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.follower-card {
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.follower-card:hover {
+    border-color: #1B7F8E;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(27, 127, 142, 0.2);
+}
+
+.follower-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.follower-card-icon {
+    font-size: 48px;
+}
+
+.follower-card-info {
+    flex: 1;
+}
+
+.follower-card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 4px 0;
+}
+
+.follower-card-subtitle {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.follower-card-badges {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.faction-badge,
+.level-badge,
+.marriage-badge,
+.essential-badge,
+.class-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.faction-badge {
+    background: rgba(27, 127, 142, 0.1);
+    border: 1px solid rgba(27, 127, 142, 0.3);
+    color: #1B7F8E;
+}
+
+.level-badge {
+    background: var(--color-gray-200);
+    color: var(--color-text);
+}
+
+.class-badge {
+    background: rgba(15, 76, 92, 0.1);
+    color: #0F4C5C;
+}
+
+.marriage-badge {
+    background: rgba(255, 192, 203, 0.2);
+    color: #E91E63;
+}
+
+.essential-badge {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFA000;
+}
+
+.follower-card-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.follower-card-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.skill-tag {
+    padding: 4px 8px;
+    background: rgba(27, 127, 142, 0.1);
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    color: var(--color-text);
+}
+
+/* Follower Modal */
+.follower-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follower-modal.hidden {
+    display: none;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: 12px;
+    max-width: 700px;
+    max-height: 90vh;
+    width: 90%;
+    overflow-y: auto;
+    z-index: 1001;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: white;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #0F4C5C 0%, #1B7F8E 100%);
+    padding: 32px;
+    text-align: center;
+    color: white;
+}
+
+.follower-icon {
+    font-size: 80px;
+    margin-bottom: 16px;
+}
+
+.modal-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    font-weight: var(--font-weight-bold);
+    color: white;
+}
+
+.follower-subtitle {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.modal-body {
+    padding: 32px;
+}
+
+.follower-badges-section {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.modal-body h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-card-border);
+}
+
+.follower-description-section,
+.follower-personality-section,
+.follower-skills-section,
+.follower-location-section,
+.follower-recruitment-section,
+.follower-morality-section {
+    margin-bottom: 24px;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-badge {
+    padding: 8px 12px;
+    background: rgba(27, 127, 142, 0.1);
+    border: 1px solid rgba(27, 127, 142, 0.2);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+}
+
+.recruitment-text {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: 1.6;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(27, 127, 142, 0.05) 0%, transparent 100%);
+    border-left: 4px solid #1B7F8E;
+    border-radius: 4px;
+    font-weight: var(--font-weight-medium);
+}
+
+/* Footer */
+.followers-footer {
+    margin-top: 60px;
+    padding: 32px 0;
+    border-top: 1px solid var(--color-card-border);
+    text-align: center;
+}
+
+.footer-links {
+    margin-bottom: 12px;
+    font-size: var(--font-size-sm);
+}
+
+.footer-links a {
+    color: #1B7F8E;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+}
+
+.footer-links .separator {
+    color: var(--color-text-secondary);
+    margin: 0 8px;
+}
+
+.followers-footer p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .followers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-header {
+        padding: 24px 20px;
+    }
+
+    .follower-icon {
+        font-size: 60px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .search-input,
+    .filter-select {
+        width: 100%;
+    }
+}

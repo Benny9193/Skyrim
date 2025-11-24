@@ -1,0 +1,420 @@
+/* Enchantments Styles */
+
+/* Header */
+.enchantments-header {
+    background: linear-gradient(135deg, #5E35B1 0%, #311B92 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.enchantments-header h1 {
+    margin: 0 0 16px 0;
+    font-size: 48px;
+    font-weight: var(--font-weight-bold);
+}
+
+.enchantments-header p {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+}
+
+/* Main Content */
+.enchantments-main {
+    padding: 32px 0;
+    min-height: 60vh;
+}
+
+.section-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-card-border);
+}
+
+.section-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+}
+
+.subtitle {
+    margin: 0 0 16px 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.search-input, .filter-select {
+    padding: 10px 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background: var(--color-background);
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-input:focus, .filter-select:focus {
+    outline: none;
+    border-color: #5E35B1;
+}
+
+.filter-select {
+    cursor: pointer;
+}
+
+/* Enchantments Grid */
+.enchantments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.enchantment-card {
+    background: var(--color-surface);
+    border: 2px solid var(--color-card-border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.enchantment-card:hover {
+    border-color: #5E35B1;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(94, 53, 177, 0.2);
+}
+
+.enchantment-card-icon {
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.enchantment-card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 8px 0;
+    text-align: center;
+}
+
+.enchantment-card-type {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.type-badge,
+.school-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.type-badge {
+    background: rgba(94, 53, 177, 0.1);
+    border: 1px solid rgba(94, 53, 177, 0.3);
+    color: #5E35B1;
+}
+
+.school-badge {
+    background: var(--color-gray-200);
+    color: var(--color-text);
+}
+
+.enchantment-card-effect {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.6;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(94, 53, 177, 0.05) 0%, transparent 100%);
+    border-left: 3px solid #5E35B1;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-weight: var(--font-weight-medium);
+}
+
+.enchantment-card-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.item-tag {
+    padding: 4px 8px;
+    background: rgba(94, 53, 177, 0.1);
+    border-radius: 4px;
+    font-size: var(--font-size-xs);
+    color: var(--color-text);
+}
+
+/* Enchantment Modal */
+.enchantment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enchantment-modal.hidden {
+    display: none;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: 12px;
+    max-width: 700px;
+    max-height: 90vh;
+    width: 90%;
+    overflow-y: auto;
+    z-index: 1001;
+    box-shadow: 0 20px 60px rgba(94, 53, 177, 0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: white;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #5E35B1 0%, #311B92 100%);
+    padding: 32px;
+    text-align: center;
+    color: white;
+}
+
+.enchantment-icon {
+    font-size: 80px;
+    margin-bottom: 16px;
+}
+
+.modal-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    font-weight: var(--font-weight-bold);
+    color: white;
+}
+
+.school-text {
+    font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.modal-body {
+    padding: 32px;
+}
+
+.enchantment-badges-section {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.modal-body h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-card-border);
+}
+
+.enchantment-description-section,
+.enchantment-effect-section,
+.enchantment-stats-section,
+.enchantment-items-section,
+.enchantment-location-section {
+    margin-bottom: 24px;
+}
+
+.effect-text {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    line-height: 1.6;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(94, 53, 177, 0.1) 0%, transparent 100%);
+    border-left: 4px solid #5E35B1;
+    border-radius: 4px;
+    font-weight: var(--font-weight-medium);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.stat-item {
+    padding: 12px;
+    background: var(--color-gray-200);
+    border-radius: 6px;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+}
+
+.items-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.item-badge {
+    padding: 8px 12px;
+    background: rgba(94, 53, 177, 0.1);
+    border: 1px solid rgba(94, 53, 177, 0.2);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+}
+
+.locations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.location-item {
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(94, 53, 177, 0.05) 0%, transparent 100%);
+    border-left: 4px solid #5E35B1;
+    border-radius: 4px;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+}
+
+/* Footer */
+.enchantments-footer {
+    margin-top: 60px;
+    padding: 32px 0;
+    border-top: 1px solid var(--color-card-border);
+    text-align: center;
+}
+
+.footer-links {
+    margin-bottom: 12px;
+    font-size: var(--font-size-sm);
+}
+
+.footer-links a {
+    color: #5E35B1;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+}
+
+.footer-links .separator {
+    color: var(--color-text-secondary);
+    margin: 0 8px;
+}
+
+.enchantments-footer p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .enchantments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-header {
+        padding: 24px 20px;
+    }
+
+    .enchantment-icon {
+        font-size: 60px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .search-input,
+    .filter-select {
+        width: 100%;
+    }
+}

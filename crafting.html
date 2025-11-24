@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crafting Recipes - Skyrim Reference</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="crafting.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="crafting-header">
+        <div class="container">
+            <h1>🔨 Crafting & Smithing</h1>
+            <p>Forge legendary weapons and armor</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="crafting-main">
+        <div class="container">
+            <!-- Section Header with Filters -->
+            <div class="section-header">
+                <h2>Recipe Database</h2>
+                <p class="subtitle">Master the art of Smithing and create powerful equipment</p>
+
+                <div class="controls">
+                    <input type="text" id="craftingSearch" class="search-input" placeholder="Search recipes...">
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="Weapon">Weapons</option>
+                        <option value="Armor">Armor</option>
+                    </select>
+                    <select id="typeFilter" class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="Dagger">Dagger</option>
+                        <option value="Sword">Sword</option>
+                        <option value="Battleaxe">Battleaxe</option>
+                        <option value="Warhammer">Warhammer</option>
+                        <option value="Bow">Bow</option>
+                        <option value="Crossbow">Crossbow</option>
+                        <option value="Heavy Armor">Heavy Armor</option>
+                        <option value="Light Armor">Light Armor</option>
+                        <option value="Shield">Shield</option>
+                    </select>
+                    <select id="skillFilter" class="filter-select">
+                        <option value="">All Skill Levels</option>
+                        <option value="0">Novice (0)</option>
+                        <option value="20">Apprentice (20)</option>
+                        <option value="30">Journeyman (30)</option>
+                        <option value="50">Adept (50)</option>
+                        <option value="70">Expert (70)</option>
+                        <option value="80">Master (80)</option>
+                        <option value="90">Legendary (90+)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Crafting Grid -->
+            <div id="craftingGrid" class="crafting-grid">
+                <!-- Recipes will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal -->
+    <div id="recipeModal" class="recipe-modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+
+            <div class="modal-header">
+                <div class="recipe-icon" id="recipeIcon">🔨</div>
+                <h2 id="recipeName">Recipe Name</h2>
+                <p class="recipe-type" id="recipeType">Type</p>
+            </div>
+
+            <div class="modal-body">
+                <div class="recipe-badges-section">
+                    <span class="category-badge" id="recipeCategory">Category</span>
+                    <span class="skill-badge" id="recipeSkill">Skill Level</span>
+                    <span class="perk-badge" id="recipePerk">Perk Required</span>
+                </div>
+
+                <div class="recipe-description-section">
+                    <h3>Description</h3>
+                    <p id="recipeDescription">Description text</p>
+                </div>
+
+                <div class="recipe-stats-section">
+                    <h3>Item Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Weight</span>
+                            <span class="stat-value" id="recipeWeight">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Value</span>
+                            <span class="stat-value" id="recipeValue">-</span>
+                        </div>
+                        <div class="stat-item" id="damageSection" style="display: none;">
+                            <span class="stat-label">Damage</span>
+                            <span class="stat-value" id="recipeDamage">-</span>
+                        </div>
+                        <div class="stat-item" id="armorSection" style="display: none;">
+                            <span class="stat-label">Armor Rating</span>
+                            <span class="stat-value" id="recipeArmor">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-materials-section">
+                    <h3>Required Materials</h3>
+                    <div id="recipeMaterials" class="materials-list">
+                        <!-- Materials will be populated -->
+                    </div>
+                </div>
+
+                <div class="recipe-info-section">
+                    <h3>Crafting Information</h3>
+                    <p><strong>Crafting Station:</strong> <span id="recipeStation">Station</span></p>
+                    <p><strong>Skill Required:</strong> <span id="recipeSkillReq">Skill</span></p>
+                    <p><strong>Improvement Material:</strong> <span id="recipeImprovement">Material</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="crafting-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="landing.html">Home</a>
+                <span class="separator">•</span>
+                <a href="codex.html">Codex</a>
+                <span class="separator">•</span>
+                <a href="bestiary.html">Bestiary</a>
+            </div>
+            <p>&copy; 2024 Skyrim Reference. Fan-made resource for The Elder Scrolls V: Skyrim.</p>
+        </div>
+    </footer>
+
+    <script src="crafting.js"></script>
+</body>
+</html>
