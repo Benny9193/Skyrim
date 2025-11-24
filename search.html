@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Skyrim Interactive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="loading.css">
+    <style>
+        .search-page {
+            padding: 2rem 0;
+            min-height: calc(100vh - 64px);
+        }
+        
+        .search-header {
+            margin-bottom: 2rem;
+        }
+        
+        .search-title {
+            font-size: 2.5rem;
+            margin: 0 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .search-box-large {
+            position: relative;
+            max-width: 600px;
+        }
+        
+        .search-box-large input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            font-size: 1.1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+        
+        .search-box-large input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .search-box-large .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            pointer-events: none;
+        }
+        
+        .search-stats {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        
+        .search-results-section {
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .result-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .result-icon {
+            font-size: 2.5rem;
+        }
+        
+        .result-info h3 {
+            margin: 0 0 0.25rem;
+            font-size: 1.25rem;
+        }
+        
+        .result-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--badge-bg);
+            color: var(--text-muted);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        
+        .result-desc {
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        
+        .no-results-icon {
+            font-size: 5rem;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation will be injected here -->
+    
+    <div class="app-container">
+        <main class="search-page">
+            <div class="container">
+                <!-- Header -->
+                <header class="search-header">
+                    <h1 class="search-title">
+                        <span>🔍</span>
+                        Search
+                    </h1>
+                    
+                    <div class="search-box-large">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Search creatures, locations, items..."
+                            autocomplete="off"
+                        >
+                        <span class="search-icon">🔍</span>
+                    </div>
+                </header>
+
+                <!-- Stats -->
+                <div class="search-stats" id="searchStats" style="display: none;">
+                    <p id="statsText"></p>
+                </div>
+
+                <!-- Results -->
+                <div id="resultsContainer"></div>
+
+                <!-- Initial State -->
+                <div class="no-results" id="initialState">
+                    <div class="no-results-icon">🔍</div>
+                    <h2>Start Searching</h2>
+                    <p>Enter a search term to find creatures, locations, achievements, and more...</p>
+                </div>
+
+                <!-- No Results -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <div class="no-results-icon">😕</div>
+                    <h2>No Results Found</h2>
+                    <p>Try different keywords or browse our categories</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="inject-nav.js"></script>
+    <script type="module">
+        const searchInput = document.getElementById('searchInput');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const searchStats = document.getElementById('searchStats');
+        const statsText = document.getElementById('statsText');
+        const initialState = document.getElementById('initialState');
+        const noResults = document.getElementById('noResults');
+
+        let searchTimeout;
+        let searchData = null;
+
+        // Get search query from URL
+        const params = new URLSearchParams(window.location.search);
+        const initialQuery = params.get('q') || '';
+        if (initialQuery) {
+            searchInput.value = initialQuery;
+            performSearch(initialQuery);
+        }
+
+        // Load search data
+        async function loadSearchData() {
+            if (searchData) return searchData;
+            
+            try {
+                const [characters, locations, dragons, achievements] = await Promise.all([
+                    fetch('/characters.json').then(r => r.ok ? r.json() : []).catch(() => []),
+                    fetch('/locations.json').then(r => r.ok ? r.json() : []).catch(() => []),
+                    fetch('/dragons.json').then(r => r.ok ? r.json() : []).catch(() => []),
+                    fetch('/achievements.json').then(r => r.ok ? r.json() : []).catch(() => [])
+                ]);
+                
+                searchData = { creatures: characters, locations, dragons, achievements };
+                return searchData;
+            } catch (error) {
+                console.error('Error loading search data:', error);
+                return { creatures: [], locations: [], dragons: [], achievements: [] };
+            }
+        }
+
+        // Perform search
+        async function performSearch(query) {
+            if (!query.trim()) {
+                showInitialState();
+                return;
+            }
+
+            const data = await loadSearchData();
+            const results = searchInData(query, data);
+            displayResults(results, query);
+        }
+
+        // Search in data
+        function searchInData(query, data) {
+            const lowerQuery = query.toLowerCase();
+            const results = {
+                creatures: [],
+                locations: [],
+                dragons: [],
+                achievements: []
+            };
+
+            // Search creatures
+            if (data.creatures && Array.isArray(data.creatures)) {
+                results.creatures = data.creatures.filter(c => 
+                    c.name?.toLowerCase().includes(lowerQuery) ||
+                    c.race?.toLowerCase().includes(lowerQuery) ||
+                    c.description?.toLowerCase().includes(lowerQuery) ||
+                    c.faction?.toLowerCase().includes(lowerQuery)
+                );
+            }
+
+            // Search locations
+            if (data.locations && Array.isArray(data.locations)) {
+                results.locations = data.locations.filter(l => 
+                    l.name?.toLowerCase().includes(lowerQuery) ||
+                    l.type?.toLowerCase().includes(lowerQuery) ||
+                    l.description?.toLowerCase().includes(lowerQuery) ||
+                    l.region?.toLowerCase().includes(lowerQuery)
+                );
+            }
+
+            // Search dragons
+            if (data.dragons && Array.isArray(data.dragons)) {
+                results.dragons = data.dragons.filter(d => 
+                    d.name?.toLowerCase().includes(lowerQuery) ||
+                    d.type?.toLowerCase().includes(lowerQuery) ||
+                    d.description?.toLowerCase().includes(lowerQuery)
+                );
+            }
+
+            // Search achievements
+            if (data.achievements && Array.isArray(data.achievements)) {
+                results.achievements = data.achievements.filter(a => 
+                    a.name?.toLowerCase().includes(lowerQuery) ||
+                    a.description?.toLowerCase().includes(lowerQuery)
+                );
+            }
+
+            return results;
+        }
+
+        // Display results
+        function displayResults(results, query) {
+            const totalResults = 
+                results.creatures.length +
+                results.locations.length +
+                results.dragons.length +
+                results.achievements.length;
+
+            initialState.style.display = 'none';
+            
+            if (totalResults === 0) {
+                noResults.style.display = 'block';
+                resultsContainer.innerHTML = '';
+                searchStats.style.display = 'none';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            searchStats.style.display = 'block';
+            statsText.textContent = `Found ${totalResults} result${totalResults !== 1 ? 's' : ''} for "${query}"`;
+
+            let html = '';
+
+            // Creatures
+            if (results.creatures.length > 0) {
+                html += createSection('Creatures', '🐉', results.creatures.map(c => ({
+                    icon: '🐲',
+                    name: c.name,
+                    type: 'Creature',
+                    desc: c.description || c.race,
+                    url: `character.html?id=${c.id}`
+                })));
+            }
+
+            // Locations
+            if (results.locations.length > 0) {
+                html += createSection('Locations', '📍', results.locations.map(l => ({
+                    icon: '🏰',
+                    name: l.name,
+                    type: 'Location',
+                    desc: l.description || l.type,
+                    url: `location.html?id=${l.id}`
+                })));
+            }
+
+            // Dragons
+            if (results.dragons.length > 0) {
+                html += createSection('Dragons', '🐉', results.dragons.map(d => ({
+                    icon: '🐉',
+                    name: d.name,
+                    type: 'Dragon',
+                    desc: d.description || d.type,
+                    url: `dragons.html?id=${d.id}`
+                })));
+            }
+
+            // Achievements
+            if (results.achievements.length > 0) {
+                html += createSection('Achievements', '🏆', results.achievements.map(a => ({
+                    icon: '🏆',
+                    name: a.name,
+                    type: 'Achievement',
+                    desc: a.description,
+                    url: `achievements.html#${a.id}`
+                })));
+            }
+
+            resultsContainer.innerHTML = html;
+        }
+
+        // Create section HTML
+        function createSection(title, icon, items) {
+            const itemsHTML = items.map(item => `
+                <a href="${item.url}" class="result-card">
+                    <div class="result-header">
+                        <div class="result-icon">${item.icon}</div>
+                        <div class="result-info">
+                            <h3>${item.name}</h3>
+                            <span class="result-type">${item.type}</span>
+                        </div>
+                    </div>
+                    ${item.desc ? `<p class="result-desc">${item.desc}</p>` : ''}
+                </a>
+            `).join('');
+
+            return `
+                <section class="search-results-section">
+                    <h2 class="section-title">
+                        <span>${icon}</span>
+                        ${title}
+                    </h2>
+                    <div class="results-grid">
+                        ${itemsHTML}
+                    </div>
+                </section>
+            `;
+        }
+
+        // Show initial state
+        function showInitialState() {
+            initialState.style.display = 'block';
+            noResults.style.display = 'none';
+            resultsContainer.innerHTML = '';
+            searchStats.style.display = 'none';
+        }
+
+        // Search input handler
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const query = e.target.value;
+                // Update URL
+                const url = new URL(window.location);
+                if (query) {
+                    url.searchParams.set('q', query);
+                } else {
+                    url.searchParams.delete('q');
+                }
+                window.history.replaceState({}, '', url);
+                
+                performSearch(query);
+            }, 300);
+        });
+    </script>
+</body>
+</html>

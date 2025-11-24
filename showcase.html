@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyrim Interactive - Navigation Showcase</title>
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="loading.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .showcase-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .showcase-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .demo-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .demo-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .demo-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .demo-button.secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+        
+        .loading-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .stats-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-elevated);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation will be injected here -->
+    
+    <div class="showcase-container">
+        <div class="showcase-header">
+            <h1 class="showcase-title">🐉 Skyrim Interactive</h1>
+            <p class="showcase-subtitle">Best Interactive Website for The Elder Scrolls V: Skyrim</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🧭</span>
+                <h3 class="feature-title">Master Navigation</h3>
+                <p class="feature-description">Unified navigation bar across all pages with organized dropdown menus, mobile support, and keyboard shortcuts.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">🌙</span>
+                <h3 class="feature-title">Dark Mode</h3>
+                <p class="feature-description">Beautiful dark and light themes with 50+ CSS variables. Toggle anytime, preference is saved automatically.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">❤️</span>
+                <h3 class="feature-title">Favorites System</h3>
+                <p class="feature-description">Save your favorite creatures, locations, and builds. Access them quickly from the navigation bar.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">🔍</span>
+                <h3 class="feature-title">Site-Wide Search</h3>
+                <p class="feature-description">Press Ctrl+K or Cmd+K to search across all content. Live results with keyboard navigation support.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">Loading States</h3>
+                <p class="feature-description">Smooth loading animations, skeleton screens, and progress indicators for better perceived performance.</p>
+            </div>
+            
+            <div class="feature-card">
+                <span class="feature-icon">📱</span>
+                <h3 class="feature-title">Mobile Responsive</h3>
+                <p class="feature-description">Perfect experience on all devices. Hamburger menu, touch gestures, and optimized layouts.</p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">🎨 Theme Demo</h2>
+            <p>Click the theme toggle in the navigation bar above to switch between light and dark modes.</p>
+            <div class="button-group">
+                <button class="demo-button" onclick="document.body.setAttribute('data-theme', 'dark')">Dark Theme</button>
+                <button class="demo-button" onclick="document.body.setAttribute('data-theme', 'light')">Light Theme</button>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">⏳ Loading States Demo</h2>
+            <div class="loading-demo">
+                <div>
+                    <h4>Spinner:</h4>
+                    <div class="spinner"></div>
+                </div>
+                
+                <div>
+                    <h4>Progress Bar:</h4>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 65%;"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>Skeleton Card:</h4>
+                    <div class="skeleton-card">
+                        <div class="skeleton skeleton-avatar"></div>
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">📊 Statistics</h2>
+            <div class="stats-demo">
+                <div class="stat-card">
+                    <div class="stat-value">26</div>
+                    <div class="stat-label">Total Pages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">25+</div>
+                    <div class="stat-label">Creatures</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">50+</div>
+                    <div class="stat-label">Locations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Interactive</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">🚀 Try It Out</h2>
+            <p>Test the new navigation system:</p>
+            <div class="button-group">
+                <button class="demo-button" onclick="alert('Press Ctrl+K or Cmd+K to open search')">Open Search (Ctrl+K)</button>
+                <button class="demo-button secondary" onclick="window.location.href='bestiary.html'">Go to Bestiary</button>
+                <button class="demo-button secondary" onclick="window.location.href='character.html'">Character Viewer</button>
+                <button class="demo-button secondary" onclick="window.location.href='combat-simulator.html'">Combat Simulator</button>
+                <button class="demo-button secondary" onclick="window.location.href='favorites.html'">My Favorites</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Inject navigation -->
+    <script src="nav.js" type="module"></script>
+</body>
+</html>

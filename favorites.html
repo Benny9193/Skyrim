@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites - Skyrim Interactive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="favorites.css">
+</head>
+<body>
+    <!-- Navigation will be injected here -->
+    
+    <div class="app-container">
+        <main class="main-content favorites-main">
+            <div class="container">
+                <!-- Header -->
+                <header class="favorites-header">
+                    <div class="header-content">
+                        <h1 class="page-title">
+                            <span class="title-icon">❤️</span>
+                            My Favorites
+                        </h1>
+                        <p class="page-subtitle">Your saved creatures, locations, and more</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn--outline" id="exportBtn">
+                            <span class="btn-icon">📥</span>
+                            Export
+                        </button>
+                        <button class="btn btn--outline" id="importBtn">
+                            <span class="btn-icon">📤</span>
+                            Import
+                        </button>
+                        <button class="btn btn--danger" id="clearAllBtn">
+                            <span class="btn-icon">🗑️</span>
+                            Clear All
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Stats -->
+                <div class="favorites-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCount">0</div>
+                        <div class="stat-label">Total Favorites</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="creaturesCount">0</div>
+                        <div class="stat-label">Creatures</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="locationsCount">0</div>
+                        <div class="stat-label">Locations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="othersCount">0</div>
+                        <div class="stat-label">Other Items</div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="favorites-filters">
+                    <button class="filter-chip active" data-filter="all">
+                        All <span class="chip-count" id="allCount">0</span>
+                    </button>
+                    <button class="filter-chip" data-filter="creature">
+                        🐉 Creatures <span class="chip-count" id="creatureChipCount">0</span>
+                    </button>
+                    <button class="filter-chip" data-filter="location">
+                        📍 Locations <span class="chip-count" id="locationChipCount">0</span>
+                    </button>
+                    <button class="filter-chip" data-filter="achievement">
+                        🏆 Achievements <span class="chip-count" id="achievementChipCount">0</span>
+                    </button>
+                    <button class="filter-chip" data-filter="other">
+                        ⭐ Other <span class="chip-count" id="otherChipCount">0</span>
+                    </button>
+                </div>
+
+                <!-- Empty State -->
+                <div class="favorites-empty" id="emptyState">
+                    <div class="empty-content">
+                        <div class="empty-icon">💔</div>
+                        <h2>No Favorites Yet</h2>
+                        <p>Start exploring and add items to your favorites!</p>
+                        <div class="empty-actions">
+                            <a href="bestiary.html" class="btn btn--primary">
+                                <span class="btn-icon">🗂️</span>
+                                Browse Bestiary
+                            </a>
+                            <a href="locations.html" class="btn btn--secondary">
+                                <span class="btn-icon">📍</span>
+                                Explore Locations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Favorites Grid -->
+                <div class="favorites-grid" id="favoritesGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Import Modal -->
+    <div class="modal hidden" id="importModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Import Favorites</h3>
+                <button class="modal-close" id="closeImportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Paste your exported favorites JSON below:</p>
+                <textarea id="importTextarea" class="import-textarea" placeholder='[{"id": "...", "type": "...", ...}]' rows="10"></textarea>
+                <div class="modal-footer">
+                    <button class="btn btn--outline" id="cancelImportBtn">Cancel</button>
+                    <button class="btn btn--primary" id="confirmImportBtn">Import</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="nav.js"></script>
+    <script src="favorites.js"></script>
+    <script type="module">
+        // Initialize favorites page
+        const favoritesGrid = document.getElementById('favoritesGrid');
+        const emptyState = document.getElementById('emptyState');
+        let currentFilter = 'all';
+
+        // Load and display favorites
+        function loadFavorites() {
+            const favorites = favoritesManager.getAll();
+            
+            // Update stats
+            updateStats(favorites);
+            
+            // Filter favorites
+            const filtered = currentFilter === 'all' 
+                ? favorites 
+                : favorites.filter(fav => fav.type === currentFilter);
+            
+            // Show/hide empty state
+            if (favorites.length === 0) {
+                emptyState.style.display = 'flex';
+                favoritesGrid.style.display = 'none';
+                return;
+            } else {
+                emptyState.style.display = 'none';
+                favoritesGrid.style.display = 'grid';
+            }
+            
+            // Display favorites
+            displayFavorites(filtered);
+        }
+
+        // Update statistics
+        function updateStats(favorites) {
+            const creatures = favorites.filter(f => f.type === 'creature');
+            const locations = favorites.filter(f => f.type === 'location');
+            const others = favorites.filter(f => !['creature', 'location'].includes(f.type));
+            
+            document.getElementById('totalCount').textContent = favorites.length;
+            document.getElementById('creaturesCount').textContent = creatures.length;
+            document.getElementById('locationsCount').textContent = locations.length;
+            document.getElementById('othersCount').textContent = others.length;
+            
+            // Update filter chips
+            document.getElementById('allCount').textContent = favorites.length;
+            document.getElementById('creatureChipCount').textContent = creatures.length;
+            document.getElementById('locationChipCount').textContent = locations.length;
+            document.getElementById('achievementChipCount').textContent = 
+                favorites.filter(f => f.type === 'achievement').length;
+            document.getElementById('otherChipCount').textContent = others.length;
+        }
+
+        // Display favorites in grid
+        function displayFavorites(favorites) {
+            if (favorites.length === 0) {
+                favoritesGrid.innerHTML = `
+                    <div class="no-results">
+                        <p>No favorites in this category</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            favoritesGrid.innerHTML = favorites.map(fav => `
+                <div class="favorite-card" data-id="${fav.id}" data-type="${fav.type}">
+                    <a href="${fav.url}" class="favorite-link">
+                        <div class="favorite-icon-large">${fav.icon}</div>
+                        <div class="favorite-info">
+                            <h3 class="favorite-name">${fav.name}</h3>
+                            <span class="favorite-type-badge">${fav.type}</span>
+                        </div>
+                    </a>
+                    <button class="favorite-remove-btn" data-id="${fav.id}" data-type="${fav.type}" aria-label="Remove from favorites">
+                        <span>❌</span>
+                    </button>
+                </div>
+            `).join('');
+            
+            // Add remove handlers
+            document.querySelectorAll('.favorite-remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const id = btn.dataset.id;
+                    const type = btn.dataset.type;
+                    const card = btn.closest('.favorite-card');
+                    const name = card.querySelector('.favorite-name').textContent;
+                    
+                    if (confirm(`Remove "${name}" from favorites?`)) {
+                        favoritesManager.remove(id, type);
+                        loadFavorites();
+                        showFavoriteToast(false, name);
+                    }
+                });
+            });
+        }
+
+        // Filter handlers
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                currentFilter = chip.dataset.filter;
+                loadFavorites();
+            });
+        });
+
+        // Export favorites
+        document.getElementById('exportBtn')?.addEventListener('click', () => {
+            const json = favoritesManager.export();
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `skyrim-favorites-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Import favorites
+        const importModal = document.getElementById('importModal');
+        document.getElementById('importBtn')?.addEventListener('click', () => {
+            importModal.classList.remove('hidden');
+        });
+        
+        document.getElementById('closeImportModal')?.addEventListener('click', () => {
+            importModal.classList.add('hidden');
+        });
+        
+        document.getElementById('cancelImportBtn')?.addEventListener('click', () => {
+            importModal.classList.add('hidden');
+        });
+        
+        document.getElementById('confirmImportBtn')?.addEventListener('click', () => {
+            const textarea = document.getElementById('importTextarea');
+            if (favoritesManager.import(textarea.value)) {
+                showToast('✅', 'Favorites imported successfully!');
+                importModal.classList.add('hidden');
+                textarea.value = '';
+                loadFavorites();
+            } else {
+                showToast('❌', 'Failed to import. Please check the JSON format.');
+            }
+        });
+        
+        // Toast helper
+        function showToast(icon, message) {
+            const toast = document.createElement('div');
+            toast.className = 'favorite-toast show';
+            toast.innerHTML = `<span class="toast-icon">${icon}</span><span class="toast-text">${message}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Clear all favorites
+        document.getElementById('clearAllBtn')?.addEventListener('click', () => {
+            if (confirm('Are you sure you want to clear all favorites? This cannot be undone.')) {
+                favoritesManager.clear();
+                loadFavorites();
+            }
+        });
+
+        // Listen for favorites updates
+        window.addEventListener('favorites-updated', loadFavorites);
+
+        // Initial load
+        loadFavorites();
+    </script>
+</body>
+</html>
