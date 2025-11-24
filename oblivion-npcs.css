@@ -1,0 +1,338 @@
+/* Oblivion NPCs Table Styles */
+
+/* Controls Section */
+.controls-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem 3rem 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.search-box .search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: #aaa;
+    font-weight: 500;
+}
+
+.filter-group select {
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+#clearFilters {
+    padding: 0.5rem 1.5rem;
+    white-space: nowrap;
+}
+
+/* Stats Summary */
+.stats-summary {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(74, 144, 226, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4a90e2;
+}
+
+/* Table Container */
+.table-container {
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.npcs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.npcs-table thead {
+    background: rgba(74, 144, 226, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.npcs-table th {
+    padding: 1rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    color: #fff;
+    border-bottom: 2px solid rgba(74, 144, 226, 0.5);
+    white-space: nowrap;
+}
+
+.npcs-table th.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.npcs-table th.sortable:hover {
+    background: rgba(74, 144, 226, 0.3);
+}
+
+.npcs-table th.sortable.sorted-asc .sort-arrow::after {
+    content: '↑';
+    color: #4a90e2;
+}
+
+.npcs-table th.sortable.sorted-desc .sort-arrow::after {
+    content: '↓';
+    color: #4a90e2;
+}
+
+.sort-arrow {
+    margin-left: 0.5rem;
+    opacity: 0.5;
+}
+
+.npcs-table tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.2s;
+}
+
+.npcs-table tbody tr:hover {
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.npcs-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.npcs-table tbody tr:nth-child(even):hover {
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.npcs-table td {
+    padding: 0.75rem;
+    color: #ddd;
+    vertical-align: top;
+}
+
+.npcs-table td:first-child {
+    font-weight: 600;
+    color: #4a90e2;
+}
+
+/* Essential Badge */
+.essential-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.essential-badge.yes {
+    background: rgba(76, 175, 80, 0.3);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+.essential-badge.no {
+    background: rgba(244, 67, 54, 0.3);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.5);
+}
+
+/* Description column */
+.npcs-table td:last-child {
+    max-width: 300px;
+    font-size: 0.85rem;
+    color: #bbb;
+    line-height: 1.4;
+}
+
+/* Loading State */
+.loading-state {
+    text-align: center;
+    padding: 3rem;
+    color: #aaa;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(74, 144, 226, 0.2);
+    border-top-color: #4a90e2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error State */
+.error-state {
+    text-align: center;
+    padding: 3rem;
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #aaa;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer */
+.app-footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    text-align: center;
+    color: #888;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .npcs-table {
+        font-size: 0.85rem;
+    }
+    
+    .npcs-table th,
+    .npcs-table td {
+        padding: 0.5rem;
+    }
+    
+    .npcs-table td:last-child {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    #clearFilters {
+        width: 100%;
+    }
+    
+    .stats-summary {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .table-container {
+        overflow-x: scroll;
+    }
+    
+    .npcs-table {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 480px) {
+    .controls-section {
+        padding: 1rem;
+    }
+    
+    .search-box input {
+        font-size: 0.9rem;
+        padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    }
+    
+    .stat-value {
+        font-size: 1.25rem;
+    }
+}
