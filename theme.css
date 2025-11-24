@@ -1,0 +1,471 @@
+/* ===================================
+   SKYRIM THEME SYSTEM
+   CSS Variables for Light & Dark Modes
+   =================================== */
+
+/* Default Theme (Dark) */
+:root,
+[data-theme="dark"] {
+    /* Colors */
+    --primary-color: #c4841d;
+    --primary-hover: #a87318;
+    --secondary-color: #666;
+    --accent-color: #ffd700;
+    
+    /* Backgrounds */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --bg-tertiary: #333;
+    --bg-elevated: #252525;
+    
+    /* Text */
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #999;
+    --text-inverse: #1a1a1a;
+    
+    /* Borders */
+    --border-color: #444;
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-heavy: rgba(255, 255, 255, 0.2);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
+    
+    /* Interactive States */
+    --hover-overlay: rgba(255, 255, 255, 0.1);
+    --active-overlay: rgba(255, 215, 0, 0.2);
+    --focus-ring: 0 0 0 3px rgba(196, 132, 29, 0.3);
+    
+    /* Components */
+    --card-bg: #2a2a2a;
+    --modal-bg: #2a2a2a;
+    --input-bg: #1a1a1a;
+    --button-bg: #333;
+    --chip-bg: #333;
+    --chip-hover-bg: #444;
+    --badge-bg: #333;
+    --toast-bg: #f8f9fa;
+    --toast-text: #1a1a1a;
+    
+    /* Status Colors */
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #ff4444;
+    --info: #2196f3;
+    
+    /* Difficulty Colors */
+    --difficulty-novice: #4caf50;
+    --difficulty-apprentice: #8bc34a;
+    --difficulty-adept: #ffc107;
+    --difficulty-expert: #ff9800;
+    --difficulty-master: #ff5722;
+    --difficulty-legendary: #9c27b0;
+    
+    /* Stats Colors */
+    --health-color: #ff4444;
+    --magicka-color: #4444ff;
+    --stamina-color: #44ff44;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+    
+    /* Z-Index Scale */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 500;
+    --z-nav: 1000;
+    --z-modal: 2000;
+    --z-search: 2000;
+    --z-tooltip: 3000;
+    --z-toast: 4000;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    /* Colors */
+    --primary-color: #c4841d;
+    --primary-hover: #a87318;
+    --secondary-color: #666;
+    --accent-color: #c4841d;
+    
+    /* Backgrounds */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #f0f0f0;
+    --bg-elevated: #ffffff;
+    
+    /* Text */
+    --text-primary: #1a1a1a;
+    --text-secondary: #333;
+    --text-muted: #666;
+    --text-inverse: #ffffff;
+    
+    /* Borders */
+    --border-color: #ddd;
+    --border-light: rgba(0, 0, 0, 0.08);
+    --border-heavy: rgba(0, 0, 0, 0.15);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.2);
+    
+    /* Interactive States */
+    --hover-overlay: rgba(0, 0, 0, 0.05);
+    --active-overlay: rgba(196, 132, 29, 0.1);
+    --focus-ring: 0 0 0 3px rgba(196, 132, 29, 0.2);
+    
+    /* Components */
+    --card-bg: #ffffff;
+    --modal-bg: #ffffff;
+    --input-bg: #f8f9fa;
+    --button-bg: #f0f0f0;
+    --chip-bg: #f0f0f0;
+    --chip-hover-bg: #e0e0e0;
+    --badge-bg: #f0f0f0;
+    --toast-bg: #1a1a1a;
+    --toast-text: #ffffff;
+    
+    /* Status Colors (same in both themes) */
+    --success: #4caf50;
+    --warning: #ff9800;
+    --error: #ff4444;
+    --info: #2196f3;
+}
+
+/* Global Styles */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+
+/* Smooth theme transitions for common elements */
+*,
+*::before,
+*::after {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: var(--transition-slow);
+    transition-timing-function: ease;
+}
+
+/* Disable transitions for form inputs to avoid interference */
+.no-transition,
+.no-transition *,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+    transition-property: none !important;
+}
+
+/* Re-enable specific transitions for interactive elements */
+button,
+a,
+.nav-link,
+.card,
+.btn {
+    transition: transform var(--transition-fast), 
+                box-shadow var(--transition-fast),
+                background-color var(--transition-normal),
+                border-color var(--transition-normal),
+                color var(--transition-normal);
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Buttons */
+.btn {
+    background: var(--button-bg);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--focus-ring);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Selection */
+::selection {
+    background: var(--primary-color);
+    color: var(--text-inverse);
+}
+
+/* Scrollbar (Webkit browsers) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-heavy);
+    border-radius: 6px;
+    border: 2px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-heavy) var(--bg-secondary);
+}
+
+/* Loading Skeleton */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--bg-secondary) 25%,
+        var(--bg-tertiary) 50%,
+        var(--bg-secondary) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--badge-bg);
+    color: var(--text-primary);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge--success {
+    background: var(--success);
+    color: white;
+}
+
+.badge--warning {
+    background: var(--warning);
+    color: white;
+}
+
+.badge--error {
+    background: var(--error);
+    color: white;
+}
+
+.badge--info {
+    background: var(--info);
+    color: white;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+    box-shadow: var(--shadow-md);
+    z-index: var(--z-tooltip);
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+}
+
+/* Utility Classes */
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.text-success {
+    color: var(--success);
+}
+
+.text-warning {
+    color: var(--warning);
+}
+
+.text-error {
+    color: var(--error);
+}
+
+.text-info {
+    color: var(--info);
+}
+
+.bg-primary {
+    background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+    background-color: var(--bg-tertiary);
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    [data-theme] {
+        --bg-primary: white;
+        --bg-secondary: white;
+        --text-primary: black;
+        --text-secondary: black;
+    }
+    
+    .no-print,
+    nav,
+    .nav,
+    .skyrim-nav,
+    button,
+    .btn {
+        display: none !important;
+    }
+}
